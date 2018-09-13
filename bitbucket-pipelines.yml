@@ -6,7 +6,7 @@ pipelines:
         caches:
           - composer
         script:
-          - apk get --no-cache unzip
+          - apk add --no-cache unzip
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
           - vendor/bin/phpunit
