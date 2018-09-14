@@ -11,4 +11,13 @@ pipelines:
           - docker-php-ext-install -j$(nproc) gd
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
+          - ln -s .env.testing .env
+          - php artian key:generate
           - vendor/bin/phpunit
+definitions:
+  services:
+    db:
+      image: mysql:8
+      environment:
+        MYSQL_DATABASE: attendize
+        MYSQL_ROOT_PASSWORD: attendize
