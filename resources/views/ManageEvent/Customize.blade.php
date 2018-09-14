@@ -48,10 +48,9 @@
             $("input[name='organiser_fee_fixed']").TouchSpin({
                 min: 0,
                 max: 100,
-                step: 0.1,
+                step: 0.01,
                 decimals: 2,
                 verticalbuttons: true,
-                forcestepdivisibility: 'none',
                 postfix: '{{$event->currency->symbol_left}}',
                 buttondown_class: "btn btn-link",
                 buttonup_class: "btn btn-link",
