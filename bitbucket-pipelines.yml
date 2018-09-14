@@ -5,6 +5,8 @@ pipelines:
     - step:
         caches:
           - composer
+        services:
+          - db
         script:
           - apk add --no-cache unzip freetype-dev jpeg-dev
           - docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
@@ -12,7 +14,7 @@ pipelines:
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer install
           - ln -s .env.testing .env
-          - php artian key:generate
+          - php artisan key:generate
           - vendor/bin/phpunit
 definitions:
   services:
