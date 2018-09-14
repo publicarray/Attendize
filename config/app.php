@@ -160,6 +160,7 @@ return [
         /*
          * Third Party Service Providers...
          */
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         Vinelab\Http\HttpServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
