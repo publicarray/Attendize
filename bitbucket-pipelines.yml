@@ -4,9 +4,10 @@ pipelines:
   default:
     - step:
         caches:
-          - composer: vendor
+          - composer
+          - mycomposer
         services:
-          - db
+          - mysql
         script:
           - apk add --no-cache unzip freetype-dev jpeg-dev
           - docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
@@ -18,9 +19,13 @@ pipelines:
           - php artisan key:generate
           - vendor/bin/phpunit
 definitions:
+  caches:
+    mycomposer: vendor
   services:
-    db:
+    mysql:
       image: mysql:8
       environment:
         MYSQL_DATABASE: attendize
-        MYSQL_ROOT_PASSWORD: attendize
+        MYSQL_USER: attendize
+        MYSQL_PASSWORD: attendize
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
