@@ -40,7 +40,7 @@ return [
   'expiry_year' => 'Expiry year',
   'first_name' => 'First name',
   'free' => 'FREE',
-  'inc_fees' => '(inc. Booking Fees)',
+  'inc_fees' => 'Booking Fees',
   'last_name' => 'Last name',
   'offline_payment_instructions' => 'Offline payment instructions',
   'offline_payment_methods_available' => 'Offline Payment Methods Available',
