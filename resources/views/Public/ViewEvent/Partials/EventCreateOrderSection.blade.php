@@ -228,7 +228,7 @@
             </div>
         </div>
     </div>
-    <img src="https://cdn.attendize.com/lg.png" />
+    {{-- <img src="https://cdn.attendize.com/lg.png" /> --}}
 </section>
 @if(session()->get('message'))
     <script>showMessage('{{session()->get('message')}}');</script>
