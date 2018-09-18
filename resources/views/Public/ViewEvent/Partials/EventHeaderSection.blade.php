@@ -24,17 +24,17 @@
             <h1 property="name">{{$event->title}}</h1>
             <div class="event_venue">
                 <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
-                    {{ $event->start_date->format('d/m/y H:i a') }}
-                    ({{ $event->start_date->diffForHumans() }})
+                    {{ $event->start_date->format('d/m/y g:i a') }}
+                    {{-- ({{ $event->start_date->diffForHumans() }}) --}}
                 </span>
                 -
                 <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
                      @if($event->start_date->diffInHours($event->end_date) <= 12)
-                        {{ $event->end_date->format('H:i a') }}
+                        {{ $event->end_date->format('g:i a') }}
                      @else
-                        {{ $event->end_date->format('d/m/y H:i a') }}
+                        {{ $event->end_date->format('d/m/y g:i a') }}
                      @endif
-                    ({{ $event->start_date->diffAsCarbonInterval($event->end_date)->forHumans() }})
+                    {{-- ({{ $event->start_date->diffAsCarbonInterval($event->end_date)->forHumans() }}) --}}
                 </span>
                 @lang("Public_ViewEvent.at")
                 <span property="location" typeof="Place">
