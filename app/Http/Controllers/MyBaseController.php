@@ -8,12 +8,10 @@ use Auth;
 use JavaScript;
 use View;
 
-
 class MyBaseController extends Controller
 {
     public function __construct()
     {
-
         if (empty(Auth::user())) {
             return redirect()->to('/login');
         }
@@ -31,7 +29,7 @@ class MyBaseController extends Controller
              * @todo These should be user selectable
              */
             'DateFormat'          => 'dd-MM-yyyy',
-            'DateTimeFormat'      => 'dd-MM-yyyy hh:mm',
+            'DateTimeFormat'      => 'dd-MM-yyyy hh:mm AA',
             'GenericErrorMessage' => trans("Controllers.whoops"),
         ]);
         /*
