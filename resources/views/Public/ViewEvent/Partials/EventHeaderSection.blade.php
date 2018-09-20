@@ -24,7 +24,7 @@
             <h1 property="name">{{$event->title}}</h1>
             <div class="event_venue">
                 <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
-                    {{ $event->start_date->format('d/m/y g:i a') }}
+                    {{ $event->startDateFormatted() }}
                     {{-- ({{ $event->start_date->diffForHumans() }}) --}}
                 </span>
                 -
@@ -32,7 +32,7 @@
                      @if($event->start_date->diffInHours($event->end_date) <= 12)
                         {{ $event->end_date->format('g:i a') }}
                      @else
-                        {{ $event->end_date->format('d/m/y g:i a') }}
+                        {{ $event->endDateFormatted() }}
                      @endif
                     {{-- ({{ $event->start_date->diffAsCarbonInterval($event->end_date)->forHumans() }}) --}}
                 </span>

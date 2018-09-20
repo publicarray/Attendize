@@ -59,7 +59,7 @@
 
                         <div class='logo'>
                             <img alt="{{$event->organiser->full_logo_path}}" src="data:image/png;base64, {{$image}}" />
-                            @if(count($images)>0)
+                            @if(isset($images) && count($images) > 0)
                                 @foreach($images as $img)
                                     <BR><img src="data:image/png;base64, {{$img}}" />
                                 @endforeach
@@ -74,9 +74,9 @@
                                 <h4>@lang("Ticket.venue")</h4>
                                 {{$event->venue_name}}
                                 <h4>@lang("Ticket.start_date_time")</h4>
-                                {{$event->start_date->format('Y-m-d H:i')}}
+                                {{$event->startDateFormatted()}}
                                 <h4>@lang("Ticket.end_date_time")</h4>
-                                {{$event->end_date->format('Y-m-d H:i')}}
+                                {{$event->endDateFormatted()}}
                             </div>
 
                             <div class="attendee_details">
