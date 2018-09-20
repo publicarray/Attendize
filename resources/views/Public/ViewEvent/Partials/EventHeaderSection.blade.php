@@ -25,7 +25,6 @@
             <div class="event_venue">
                 <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
                     {{ $event->startDateFormatted() }}
-                    {{-- ({{ $event->start_date->diffForHumans() }}) --}}
                 </span>
                 -
                 <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
@@ -34,14 +33,18 @@
                      @else
                         {{ $event->endDateFormatted() }}
                      @endif
-                    {{-- ({{ $event->start_date->diffAsCarbonInterval($event->end_date)->forHumans() }}) --}}
                 </span>
                 @lang("Public_ViewEvent.at")
                 <span property="location" typeof="Place">
                     <b property="name">{{$event->venue_name}}</b>
                     <meta property="address" content="{{ urldecode($event->venue_name) }}">
                 </span>
-                {{-- <a href="calendar.ics">Download Apple Calendar (todo: fix timezone)</i></a> --}}
+                <br>
+                <span>{{ $event->start_date->diffForHumans() }} - Length: {{ $event->start_date->diffAsCarbonInterval($event->end_date)->forHumans() }}
+                </span>
+                <span>
+                    <a id="calDowload" href="calendar.ics"><i class="ico-calendar"></i></a>
+                </span>
             </div>
 
             <div class="event_buttons">
