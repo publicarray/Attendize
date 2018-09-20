@@ -370,8 +370,9 @@ class Event extends MyBaseModel
         $siteUrl = URL::to('/');
         $eventUrl = $this->getEventUrlAttribute();
 
-        $start_date = $this->start_date;
-        $end_date = $this->end_date;
+        $tz = config('app.timezone');
+        $start_date = $this->start_date->setTimezone('UTC');
+        $end_date = $this->end_date->setTimezone('UTC');
         $timestamp = new Carbon();
 
         $icsTemplate = <<<ICSTemplate
@@ -381,8 +382,8 @@ PRODID:{$siteUrl}
 BEGIN:VEVENT
 UID:{$eventUrl}
 DTSTAMP:{$timestamp->format('Ymd\THis\Z')}
-DTSTART:{$start_date->format('Ymd\THis\Z')}
-DTEND:{$end_date->format('Ymd\THis\Z')}
+DTSTART;TZID={$tz}:{$start_date->format('Ymd\THis\Z')}
+DTEND;TZID={$tz}:{$end_date->format('Ymd\THis\Z')}
 SUMMARY:$this->title
 LOCATION:{$this->venue_name}
 DESCRIPTION:{$this->description}
