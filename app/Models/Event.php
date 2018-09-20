@@ -11,7 +11,7 @@ class Event extends MyBaseModel
 {
     use SoftDeletes;
 
-    protected $dates = ['start_date', 'end_date', 'on_sale_date'];
+    protected $dates = ['start_date', 'end_date'];
 
     /**
      * The validation rules.
@@ -363,16 +363,6 @@ class Event extends MyBaseModel
     public function getSalesAndFeesVoulmeAttribute()
     {
         return $this->sales_volume + $this->organiser_fees_volume;
-    }
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @return array $dates
-     */
-    public function getDates()
-    {
-        return ['created_at', 'updated_at', 'start_date', 'end_date'];
     }
 
     public function getIcsForEvent()
