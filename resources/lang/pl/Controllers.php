@@ -3,11 +3,11 @@
 Generated via "php artisan localization:missing" at 2018/04/26 10:21:11
  *************************************************************************/
 
-return array (
+return [
     //============================== New strings to translate ==============================//
     // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\ManageOrganiser\\Events.blade.php
     'sort' =>
-        array (
+        [
             'event_title' => 'Nazwa Wydarzenia',
             'start_date' => 'Data Rozpoczęcia',
             'created_at' => 'Data Utworzenia',
@@ -15,14 +15,13 @@ return array (
             'sales_volume' => 'Sprzedaż',
             'sort_order' => 'Własna Kolejność',
             'title' => 'Nazwa Biletu',
-        ),
+        ],
     // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\ManageOrganiser\\Events.blade.php
     //==================================== Translations ====================================//
     'account_successfully_updated' => 'Konto Zaktualizowane Poprawnie',
     'addInviteError' => 'Musisz utworzyć bilet zanim utworzysz uczestnika.',
     'attendee_already_cancelled' => 'Uczestnik już anulowany',
     'attendee_already_checked_in' => 'Uczestnik już wszedł w tym momencie: :time ',
-    'attendee_check_in_success' => 'Sukces !<br>Imię: :name <br>Zamówienie: :ref<br>Bilet: :ticket.',
     'attendee_exception' => 'Wystąpił błąd w trakcie zapraszania tego uczestnika. Spróbuj ponownie.',
     'attendee_successfully_checked_in' => 'Uczestnik oznaczony',
     'attendee_successfully_checked_out' => 'Uczestnik odznaczony',
@@ -32,34 +31,34 @@ return array (
     'confirmation_malformed' => 'Kod potwierdzający jest niewłaściwy lub nie istnieje.',
     'confirmation_successful' => 'Sukces! Twój adres email został potwierdzony. Możesz się zalogować!',
     'error' =>
-        array (
+        [
             'email' =>
-                array (
+                [
                     'email' => 'Proszę wprowadź poprawny adres Email.',
                     'required' => 'Adres Email jest wymagany.',
                     'unique' => 'Adres Email już istnieje w naszej bazie danych.',
-                ),
+                ],
             'first_name' =>
-                array (
+                [
                     'required' => 'Proszę wprowadź swoje imię.',
-                ),
+                ],
             'last_name' =>
-                array (
+                [
                     'required' => 'Proszę wprowadź swoje nazwisko.',
-                ),
+                ],
             'page_bg_color' =>
-                array (
+                [
                     'required' => 'Proszę wprowadź kolor tła.',
-                ),
+                ],
             'page_header_bg_color' =>
-                array (
+                [
                     'required' => 'Proszę wprowadź kolor tła nagłówka.',
-                ),
+                ],
             'password' =>
-                array (
+                [
                     'passcheck' => 'Hasło jest niepoprawne.',
-                ),
-        ),
+                ],
+        ],
     'event_create_exception' => 'Ups! Pojawił sie problem przy tworzeniu wydarzenia. Spróbuj ponownie.',
     'event_page_successfully_updated' => 'Strona wydarzenia zaktualizowana poprawnie!',
     'event_successfully_updated' => 'Wydarzenie zaktualizowane poprawnie!',
@@ -115,4 +114,4 @@ return array (
     'tickets_for_event' => 'Twoje bilety na wydarzenie :event.',
     'whoops' => 'Ups! Coś poszło nie tak. Spróbuj ponownie.',
     'your_password_reset_link' => 'Twój link do resetu hasła',
-);
+];

@@ -15,9 +15,9 @@ return [
   'event_attendees' => 'Uczestnicy Wydarzenia',
   'first_name' => 'Imię',
   'last_name' => 'Nazwisko',
-  'name' => 'Imię i Nazwisko',
-  'ticket' => '',
-  'reference' => '',
+  'name' => 'Imię',
+  'ticket' => 'Bilet',
+  'reference' => 'Zamówienie',
   'search_attendees' => 'Przeszukaj dane uczestników...',
   'send_invitation_n_ticket_to_attendee' => 'Wyślij zaproszenie i bilet do uczestnika.',
 ];
