@@ -13,10 +13,10 @@ You have received a new order for the event <b>{{$order->event->title}}</b>.<br>
 
 Order Summary:
 <br><br>
-Order Reference: <b>{{$order->order_reference}}</b><br>
-Order Name: <b>{{$order->full_name}}</b><br>
-Order Date: <b>{{$order->created_at->toDayDateTimeString()}}</b><br>
-Order Email: <b>{{$order->email}}</b><br>
+Reference: <b>{{$order->order_reference}}</b><br>
+Name: <b>{{$order->full_name}}</b><br>
+Date: <b>{{$order->created_at->toDayDateTimeString()}}</b><br>
+Email: <b>{{$order->email}}</b><br>
 
 
 <h3>Order Items</h3>
@@ -28,7 +28,7 @@ Order Email: <b>{{$order->email}}</b><br>
                 Ticket
             </th>
             <th>
-                Quantity
+                Qty.
             </th>
             <th>
                 Price

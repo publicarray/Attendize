@@ -1,18 +1,18 @@
 @extends('en.Emails.Layouts.Master')
 
 @section('message_content')
-Hello,<br><br>
+Hello {{$order->full_name}},<br><br>
 
 Your order for the event <b>{{$order->event->title}}</b> was successful.<br><br>
 
-Your tickets are attached to this email. You can also view you order details and download your tickets at: {{route('showOrderDetails', ['order_reference' => $order->order_reference])}}
+Your tickets are attached to this email. You can also view your order details and download your tickets at: {{route('showOrderDetails', ['order_reference' => $order->order_reference])}}
 
 
 <h3>Order Details</h3>
-Order Reference: <b>{{$order->order_reference}}</b><br>
-Order Name: <b>{{$order->full_name}}</b><br>
-Order Date: <b>{{$order->created_at->toDayDateTimeString()}}</b><br>
-Order Email: <b>{{$order->email}}</b><br>
+Reference: <b>{{$order->order_reference}}</b><br>
+Name: <b>{{$order->full_name}}</b><br>
+Date: <b>{{$order->created_at->toDayDateTimeString()}}</b><br>
+Email: <b>{{$order->email}}</b><br>
 
 <h3>Order Items</h3>
 <div style="padding:10px; background: #F9F9F9; border: 1px solid #f1f1f1;">
@@ -28,7 +28,7 @@ Order Email: <b>{{$order->email}}</b><br>
                 <b>Price</b>
             </td>
             <td>
-                <b>Fee</b>
+                <b>Booking Fee</b>
             </td>
             <td>
                 <b>Total</b>
