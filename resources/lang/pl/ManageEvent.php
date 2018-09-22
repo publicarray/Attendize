@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
   //==================================== Translations ====================================//
   'all_attendees' => 'Wszyscy Uczestnicy',
   'all_attendees_cancelled' => 'Wszyscy uczestnicy z tego zamówienia zostali anulowani.',
@@ -26,7 +26,7 @@ return array (
   'create_ticket' => 'Utwórz Bilet',
   'download_pdf_ticket' => 'Pobierz Bilet (PDF)',
   'edit_attendee' => 'Edytuj Uczestnika',
-  'edit_attendee_title' => 'Edytuj <b>:attendee<b>',
+  'edit_attendee_title' => 'Edytuj',
   'edit_order_title' => 'Zamówienie: <b>:order_ref</b>',
   'edit_question' => 'Edytuj Pytanie',
   'edit_ticket' => 'Edytuj Bilet',
@@ -92,4 +92,4 @@ return array (
   'ticket_title_placeholder' => 'Np.: Bilet Normalny',
   'update_order' => 'Aktualizuj Zamówienie',
   'widgets' => 'Widgety',
-);
+];
