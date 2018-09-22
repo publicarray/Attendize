@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organiser;
-use File;
-use Image;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -49,7 +47,7 @@ class OrganiserCustomizeController extends MyBaseController
         }
 
         $organiser->name                  = $request->get('name');
-        $organiser->about                 = $request->get('about');
+        $organiser->about                 = strip_tags($request->get('about'));
         $organiser->google_analytics_code = $request->get('google_analytics_code');
         $organiser->email                 = $request->get('email');
         $organiser->enable_organiser_page = $request->get('enable_organiser_page');
