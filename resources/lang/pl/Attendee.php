@@ -1,9 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/19 17:07:35 
+ Generated via "php artisan localization:missing" at 2018/04/19 17:07:35
 *************************************************************************/
 
-return array (
+return [
   //============================== New strings to translate ==============================//
   'scan_another_ticket' => 'Zeskanuj kolejny bilet',
   'scanning' => 'Skanuję',
@@ -16,6 +16,8 @@ return array (
   'first_name' => 'Imię',
   'last_name' => 'Nazwisko',
   'name' => 'Imię i Nazwisko',
+  'ticket' => '',
+  'reference' => '',
   'search_attendees' => 'Przeszukaj dane uczestników...',
   'send_invitation_n_ticket_to_attendee' => 'Wyślij zaproszenie i bilet do uczestnika.',
-);
+];

@@ -137,9 +137,9 @@
                         @{{ scanResultObject.message }}
                     </span>
                     <span v-if="scanResultObject.status == 'success'" class="message">
-                        NAME: @{{ scanResultObject.name }}<br>
-                        REFERENCE: @{{scanResultObject.reference }}<br>
-                        TICKET: @{{scanResultObject.ticket }}
+                        <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
+                        <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br>
+                        <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
                     </span>
                     <span v-if="isScanning">
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
