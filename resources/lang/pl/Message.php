@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
   //============================== New strings to translate ==============================//
   // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\ManageEvent\\Modals\\MessageAttendees.blade.php
   'new_message' => 'Nowa Wiadomość',
@@ -9,7 +9,7 @@ return array (
   //==================================== Translations ====================================//
   'all_event_attendees' => 'Wszyscy członkowie wydarzenia',
   'attendees_with_ticket_type' => 'Uczestnicy z biletem',
-  'before_send_message' => 'Uczestnik zostanie poinstruowany o możliwości odpowiedzi na adres <b>:recipient</b>',
+  'before_send_message' => 'Uczestnik zostanie poinstruowany o możliwości odpowiedzi na adres',
   'content' => 'Treść wiadomości',
   'date' => 'data',
   'leave_blank_to_send_immediately' => 'Pozostaw puste, aby wysłać teraz',
@@ -22,4 +22,4 @@ return array (
   'subject' => 'Temat',
   'to' => 'Do',
   'unsent' => 'Nie wysłano',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array (
+return [
   //============================== New strings to translate ==============================//
   // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\ManageEvent\\Modals\\MessageAttendees.blade.php
   'new_message' => 'New Message',
@@ -9,7 +9,7 @@ return array (
   //==================================== Translations ====================================//
   'all_event_attendees' => 'All event attendees',
   'attendees_with_ticket_type' => 'Attendees with ticket type',
-  'before_send_message' => 'The attendee will be instructed to send any reply to <b>:recipient</b>',
+  'before_send_message' => 'The attendee will be instructed to send any reply to',
   'content' => 'Message Content',
   'date' => 'date',
   'leave_blank_to_send_immediately' => 'Leave blank to send immediately',
@@ -22,4 +22,4 @@ return array (
   'subject' => 'Message Subject',
   'to' => 'To',
   'unsent' => 'Unsent',
-);
+];

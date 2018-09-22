@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="help-block">
-                    {!! @trans("Message.before_send_message", ["organiser"=>$attendee->event->organiser->email]) !!}
+                    @lang("Message.before_send_message") <b>{{ $attendee->event->organiser->email }}</b>
                 </div>
             </div> <!-- /end modal body-->
             <div class="modal-footer">

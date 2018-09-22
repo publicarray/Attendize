@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
                     <i class="ico-edit"></i>
-                    {{ @trans("ManageEvent.edit_attendee_title") . $attendee->full_name }}
+                        @lang("ManageEvent.edit_attendee_title") <b>{{ $attendee->full_name }}</b>
                     </h3>
             </div>
             <div class="modal-body">

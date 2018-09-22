@@ -1,9 +1,9 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/26 11:05:24 
+ Generated via "php artisan localization:missing" at 2018/04/26 11:05:24
 *************************************************************************/
 
-return array (
+return [
   //==================================== Translations ====================================//
   'all_attendees' => 'All Attendees',
   'all_attendees_cancelled' => 'All attendees in this order have been cancelled.',
@@ -13,12 +13,14 @@ return array (
   'attendee_cancelled_help' => 'This attendee has been cancelled',
   'attendees_file_requirements' => 'File must be .csv and the first line must contain first_name,last_name,email',
   'attendize_qrcode_check_in' => 'Attendize QRCode Check-in',
-  'cancel_attendee_title' => 'Cancel <b>:cancel</b>',
+  'cancel_attendee_title' => 'Cancel',
   'cancel_description' => 'Cancelling Attendees will remove them from the attendee list.',
-  'cancel_notify' => 'Notify <b>:name</b> their ticket has been cancelled.',
+  'cancel_notify_p1' => 'Notify',
+  'cancel_notify_p2' => ' their ticket has been cancelled.',
   'cancel_order_:ref' => 'Cancel Order: <b>:ref</b>',
   'cancel_refund' => 'If you would like to refund the order which this attendee belongs to you can do so <a href=":url">here</a>.',
-  'cancel_refund_user' => 'Refund <b>:name</b> for their ticket.',
+  'cancel_refund_user_p1' => 'Refund',
+  'cancel_refund_user_p2' => 'for their ticket.',
   'cant_refund_here' => 'Sorry, you can\'t refund <b>:gateway</b> payments here. You will have to do it on their website.',
   'check-in' => 'Check-In',
   'checkin_search_placeholder' => 'Search by Attendee Name, Order Reference, Attendee Reference...',
@@ -29,7 +31,7 @@ return array (
   'create_ticket' => 'Create Ticket',
   'download_pdf_ticket' => 'Download PDF Ticket',
   'edit_attendee' => 'Edit Attendee',
-  'edit_attendee_title' => 'Edit <b>:attendee<b>',
+  'edit_attendee_title' => 'Edit',
   'edit_order_title' => 'Order: <b>:order_ref</b>',
   'edit_question' => 'Edit Question',
   'edit_ticket' => 'Edit Ticket',
@@ -96,8 +98,8 @@ return array (
   'update_order' => 'Update Order',
   'widgets' => 'Widgets',
   //================================== Obsolete strings ==================================//
-  'LLH:obsolete' => 
-  array (
+  'LLH:obsolete' =>
+  [
     'create_question' => 'Create Question',
-  ),
-);
+  ],
+];
