@@ -19,20 +19,6 @@
             display: none;
         }
     </style>
-    <script>
-        $(function () {
-            $('.colorpicker').minicolors({
-                changeDelay: 500,
-                change: function () {
-                    var replaced = replaceUrlParam('{{route('showOrganiserHome', ['organiser_id'=>$organiser->id])}}', 'preview_styles', encodeURIComponent($('#OrganiserPageDesign form').serialize()));
-                    document.getElementById('previewIframe').src = replaced;
-                }
-            });
-
-        });
-
-        @include('ManageOrganiser.Partials.OrganiserCreateAndEditJS')
-    </script>
 @stop
 
 @section('menu')
@@ -90,7 +76,7 @@
                         {!! Form::label('about', trans("Organiser.organiser_description"), array('class'=>'control-label ')) !!}
                         {!!  Form::textarea('about', Input::old('about'),
                                                 array(
-                                                'class'=>'form-control ',
+                                                'class'=>'form-control editable',
                                                 'placeholder'=>trans("Organiser.organiser_description_placeholder"),
                                                 'rows' => 4
                                                 ))  !!}
@@ -247,4 +233,6 @@
                 </div>
             </div>
         </div>
+@include('ManageOrganiser.Partials.OrganiserCreateAndEditJS')
+
 @stop
