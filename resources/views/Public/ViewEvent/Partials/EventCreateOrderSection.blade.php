@@ -166,7 +166,7 @@
                     <div class="offline_payment" style="display: none;">
                         <h5>@lang("Public_ViewEvent.offline_payment_instructions")</h5>
                         <div class="well">
-                            {!! Markdown::parse($event->offline_payment_instructions) !!}
+                            {!! Markdown::parse(strip_tags($event->offline_payment_instructions)) !!}
                         </div>
                     </div>
 

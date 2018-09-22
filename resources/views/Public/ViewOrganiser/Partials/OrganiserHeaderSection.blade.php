@@ -9,7 +9,7 @@
             <h1>{{$organiser->name}}</h1>
             @if($organiser->about)
             <div class="description pa10">
-                 {!! Markdown::parse($organiser->about) !!}
+                 {!! Markdown::parse(strip_tags($organiser->about)) !!}
             </div>
             @endif
         </div>

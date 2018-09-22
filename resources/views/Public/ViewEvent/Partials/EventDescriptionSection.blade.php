@@ -9,7 +9,7 @@
         @if($event->images->count())
         <div class="col-md-7">
             <div class="content event_details" property="description">
-                {!! Markdown::parse($event->description) !!}
+                {!! Markdown::parse(strip_tags($event->description)) !!}
             </div>
         </div>
         <div class="col-md-5">
@@ -20,7 +20,7 @@
         @else */ ?>
         <div class="col-md-12">
             <div class="content event_details" property="description">
-                {!! Markdown::parse($event->description) !!}
+                {!! Markdown::parse(strip_tags($event->description)) !!}
             </div>
         </div>
         <?php /*@endif*/ ?>
