@@ -145,26 +145,6 @@ footer {
     opacity: .7;
 }
 
-.scannerButtons {
-    position: absolute;
-    bottom: 0;
-    padding: 10px;
-    width: 100%;
-}
-
-.scannerButtons a {
-    display: block;
-    text-align: center;
-    background-color: rgb(255, 255, 255);
-    padding: 15px;
-    font-weight: lighter;
-    text-transform: uppercase;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 100%;
-    color: darkgreen;
-    font-weight: bold;
-}
 .scannerAimer {
     width: 250px;
     height: 250px;
@@ -206,12 +186,11 @@ footer {
 
 .ScanResultMessage {
     transition: background 0.4s ease-in-out;
-    width: 250px;
+    width: 340px;
     font-size: 16px;
-    text-align: center;
+    letter-spacing: 1px;
     color: #fff;
     padding: 15px;
-    text-transform: uppercase;
     margin: 0 auto;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.63);
 }
@@ -367,6 +346,12 @@ video#scannerVideo {
         opacity: 0;
     }
 }
+#scanning-ellipsis {
+    padding: 1em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 #scanning-ellipsis span {
     -webkit-animation-name: opacity;
     -webkit-animation-duration: 1s;

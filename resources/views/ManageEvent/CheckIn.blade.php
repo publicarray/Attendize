@@ -124,12 +124,7 @@
         </a>
         <video id="scannerVideo" playsinline autoplay></video>
 
-        <div class="scannerButtons">
-                    <a @click="initScanner" v-show="!isScanning" href="javascript:void(0);">
-                    @lang("Attendee.scan_another_ticket")
-                    </a>
-        </div>
-        <div v-if="isScanning" class="scannerAimer">
+        <div v-if="!scanResult && isScanning" class="scannerAimer">
         </div>
 
         <div v-if="scanResult" class="scannerResult @{{ scanResultType }}">
@@ -138,10 +133,10 @@
         </div>
 
         <div class="ScanResultMessage">
-                    <span class="message" v-if="!isScanning">
+                    <span class="message">
                         @{{{ scanResultMessage }}}
                     </span>
-                    <span v-else>
+                    <span v-if="isScanning">
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
                     </span>
         </div>

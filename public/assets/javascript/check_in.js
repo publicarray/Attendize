@@ -31,7 +31,7 @@ var checkinApp = new Vue({
             this.$http.post(Attendize.checkInSearchRoute, {q: this.searchTerm}).then(function (res) {
                 this.attendees = res.data;
                 this.searchResultsCount = (Object.keys(res.data).length);
-                console.log('Succesfully fetched attendees')
+                console.log('Successfully fetched attendees')
             }, function () {
                 console.log('Failed to fetch attendees')
             });
@@ -80,7 +80,8 @@ var checkinApp = new Vue({
                 this.scanResult = true;
                 this.scanResultMessage = res.data.message;
                 this.scanResultType = res.data.status;
-
+                // Continue scanning after 3 seconds
+                setTimeout(() => {this.initScanner()}, 3000);
             }, function (response) {
                 this.scanResultMessage = lang("whoops2");
             });
@@ -95,8 +96,6 @@ var checkinApp = new Vue({
 
             var that = this;
             this.isScanning = true;
-            this.scanResult = false;
-
             /*
              If the scanner is already initiated clear it and start over.
              */
@@ -164,6 +163,10 @@ var checkinApp = new Vue({
             }
         },
         closeScanner: function () {
+            this.scanResult = false;
+            this.isScanning = false;
+            this.scanResultMessage = '';
+            this.scanResultType = '';
             clearTimeout(this.QrTimeout);
             this.showScannerModal = false;
             track = this.stream.getTracks()[0];

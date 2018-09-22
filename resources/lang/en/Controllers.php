@@ -1,13 +1,13 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/26 10:21:11 
+ Generated via "php artisan localization:missing" at 2018/04/26 10:21:11
 *************************************************************************/
 
-return array (
+return [
   //============================== New strings to translate ==============================//
   // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\ManageOrganiser\\Events.blade.php
-  'sort' => 
-  array (
+  'sort' =>
+  [
     'event_title' => 'Event Title',
     'start_date' => 'Start Date',
     'created_at' => 'Creation Date',
@@ -15,51 +15,51 @@ return array (
     'sales_volume' => 'Sales Volume',
     'sort_order' => 'Custom Sort Order',
     'title' => 'Ticket Title',
-  ),
+  ],
   // Defined in file C:\\wamp\\www\\attendize\\resources\\views\\ManageOrganiser\\Events.blade.php
   //==================================== Translations ====================================//
   'account_successfully_updated' => 'Account Successfully Updated',
   'addInviteError' => 'You need to create a ticket before you can invite an attendee.',
   'attendee_already_cancelled' => 'Attendee Already Cancelled',
   'attendee_already_checked_in' => 'Attendee already checked in at :time ',
-  'attendee_check_in_success' => 'Success !<br>Name: :name <br>Reference: :ref<br>Ticket: :ticket.',
+  'attendee_check_in_success' => 'NAME: :name <br>REFERENCE: :ref<br>TICKET: :ticket.',
   'attendee_exception' => 'An error occurred while inviting this attendee. Please try again.',
-  'attendee_successfully_checked_in' => 'Attendee Succesfully Checked In',
-  'attendee_successfully_checked_out' => 'Attendee Succesfully Checked Out',
+  'attendee_successfully_checked_in' => 'Attendee Successfully Checked In',
+  'attendee_successfully_checked_out' => 'Attendee Successfully Checked Out',
   'attendee_successfully_invited' => 'Attendee Successfully Invited!',
   'cant_delete_ticket_when_sold' => 'Sorry, you can\'t delete this ticket as some have already been sold',
   'check_in_all_tickets' => 'Check in all tickets associated to this order',
   'confirmation_malformed' => 'The confirmation code is missing or malformed.',
   'confirmation_successful' => 'Success! Your email is now verified. You can now login.',
-  'error' => 
-  array (
-    'email' => 
-    array (
+  'error' =>
+  [
+    'email' =>
+    [
       'email' => 'Please enter a valid E-mail address.',
       'required' => 'E-mail address is required.',
       'unique' => 'E-mail already in use for this account.',
-    ),
-    'first_name' => 
-    array (
+    ],
+    'first_name' =>
+    [
       'required' => 'Please enter your first name.',
-    ),
-    'last_name' => 
-    array (
+    ],
+    'last_name' =>
+    [
       'required' => 'Please enter your last name.',
-    ),
-    'page_bg_color' => 
-    array (
+    ],
+    'page_bg_color' =>
+    [
       'required' => 'Please enter a background color.',
-    ),
-    'page_header_bg_color' => 
-    array (
+    ],
+    'page_header_bg_color' =>
+    [
       'required' => 'Please enter a header background color.',
-    ),
-    'password' => 
-    array (
+    ],
+    'password' =>
+    [
       'passcheck' => 'This password is incorrect.',
-    ),
-  ),
+    ],
+  ],
   'event_create_exception' => 'Whoops! There was a problem creating your event. Please try again.',
   'event_page_successfully_updated' => 'Event Page Successfully Updated.',
   'event_successfully_updated' => 'Event Successfully Updated!',
@@ -115,4 +115,4 @@ return array (
   'tickets_for_event' => 'Your tickets for the event :event.',
   'whoops' => 'Whoops! Looks like something went wrong. Please try again.',
   'your_password_reset_link' => 'Your Password Reset Link',
-);
+];
