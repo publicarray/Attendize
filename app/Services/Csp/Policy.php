@@ -17,7 +17,7 @@ class Policy extends BasePolicy
             ->addDirectivesForGoogleAnalytics()
             ->addDirectivesForTwitter()
             ->addDirectivesForStripe()
-            ->addDirectivesForSRI()
+            //->addDirectivesForSRI()
             ->addDirectivesForCdnjs();
     }
 
