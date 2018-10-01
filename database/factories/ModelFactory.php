@@ -203,7 +203,10 @@ $factory->define(App\Models\Order::class, function (Faker\Generator $faker) {
         'is_refunded'           => 0,
         'amount'                => 20.00,
         'amount_refunded'       => 0,
-        'event_id'              => factory(App\Models\Event::class)->create()->id
+        'event_id'              => factory(App\Models\Event::class)->create()->id,
+        'payment_gateway_id'    => 1,
+        'is_payment_received'   => false,
+        'taxamt'                => 0
     ];
 });
 
@@ -213,7 +216,7 @@ $factory->define(App\Models\Ticket::class, function (Faker\Generator $faker) {
         'user_id'               => factory(App\Models\User::class)->create()->id,
         'edited_by_user_id'     => factory(App\Models\User::class)->create()->id,
         'account_id'            => factory(App\Models\Account::class)->create()->id,
-        'order_id'              => factory(App\Models\OrderStatus::class)->create()->id,
+        'order_id'              => factory(App\Models\Order::class)->create()->id,
         'event_id'              => factory(App\Models\Event::class)->create()->id,
         'title'                 => $faker->name,
         'description'           => $faker->text,
@@ -226,7 +229,10 @@ $factory->define(App\Models\Ticket::class, function (Faker\Generator $faker) {
         'end_sale_date'         => Carbon::now()->addDays(20),
         'sales_volume'          => 0,
         'organiser_fees_volume' => 0,
-        'is_paused'             => 0
+        'is_paused'             => 0,
+        'public_id'             => null,
+        'sort_order'            => 0,
+        'is_hidden'             => false
     ];
 });
 
@@ -264,6 +270,7 @@ $factory->define(App\Models\Attendee::class, function (Faker\Generator $faker) {
         'reference_index'          => $faker->numberBetween(),
         'private_reference_number' => 1,
         'is_cancelled'             => false,
+        'is_refunded'              => false,
         'has_arrived'              => false,
         'arrival_time'             => Carbon::now(),
         'account_id'               => factory(App\Models\Account::class)->create()->id,
@@ -286,4 +293,3 @@ $factory->define(App\Models\EventImage::class, function (Faker\Generator $faker)
         'user_id'    => factory(App\Models\User::class)->create()->id
     ];
 });
-
