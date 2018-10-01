@@ -15,12 +15,16 @@ class AddSecurityHeaders
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-        return $response->withHeaders([
+        if (method_exists($response, 'withHeaders')) {
+            return $response->withHeaders([
                 'Referrer-Policy' => 'same-origin',
                 'Feature-Policy' => "vibrate 'none'; camera 'self'; microphone 'none'; geolocation 'none' vr 'none'; usb 'none'",
                 'X-Content-Type-Options' => 'nosniff',
                 'X-Frame-Options' => 'sameorigin',
                 'X-XSS-Protection' => '1; mode=block',
             ]);
+        }
+
+        return $response;
     }
 }
