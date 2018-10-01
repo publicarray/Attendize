@@ -81,12 +81,14 @@ class Ticket extends MyBaseModel
     /**
      * Parse start_sale_date to a Carbon instance
      *
-     * @param string $date DateTime
+     * @param string|null|Carbon $date DateTime
      */
     public function setStartSaleDateAttribute($date)
     {
         if (!$date) {
             $this->attributes['start_sale_date'] = Carbon::now();
+        } elseif (get_class($date) == 'Carbon\Carbon') {
+            $this->attributes['start_sale_date'] = $date;
         } else {
             $this->attributes['start_sale_date'] = Carbon::createFromFormat(
                 config('attendize.default_datetime_format'),
@@ -98,12 +100,14 @@ class Ticket extends MyBaseModel
     /**
      * Parse end_sale_date to a Carbon instance
      *
-     * @param string|null $date DateTime
+     * @param string|null|Carbon $date DateTime
      */
     public function setEndSaleDateAttribute($date)
     {
         if (!$date) {
             $this->attributes['end_sale_date'] = null;
+        } elseif (get_class($date) == 'Carbon\Carbon') {
+            $this->attributes['end_sale_date'] = $date;
         } else {
             $this->attributes['end_sale_date'] = Carbon::createFromFormat(
                 config('attendize.default_datetime_format'),

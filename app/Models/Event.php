@@ -200,12 +200,16 @@ class Event extends MyBaseModel
     /**
      * Parse start_date to a Carbon instance
      *
-     * @param string $date DateTime
+     * @param String|Carbon $date DateTime
      */
     public function setStartDateAttribute($date)
     {
-        $format = config('attendize.default_datetime_format');
-        $this->attributes['start_date'] = Carbon::createFromFormat($format, $date);
+        if (get_class($date) == 'Carbon\Carbon') {
+            $this->attributes['start_date'] = $date;
+        } else {
+            $format = config('attendize.default_datetime_format');
+            $this->attributes['start_date'] = Carbon::createFromFormat($format, $date);
+        }
     }
 
     /**
@@ -220,12 +224,16 @@ class Event extends MyBaseModel
     /**
      * Parse end_date to a Carbon instance
      *
-     * @param string $date DateTime
+     * @param String|Carbon $date DateTime
      */
     public function setEndDateAttribute($date)
     {
-        $format = config('attendize.default_datetime_format');
-        $this->attributes['end_date'] = Carbon::createFromFormat($format, $date);
+        if (get_class($date) == 'Carbon\Carbon') {
+            $this->attributes['end_date'] = $date;
+        } else {
+            $format = config('attendize.default_datetime_format');
+            $this->attributes['end_date'] = Carbon::createFromFormat($format, $date);
+        }
     }
 
     /**
