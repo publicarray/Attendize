@@ -54,7 +54,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
-    public function setUp(){
+    public function setUp()
+    {
         parent::setUp();
 
         /*
@@ -62,6 +63,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
          */
         $this->faker = Faker\Factory::create();
 
+        /*
+         * Set up key
+         */
+        Artisan::call('key:generate');
         /*
          * Migrate & Seed the DB
          */
@@ -73,18 +78,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         /*
          * Set up our test user
          */
-        if(User::where('email','=','test@test.test')->count() === 0) {
+        if (User::where('email', '=', 'test@test.test')->count() === 0) {
             $this->test_user = factory(App\Models\User::class)->create([
                 'email'    => $this->test_user_email,
                 'password' => Hash::make($this->test_user_password),
             ]);
         } else {
-            $this->test_user = User::where('email','=','test@test.test')->first();
+            $this->test_user = User::where('email', '=', 'test@test.test')->first();
         }
-
     }
 
-    public function tearDown(){
+    public function tearDown()
+    {
         parent::tearDown();
     }
 }
