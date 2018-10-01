@@ -124,16 +124,27 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Organiser::class, function (Faker\Generator $faker) {
     return [
-        'account_id'         => factory(App\Models\Account::class)->create()->id,
-        'name'               => $faker->name,
-        'about'              => $faker->text,
-        'email'              => $faker->email,
-        'phone'              => $faker->phoneNumber,
-        'facebook'           => 'https://facebook.com/organizer-profile',
-        'twitter'            => 'https://twitter.com/organizer-profile',
-        'logo_path'          => 'path/to/logo',
-        'is_email_confirmed' => 0,
-        'confirmation_key'   => str_random(15),
+        'account_id'                => factory(App\Models\Account::class)->create()->id,
+        'name'                      => $faker->name,
+        'about'                     => $faker->text,
+        'email'                     => $faker->email,
+        'phone'                     => $faker->phoneNumber,
+        'facebook'                  => 'https://facebook.com/organizer-profile',
+        'twitter'                   => 'https://twitter.com/organizer-profile',
+        'logo_path'                 => 'path/to/logo',
+        'is_email_confirmed'        => 0,
+        'confirmation_key'          => str_random(15),
+        'show_twitter_widget'       => $faker->boolean,
+        'show_facebook_widget'      => $faker->boolean,
+        'page_header_bg_color'      => $faker->hexcolor,
+        'page_bg_color'             => '#ffffff',
+        'page_text_color'           => '#000000',
+        'enable_organiser_page'     => $faker->boolean,
+        'google_analytics_code'     => null,
+        'tax_name'                  => $faker->text(11) . ' tax',
+        'tax_value'                 => $faker->randomFloat(2, 0, 30),
+        'tax_id'                    => $faker->randomDigitNotNull,
+        'charge_tax'                => $faker->boolean
     ];
 });
 
@@ -190,8 +201,8 @@ $factory->define(App\Models\Order::class, function (Faker\Generator $faker) {
         'last_name'             => $faker->lastName,
         'email'                 => $faker->email,
         'ticket_pdf_path'       => '/ticket/pdf/path',
-        'order_reference'       => $faker->text,
-        'transaction_id'        => $faker->text,
+        'order_reference'       => $faker->text(15),
+        'transaction_id'        => $faker->text(50),
         'discount'              => .20,
         'booking_fee'           => .10,
         'organiser_booking_fee' => .10,
