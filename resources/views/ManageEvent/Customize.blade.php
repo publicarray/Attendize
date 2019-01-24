@@ -224,7 +224,7 @@
                         <input type="text" id="affiliateGenerator" name="affiliateGenerator" class="form-control"/>
 
                         <div style="display:none; margin-top:10px; " id="referralUrl">
-                            <input onclick="this.select();" type="text" name="affiliateLink" class="form-control"/>
+                            <input onclick="this.select();" type="text" name="affiliateLink" readonly class="form-control"/>
                         </div>
                     </div>
 
