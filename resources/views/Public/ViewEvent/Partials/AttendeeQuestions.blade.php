@@ -8,9 +8,9 @@
             @elseif($question->question_type_id == config('attendize.question_textbox_multi'))
                 {!! Form::textarea("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]", null, ['rows'=>5, $question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}  form-control"]) !!}
             @elseif($question->question_type_id == config('attendize.question_dropdown_single'))
-                {!! Form::select("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]", array_merge(['' => '-- Please Select --'], $question->showNameWithPrice($currency)->toArray()), null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}   form-control"]) !!}
+                {!! Form::select("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]", array_merge(['' => '-- Please Select --'], $question->showOptionNameWithPrice($currency)->toArray()), null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}   form-control"]) !!}
             @elseif($question->question_type_id == config('attendize.question_dropdown_multi'))
-                {!! Form::select("ticket_holder_questions[{$ticket->id}][{$i}][$question->id][]",$question->options->pluck('name', 'name'), null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}   form-control"]) !!}
+                {!! Form::select("ticket_holder_questions[{$ticket->id}][{$i}][$question->id][]",$question->showOptionNameWithPrice($currency), null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}   form-control"]) !!}
             @elseif($question->question_type_id == config('attendize.question_checkbox_multi'))
                 <br>
                 @foreach($question->options as $option)
@@ -19,7 +19,7 @@
                     ?>
                     <div class="custom-checkbox">
                         {!! Form::checkbox("ticket_holder_questions[{$ticket->id}][{$i}][$question->id][]",$option->name, false,['class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}  ", 'id' => $checkbox_id]) !!}
-                        <label for="{{ $checkbox_id }}">{{$option->name}}</label>
+                        <label for="{{ $checkbox_id }}">{{$option->showWithNameAndPrice($currency)}} </label>
                     </div>
                 @endforeach
             @elseif($question->question_type_id == config('attendize.question_radio_single'))
@@ -30,7 +30,7 @@
                     ?>
                 <div class="custom-radio">
                     {!! Form::radio("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]",$option->name, false, ['id' => $radio_id, 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}  "]) !!}
-                    <label for="{{ $radio_id }}">{{$option->name}}</label>
+                    <label for="{{ $radio_id }}">{{$option->showWithNameAndPrice($currency)}}</label>
                 </div>
                 @endforeach
             @endif

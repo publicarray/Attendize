@@ -29,4 +29,13 @@ class QuestionOption extends MyBaseModel
     {
         return $this->belongsTo(\App\Models\Question::class);
     }
+
+    public function showWithNameAndPrice($currency)
+    {
+        if ($this->price > 0) {
+            return $this->name.' ('.money($this->price, $currency).')';
+        } else {
+            return $this->name;
+        }
+    }
 }

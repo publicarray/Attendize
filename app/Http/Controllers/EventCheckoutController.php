@@ -359,7 +359,7 @@ class EventCheckoutController extends Controller
                             continue;
                         }
 
-                        switch ($question->question_type()->first()->id) {
+                        switch ($question->question_type_id) {
                             case 3: // Dropdown (single selection)
                                 $options = $question->options->toArray();
                                 if (sizeof($options) > 0) {
