@@ -17,7 +17,7 @@ class QuestionOption extends MyBaseModel
      * @access protected
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'price'];
 
     /**
      * The question associated with the question option.

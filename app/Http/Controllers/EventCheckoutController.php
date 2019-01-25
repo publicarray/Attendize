@@ -299,6 +299,7 @@ class EventCheckoutController extends Controller
         $event = Event::findOrFail($event_id);
         $order = new Order();
         $ticket_order = session()->get('ticket_order_' . $event_id);
+        $ticket_questions = isset($request->ticket_holder_questions) ? $request->ticket_holder_questions : [];
 
         $validation_rules = $ticket_order['validation_rules'];
         $validation_messages = $ticket_order['validation_messages'];
@@ -345,9 +346,47 @@ class EventCheckoutController extends Controller
                     ]);
             }
 
-            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
-            $orderService->calculateFinalCosts();
+            //
+            // get extra costs
+            //
+            $extras_price = 0; // ToDo: find a more dry and sane method
+            foreach ($ticket_order['tickets'] as $attendee_details) {
+                for ($i = 0; $i < $attendee_details['qty']; $i++) {
+                    foreach ($attendee_details['ticket']->questions as $question) {
+                        $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
 
+                        if (is_null($ticket_answer)) {
+                            continue;
+                        }
+
+                        switch ($question->question_type()->first()->id) {
+                            case 3: // Dropdown (single selection)
+                                $options = $question->options->toArray();
+                                if (sizeof($options) > 0) {
+                                    $extras_price += $options[$ticket_answer]['price'];
+                                }
+                                break;
+                            case 4: // Dropdown (multiple selection)
+                            case 5: // Checkbox
+                                foreach ($ticket_answer as $anwser) {
+                                    $extras_price += $question->options->where('name', $anwser)->first()->price;
+                                }
+                                break;
+                            case 6: // Radio input
+                                $extras_price += $question->options->where('name', $ticket_answer)->first()->price;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            $order_total = $ticket_order['order_total'] + $extras_price;
+            Log::debug(['extras_price:', $extras_price]);
+
+            $orderService = new OrderService($order_total, $ticket_order['total_booking_fee'], $event);
+            $orderService->calculateFinalCosts();
+            Log::debug(['order_total(exc tax): '.$order_total, 'GrandTotal (inc tax): '.$orderService->getGrandTotal()]);
             $transaction_data += [
                     'amount'      => $orderService->getGrandTotal(),
                     'currency'    => $event->currency->code,
@@ -395,6 +434,7 @@ class EventCheckoutController extends Controller
                     ]);
                     break;
             }
+
 
             $transaction = $gateway->purchase($transaction_data);
 
