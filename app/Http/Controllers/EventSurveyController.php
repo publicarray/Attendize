@@ -80,13 +80,15 @@ class EventSurveyController extends MyBaseController
 
         // Get options.
         $options = $request->get('option');
+        $prices = $request->get('price');
 
         // Add options.
         if ($options && is_array($options)) {
-            foreach ($options as $option_name) {
-                if (trim($option_name) !== '') {
+            foreach ($options as $i => $option) {
+                if (trim($option) !== '') {
                     $question->options()->create([
-                        'name' => $option_name,
+                        'name' => $option,
+                        'price' => $prices[$i],
                     ]);
                 }
             }
@@ -158,15 +160,17 @@ class EventSurveyController extends MyBaseController
 
             // Get options.
             $options = $request->get('option');
+            $prices = $request->get('price');
 
             $question->options()->delete();
 
             // Add options.
             if ($options && is_array($options)) {
-                foreach ($options as $option_name) {
-                    if (trim($option_name) !== '') {
+                foreach ($options as $i => $option) {
+                    if (trim($option) !== '') {
                         $question->options()->create([
-                            'name' => $option_name,
+                            'name' => $option,
+                            'price' => $prices[$i],
                         ]);
                     }
                 }
