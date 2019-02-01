@@ -15,6 +15,7 @@ return [
   'below_payment_information_header' => '',
   'below_tickets' => 'Choose the number of tickets and click "register". On the next screen you\'ll pay for them.',
   'booking_fee' => 'Booking Fee',
+  'extras' => 'Extras',
   'booking_fees' => 'Booking Fees',
   'card_number' => 'Card number',
   'checkout_submit' => 'Checkout',

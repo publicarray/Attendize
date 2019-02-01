@@ -330,7 +330,7 @@ class EventCheckoutController extends Controller
         try {
             //more transation data being put in here.
             $transaction_data = [];
-            if (config('attendize.enable_dummy_payment_gateway') == TRUE) {
+            if (config('attendize.enable_dummy_payment_gateway') == true) {
                 $formData = config('attendize.fake_card_data');
                 $transaction_data = [
                     'card' => $formData
@@ -346,47 +346,12 @@ class EventCheckoutController extends Controller
                     ]);
             }
 
-            //
-            // get extra costs
-            //
-            $extras_price = 0; // ToDo: find a more dry and sane method
-            foreach ($ticket_order['tickets'] as $attendee_details) {
-                for ($i = 0; $i < $attendee_details['qty']; $i++) {
-                    foreach ($attendee_details['ticket']->questions as $question) {
-                        $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
-
-                        if (is_null($ticket_answer)) {
-                            continue;
-                        }
-
-                        switch ($question->question_type_id) {
-                            case 3: // Dropdown (single selection)
-                                $options = $question->options->toArray();
-                                if (sizeof($options) > 0) {
-                                    $extras_price += $options[$ticket_answer]['price'];
-                                }
-                                break;
-                            case 4: // Dropdown (multiple selection)
-                            case 5: // Checkbox
-                                foreach ($ticket_answer as $anwser) {
-                                    $extras_price += $question->options->where('name', $anwser)->first()->price;
-                                }
-                                break;
-                            case 6: // Radio input
-                                $extras_price += $question->options->where('name', $ticket_answer)->first()->price;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
-            $order_total = $ticket_order['order_total'] + $extras_price;
+            $extras_price = getExtrasPrice($ticket_order, $ticket_questions);
             Log::debug(['extras_price:', $extras_price]);
 
-            $orderService = new OrderService($order_total, $ticket_order['total_booking_fee'], $event);
+            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event, $extras_price);
             $orderService->calculateFinalCosts();
-            Log::debug(['order_total(exc tax): '.$order_total, 'GrandTotal (inc tax): '.$orderService->getGrandTotal()]);
+            Log::debug(['GrandTotal (inc tax): '.$orderService->getGrandTotal()]);
             $transaction_data += [
                     'amount'      => $orderService->getGrandTotal(),
                     'currency'    => $event->currency->code,
@@ -570,6 +535,7 @@ class EventCheckoutController extends Controller
             $order->email = $request_data['order_email'];
             $order->order_status_id = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
             $order->amount = $ticket_order['order_total'];
+            $order->extras = getExtrasPrice($ticket_order, $ticket_questions);
             $order->booking_fee = $ticket_order['booking_fee'];
             $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
             $order->discount = 0.00;
@@ -578,7 +544,7 @@ class EventCheckoutController extends Controller
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
 
             // Calculating grand total including tax
-            $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
+            $orderService = new OrderService($order->amount, $order->booking_fee, $event, $order->extras);
             $orderService->calculateFinalCosts();
 
             $order->taxamt = $orderService->getTaxAmount();
@@ -756,7 +722,7 @@ class EventCheckoutController extends Controller
             abort(404);
         }
 
-        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event);
+        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event, $order->extras);
         $orderService->calculateFinalCosts();
 
         $data = [
