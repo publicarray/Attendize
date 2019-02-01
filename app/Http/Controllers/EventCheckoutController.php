@@ -636,12 +636,13 @@ class EventCheckoutController extends Controller
                             continue;
                         }
 
-                        // convert input indexes to answer text
-                        if ($question->question_type_id == 4) { // Dropdown (multiple selection)
+                        // convert drop-down indexes to answer text
+                        if ($question->question_type_id == 3) { // Dropdown (single selection)
+                            $ticket_answer = $question->options->slice($ticket_answer, 1)->first()->name;
+                        } else if ($question->question_type_id == 4) { // Dropdown (multiple selection)
                             $tmp_ticket_answer = [];
                             foreach ($ticket_answer as $answer) {
-                                // todo, don't rely on array index ($answer) and slice
-                                $tmp = $question->options->slice($answer, 1)->first()->name;
+                                $tmp_ticket_answer += $question->options->slice($answer, 1)->first()->name;
                             }
                             $ticket_answer = $tmp_ticket_answer;
                         }

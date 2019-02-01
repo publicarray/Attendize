@@ -32,10 +32,7 @@ if (!function_exists('money')) {
 
                     switch ($question->question_type_id) {
                     case 3: // Dropdown (single selection)
-                        $options = $question->options->toArray();
-                        if (sizeof($options) > 0) {
-                            $extras_price += $options[$ticket_answer]['price'];
-                        }
+                        $options = $question->options->slice($ticket_answer, 1)->first()->price;
                         break;
                     case 4: // Dropdown (multiple selection)
                         foreach ($ticket_answer as $answer) {
