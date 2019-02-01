@@ -32,7 +32,7 @@ if (!function_exists('money')) {
 
                     switch ($question->question_type_id) {
                     case 3: // Dropdown (single selection)
-                        $options = $question->options->slice($ticket_answer, 1)->first()->price;
+                        $extras_price += $question->options->slice($ticket_answer, 1)->first()->price;
                         break;
                     case 4: // Dropdown (multiple selection)
                         foreach ($ticket_answer as $answer) {
