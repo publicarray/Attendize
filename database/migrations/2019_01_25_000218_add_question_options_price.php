@@ -14,7 +14,11 @@ class AddQuestionOptionsPrice extends Migration
     public function up()
     {
         Schema::table('question_options', function (Blueprint $table) {
-            $table->decimal('price', 13, 2)->default(0);
+            $table->decimal('price', 13, 2)->default(0.00);
+        });
+
+        Schema::table('orders', function (Blueprint $table) {
+            $table->decimal('extras', 13, 2)->default(0.00);
         });
     }
 
@@ -27,6 +31,10 @@ class AddQuestionOptionsPrice extends Migration
     {
         Schema::table('question_options', function (Blueprint $table) {
             $table->dropColumn('price');
+        });
+
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('extras');
         });
     }
 }

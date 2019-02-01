@@ -11,7 +11,7 @@ class OrderMailer
 {
     public function sendOrderNotification(Order $order)
     {
-        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event);
+        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event, $order->extras);
         $orderService->calculateFinalCosts();
 
         $data = [
@@ -28,7 +28,7 @@ class OrderMailer
 
     public function sendOrderTickets(Order $order)
     {
-        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event);
+        $orderService = new OrderService($order->amount, $order->organiser_booking_fee, $order->event, $order->extras);
         $orderService->calculateFinalCosts();
 
         Log::info("Sending ticket to: " . $order->email);

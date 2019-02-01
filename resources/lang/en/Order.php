@@ -40,6 +40,7 @@ return array (
   'registered' => 'registered',
   'search_placeholder' => 'Search Orders..',
   'status' => 'Status',
+  'extras' => 'Extras',
   'sub_total' => 'Sub Total',
   'ticket' => 'Ticket',
   'tickets' => 'tickets(s)',

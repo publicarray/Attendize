@@ -116,7 +116,7 @@ class Order extends MyBaseModel
      */
     public function getTotalAmountAttribute()
     {
-        return $this->amount + $this->organiser_booking_fee + $this->booking_fee;
+        return $this->amount + $this->organiser_booking_fee + $this->booking_fee + $this->extras;
     }
 
     /**
