@@ -636,12 +636,21 @@ class EventCheckoutController extends Controller
                             continue;
                         }
 
+                        // convert input indexes to answer text
+                        if ($question->question_type_id == 4) { // Dropdown (multiple selection)
+                            $tmp_ticket_answer = [];
+                            foreach ($ticket_answer as $answer) {
+                                // todo, don't rely on array index ($answer) and slice
+                                $tmp = $question->options->slice($answer, 1)->first()->name;
+                            }
+                            $ticket_answer = $tmp_ticket_answer;
+                        }
+
                         /*
                          * If there are multiple answers to a question then join them with a comma
                          * and treat them as a single answer.
                          */
                         $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
-
                         if (!empty($ticket_answer)) {
                             QuestionAnswer::create([
                                 'answer_text' => $ticket_answer,

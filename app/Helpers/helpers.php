@@ -38,14 +38,14 @@ if (!function_exists('money')) {
                         }
                         break;
                     case 4: // Dropdown (multiple selection)
-                        foreach ($ticket_answer as $anwser) {
-                            // todo, don't rely on array index ($anwser) and slice
-                            $extras_price += $question->options->slice($anwser, 1)->first()->price;
+                        foreach ($ticket_answer as $answer) {
+                            // todo, don't rely on array index ($answer) and slice
+                            $extras_price += $question->options->slice($answer, 1)->first()->price;
                         }
                         break;
                     case 5: // Checkbox
-                        foreach ($ticket_answer as $anwser) {
-                            $extras_price += $question->options->where('name', $anwser)->first()->price;
+                        foreach ($ticket_answer as $answer) {
+                            $extras_price += $question->options->where('name', $answer)->first()->price;
                         }
                         break;
                     case 6: // Radio input
