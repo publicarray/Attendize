@@ -300,7 +300,6 @@ class EventCheckoutController extends Controller
         $order = new Order();
         $ticket_order = session()->get('ticket_order_' . $event_id);
         $ticket_questions = isset($request->ticket_holder_questions) ? $request->ticket_holder_questions : [];
-
         $validation_rules = $ticket_order['validation_rules'];
         $validation_messages = $ticket_order['validation_messages'];
 
@@ -519,8 +518,6 @@ class EventCheckoutController extends Controller
             $event = Event::findOrFail($ticket_order['event_id']);
             $attendee_increment = 1;
             $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
-
-
             /*
              * Create the order
              */
