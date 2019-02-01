@@ -642,7 +642,7 @@ class EventCheckoutController extends Controller
                         } else if ($question->question_type_id == 4) { // Dropdown (multiple selection)
                             $tmp_ticket_answer = [];
                             foreach ($ticket_answer as $answer) {
-                                $tmp_ticket_answer += $question->options->slice($answer, 1)->first()->name;
+                                array_push($tmp_ticket_answer, $question->options->slice($answer, 1)->first()->name);
                             }
                             $ticket_answer = $tmp_ticket_answer;
                         }
