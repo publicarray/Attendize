@@ -33,10 +33,12 @@
                         @endforeach
                     </div>
 
+                    @if(Route::has('showCreateOrganiser'))
                     <div style="margin-top:-15px; padding: 10px; text-align: center;">
                         @lang("Organiser.or_caps")
                     </div>
                     <a style="color: white;" href="{{route('showCreateOrganiser')}}" class="btn btn-block btn-success">@lang("Organiser.create_new_organiser")</a>
+                    @endif
                 </div>
             </div>
         </div>
