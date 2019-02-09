@@ -110,9 +110,14 @@ Route::group(
      */
     Route::group(['prefix' => 'o'], function () {
 
-        Route::get('/{organiser_id}/{organier_slug?}', [
+        Route::get('/{organiser_id}', [
             'as'   => 'showOrganiserHome',
             'uses' => 'OrganiserViewController@showOrganiserHome',
+        ]);
+
+        Route::get('/{organiser_id}/embed', [
+            'as'   => 'showEmbeddedOrganiser',
+            'uses' => 'OrganiserViewController@showEmbeddedOrganiser',
         ]);
 
     });
