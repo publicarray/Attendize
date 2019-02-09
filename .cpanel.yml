@@ -1,0 +1,4 @@
+---
+deployment:
+  tasks:
+    - composer install --no-dev
