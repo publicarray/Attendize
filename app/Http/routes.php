@@ -268,14 +268,18 @@ Route::group(
                 'uses' => 'OrganiserCustomizeController@postEditOrganiser',
             ]);
 
-            Route::get('create', [
-                'as'   => 'showCreateOrganiser',
-                'uses' => 'OrganiserController@showCreateOrganiser',
-            ]);
-            Route::post('create', [
-                'as'   => 'postCreateOrganiser',
-                'uses' => 'OrganiserController@postCreateOrganiser',
-            ]);
+            // block the creation of additional organisers when
+            // in single organiser mode
+            if (!config('attendize.single_organiser_mode') && file_exists(base_path('installed'))) {
+                Route::get('create', [
+                    'as'   => 'showCreateOrganiser',
+                    'uses' => 'OrganiserController@showCreateOrganiser',
+                ]);
+                Route::post('create', [
+                    'as'   => 'postCreateOrganiser',
+                    'uses' => 'OrganiserController@postCreateOrganiser',
+                ]);
+            }
 
             Route::post('{organiser_id}/page_design', [
                 'as'   => 'postEditOrganiserPageDesign',
