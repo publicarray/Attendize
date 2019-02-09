@@ -57,12 +57,14 @@
 
 
                 <ul class="dropdown-menu" role="menu">
+                    @if(Route::has('showCreateOrganiser'))
                     <li>
                         <a href="{{route('showCreateOrganiser')}}">
                             <i class="ico ico-plus"></i>
                             @lang("Top.create_organiser")
                         </a>
                     </li>
+                    @endif
                     @foreach($organisers as $org)
                         <li>
                             <a href="{{route('showOrganiserDashboard', ['organiser_id' => $org->id])}}">
