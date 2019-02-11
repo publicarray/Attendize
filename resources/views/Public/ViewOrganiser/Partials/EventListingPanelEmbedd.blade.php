@@ -14,8 +14,8 @@
                             <span class="year">{{ $event->start_date->format('Y') }}</span>
                             <span class="time">{{ $event->start_date->format('h:i') }}</span>
                         </time>
-                        @if(count($event->images))
-                        <img class="hide" alt="{{ $event->title }}" src="{{ asset($event->images->first()['image_path']) }}"/>
+                        @if($event->images->count())
+                        <img class="promo-img" alt="{{ $event->title }}" src="{{ asset($event->images->first()['image_path']) }}"/>
                         @endif
                         <div class="info">
                             <h2 class="title ellipsis">
