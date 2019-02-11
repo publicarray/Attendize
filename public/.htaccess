@@ -1,6 +1,5 @@
 # only allow Cloudflare
-<RequireAll>
-Require all denied
+<RequireAny>
 Require ip 173.245.48.0/20
 Require ip 103.21.244.0/22
 Require ip 103.22.200.0/22
@@ -21,7 +20,7 @@ Require ip 2606:4700::/32
 Require ip 2803:f800::/32
 Require ip 2c0f:f248::/32
 Require ip 2a06:98c0::/29
-</RequireAll>
+</RequireAny>
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
