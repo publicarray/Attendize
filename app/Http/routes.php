@@ -42,15 +42,6 @@ Route::group(
     ]);
 
 
-    Route::get('/terms_and_conditions', [
-        'as' => 'termsAndConditions',
-        function () {
-            return 'TODO: add terms and cond';
-        }
-    ]);
-
-
-
     Route::group(['middleware' => ['installed']], function () {
 
         /*
@@ -723,13 +714,6 @@ Route::group(
         // I prefer it that way:
         // return Redirect::route('showOrganiserHome', ["organiser_id"=>1]);
     });
-
-    Route::get('/terms_and_conditions', [
-        'as' => 'termsAndConditions',
-        function () {
-            return 'TODO: add terms and cond';
-        }
-    ]);
 
 });
 
