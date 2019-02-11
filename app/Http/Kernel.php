@@ -21,7 +21,6 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\VerifyCsrfToken::class,
         \App\Http\Middleware\GeneralChecks::class,
-        \App\Http\Middleware\IpMiddleware::class,  // todo remove me
         \App\Http\Middleware\HttpsProtocol::class,
     ];
 
