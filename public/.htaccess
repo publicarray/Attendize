@@ -1,7 +1,6 @@
 # only allow Cloudflare
-DenyAllButCloudFlare
 <RequireAll>
-Require all not granted
+Require all denied
 Require 173.245.48.0/20
 Require 103.21.244.0/22
 Require 103.22.200.0/22
