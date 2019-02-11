@@ -1,6 +1,4 @@
 # only allow Cloudflare
-<IfModule !mod_authz_core.c>
-# Apache 2.2
 Order allow,deny
 Deny from all
 Allow from 173.245.48.0/20
@@ -23,7 +21,6 @@ Allow from 2606:4700::/32
 Allow from 2803:f800::/32
 Allow from 2c0f:f248::/32
 Allow from 2a06:98c0::/29
-</IfModule>
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
