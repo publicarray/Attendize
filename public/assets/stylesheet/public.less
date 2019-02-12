@@ -499,13 +499,17 @@ Event Listing / Organiser Page
   background-color: rgb(200, 200, 200);
 }
 
+  .event-list img  {
+    width: 100%;
+  }
+
 @media (min-width: 768px) {
 
   .event-list > li {
     position: relative;
     display: block;
     width: 100%;
-    height: 120px;
+    min-height: 120px;
     padding: 0px;
   }
 
@@ -524,18 +528,31 @@ Event Listing / Organiser Page
     margin: 0px;
   }
 
+  .event-list img  {
+    height: auto;
+    width: 50%;
+    position: relative;
+    top: -30px;
+    left: 48px;
+  }
+
   .event-list > li > time > .day {
     font-size: 56pt;
   }
 
   .event-list > li > .info {
     position: relative;
-    height: 120px;
+    min-height: 120px;
     text-align: left;
     padding-right: 40px;
     padding-top: 30px;
   }
 
+  .event-list > li > .info > .title {
+    width: 49%;
+    vertical-align: top;
+    display: inline-block;
+  }
   .event-list > li > .info > .title,
   .event-list > li > .info > .desc {
     padding: 0px 10px;

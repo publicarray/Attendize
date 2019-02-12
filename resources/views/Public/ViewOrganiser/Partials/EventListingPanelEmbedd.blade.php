@@ -14,14 +14,14 @@
                             <span class="year">{{ $event->start_date->format('Y') }}</span>
                             <span class="time">{{ $event->start_date->format('h:i') }}</span>
                         </time>
-                        @if($event->images->count())
-                        <img class="promo-img" alt="{{ $event->title }}" src="{{ asset($event->images->first()['image_path']) }}"/>
-                        @endif
                         <div class="info">
                             <h2 class="title ellipsis">
                                <a href="{{$event->event_url }}">{{ $event->title }}</a>
+                               <p class="desc ellipsis">{{ $event->venue_name }}</p>
                             </h2>
-                            <p class="desc ellipsis">{{ $event->venue_name }}</p>
+                            @if($event->images->count())
+                            <a href="{{$event->event_url }}"><img alt="{{ $event->title }}" src="{{ asset($event->images->first()['image_path']) }}"/></a>
+                            @endif
                             <ul>
                                 <li style="width:50%;"><a target="_blank" href="{{$event->event_url }}">@lang("Public_ViewOrganiser.tickets")</a></li>
                                 <li style="width:50%;"><a target="_blank" href="{{$event->event_url }}">@lang("Public_ViewOrganiser.information")</a></li>
