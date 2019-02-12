@@ -20,7 +20,7 @@
                                <p class="desc ellipsis">{{ $event->venue_name }}</p>
                             </h2>
                             @if($event->images->count())
-                            <a href="{{$event->event_url }}"><img alt="{{ $event->title }}" src="{{ asset($event->images->first()['image_path']) }}"/></a>
+                            <a target="_blank" href="{{$event->event_url }}"><img alt="{{ $event->title }}" src="{{ asset($event->images->first()['image_path']) }}"/></a>
                             @else
                             <ul>
                                 <li style="width:50%;"><a target="_blank" href="{{$event->event_url }}">@lang("Public_ViewOrganiser.tickets")</a></li>
