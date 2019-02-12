@@ -21,12 +21,19 @@
                             </h2>
                             @if($event->images->count())
                             <a href="{{$event->event_url }}"><img alt="{{ $event->title }}" src="{{ asset($event->images->first()['image_path']) }}"/></a>
-                            @endif
+                            @else
                             <ul>
                                 <li style="width:50%;"><a target="_blank" href="{{$event->event_url }}">@lang("Public_ViewOrganiser.tickets")</a></li>
                                 <li style="width:50%;"><a target="_blank" href="{{$event->event_url }}">@lang("Public_ViewOrganiser.information")</a></li>
                             </ul>
+                            @endif
                         </div>
+                        @if($event->images->count())
+                        <ul>
+                            <li style="width:50%;"><a target="_blank" href="{{$event->event_url }}">@lang("Public_ViewOrganiser.tickets")</a></li>
+                            <li style="width:50%;"><a target="_blank" href="{{$event->event_url }}">@lang("Public_ViewOrganiser.information")</a></li>
+                        </ul>
+                        @endif
                     </li>
                 @endforeach
             @else
