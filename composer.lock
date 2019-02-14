@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e4706c678a5fab8cfc71c523f3697a5",
+    "content-hash": "4bed58fafebfd387cae9582493489a27",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -8359,12 +8359,12 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "maxhoffmann/parsedown-laravel": 20,
         "nitmedia/wkhtml2pdf": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
