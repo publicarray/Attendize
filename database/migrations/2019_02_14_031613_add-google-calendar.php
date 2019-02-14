@@ -14,7 +14,7 @@ class AddGoogleCalendar extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->string('google_calendar_id', 30);
+            $table->string('google_calendar_id', 30)->nullable();
         });
     }
 
