@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Image;
 use Log;
 use Validator;
+use Spatie\GoogleCalendar\Event as GCEvent;
 
 class EventController extends MyBaseController
 {
@@ -50,6 +51,7 @@ class EventController extends MyBaseController
         $event->title = $request->get('title');
         $event->description = strip_tags($request->get('description'));
         $event->start_date = $request->get('start_date');
+        $event->end_date = $request->get('end_date');
 
         /*
          * Venue location info (Usually auto-filled from google maps)
@@ -80,8 +82,6 @@ class EventController extends MyBaseController
             $event->location_post_code = $request->get('location_post_code');
             $event->location_is_manual = 1;
         }
-
-        $event->end_date = $request->get('end_date');
 
         $event->currency_id = Auth::user()->account->currency_id;
         //$event->timezone_id = Auth::user()->account->timezone_id;
@@ -153,8 +153,14 @@ class EventController extends MyBaseController
             $event->ticket_sub_text_color = $defaults->ticket_sub_text_color;
         }
 
+        $GCEvent = new GCEvent;
+        $GCEvent->name = $event->title;
+        $GCEvent->startDateTime = $event->start_date;
+        $GCEvent->endDateTime = $event->end_date;
 
         try {
+            $GCEvent->save();
+            $event->google_calendar_id = $GCEvent->id;
             $event->save();
         } catch (\Exception $e) {
             Log::error($e);
@@ -269,7 +275,13 @@ class EventController extends MyBaseController
             EventImage::where('event_id', '=', $event->id)->delete();
         }
 
-        $event->save();
+        if ($event->google_calendar_id) {
+            $GCEvent = GCEvent::find($event->google_calendar_id);
+            $GCEvent->name = $event->title;
+            $GCEvent->startDate = $event->start_date;
+            $GCEvent->endDate = $event->end_date;
+            $GCEvent->save();
+        }
 
         if ($request->hasFile('event_image')) {
             $path = public_path() . '/' . config('attendize.event_images_path');
