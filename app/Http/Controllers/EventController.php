@@ -39,6 +39,7 @@ class EventController extends MyBaseController
      */
     public function postCreateEvent(Request $request)
     {
+        \DB::beginTransaction();
         $event = Event::createNew();
 
         if (!$event->validate($request->all())) {
@@ -153,17 +154,23 @@ class EventController extends MyBaseController
             $event->ticket_sub_text_color = $defaults->ticket_sub_text_color;
         }
 
-        $GCEvent = new GCEvent;
-        $GCEvent->name = $event->title;
-        $GCEvent->startDateTime = $event->start_date;
-        $GCEvent->endDateTime = $event->end_date;
+        if (config(GOOGLE_CALENDAR_ID)) {
+            $GCEvent = new GCEvent;
+            $GCEvent->name = $event->title;
+            $GCEvent->startDateTime = $event->start_date;
+            $GCEvent->endDateTime = $event->end_date;
+        }
 
         try {
-            $GCEvent->save();
-            $event->google_calendar_id = $GCEvent->id;
+            if (config(GOOGLE_CALENDAR_ID)) {
+                $GCEvent->save();
+                $event->google_calendar_id = $GCEvent->id;
+            }
             $event->save();
+            \DB::commit();
         } catch (\Exception $e) {
             Log::error($e);
+            \DB::rollback();
 
             return response()->json([
                 'status'   => 'error',
