@@ -236,6 +236,7 @@ class EventController extends MyBaseController
         $event->title = $request->get('title');
         $event->description = strip_tags($request->get('description'));
         $event->start_date = $request->get('start_date');
+        $event->end_date = $request->get('end_date');
 
         /*
          * If the google place ID is the same as before then don't update the venue
@@ -276,7 +277,7 @@ class EventController extends MyBaseController
             }
         }
 
-        $event->end_date = $request->get('end_date');
+        $event->save();
 
         if ($request->get('remove_current_image') == '1') {
             EventImage::where('event_id', '=', $event->id)->delete();
@@ -284,6 +285,9 @@ class EventController extends MyBaseController
 
         if ($event->google_calendar_id) {
             $GCEvent = GCEvent::find($event->google_calendar_id);
+            if (!$GCEvent) {
+                Log::error("Google calendar event id not found!");
+            }
             $GCEvent->name = $event->title;
             $GCEvent->startDate = $event->start_date;
             $GCEvent->endDate = $event->end_date;
