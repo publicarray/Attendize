@@ -39,7 +39,6 @@ class EventController extends MyBaseController
      */
     public function postCreateEvent(Request $request)
     {
-        \DB::beginTransaction();
         $event = Event::createNew();
 
         if (!$event->validate($request->all())) {
@@ -159,18 +158,21 @@ class EventController extends MyBaseController
             $GCEvent->name = $event->title;
             $GCEvent->startDateTime = $event->start_date;
             $GCEvent->endDateTime = $event->end_date;
+            $GCEvent->location = $event->location_address;
+            // $GCEvent->description = $event->
         }
 
         try {
             if (config('google-calendar.calendar_id')) {
-                $GCEvent->save();
+                $GCEvent = $GCEvent->save();
                 $event->google_calendar_id = $GCEvent->id;
             }
             $event->save();
-            \DB::commit();
         } catch (\Exception $e) {
             Log::error($e);
-            \DB::rollback();
+            if ($GCEvent && $GCEvent->id) {
+                $GCEvent->delete();
+            }
 
             return response()->json([
                 'status'   => 'error',
@@ -291,7 +293,9 @@ class EventController extends MyBaseController
             $GCEvent->name = $event->title;
             $GCEvent->startDate = $event->start_date;
             $GCEvent->endDate = $event->end_date;
-            $GCEvent->save();
+            $GCEvent->location = $event->$event->location_address;
+            // $GCEvent->description = $event->
+           $GCEvent->save();
         }
 
         if ($request->hasFile('event_image')) {
