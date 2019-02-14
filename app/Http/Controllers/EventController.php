@@ -154,7 +154,7 @@ class EventController extends MyBaseController
             $event->ticket_sub_text_color = $defaults->ticket_sub_text_color;
         }
 
-        if (config(GOOGLE_CALENDAR_ID)) {
+        if (config('GOOGLE_CALENDAR_ID')) {
             $GCEvent = new GCEvent;
             $GCEvent->name = $event->title;
             $GCEvent->startDateTime = $event->start_date;
@@ -162,7 +162,7 @@ class EventController extends MyBaseController
         }
 
         try {
-            if (config(GOOGLE_CALENDAR_ID)) {
+            if (config('GOOGLE_CALENDAR_ID')) {
                 $GCEvent->save();
                 $event->google_calendar_id = $GCEvent->id;
             }
