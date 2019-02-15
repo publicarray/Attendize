@@ -77,6 +77,17 @@
                 e.preventDefault();
             });
 
+            $('.customImage').on('click', function (e) {
+                $('.customImage').removeClass('selected');
+                $(this).addClass('selected');
+                $('input[name=bg_image_path]').val($(this).data('src'));
+                // to do update the image preview
+                // https://stackoverflow.com/questions/24837646/onchange-file-input-change-img-src-and-change-image-color
+                var replaced = replaceUrlParam('{{route('showEventPagePreview', ['event_id'=>$event->id])}}', 'bg_img_preview', $('input[name=bg_image_path]').val());
+                document.getElementById('previewIframe').src = replaced;
+                e.preventDefault();
+            });
+
             /* Background color */
             $('input[name=bg_color]').on('change', function (e) {
                 var replaced = replaceUrlParam('{{route('showEventPagePreview', ['event_id'=>$event->id])}}', 'bg_color_preview', $('input[name=bg_color]').val().substring(1));
@@ -389,6 +400,23 @@
                                             <a class="btn btn-link" href="https://pixabay.com?ref=attendize" title="PixaBay Free Images">
                                                 @lang("Design.images_provided_by_pixabay")
                                             </a>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default" data-type="custom_image">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#bgOptions" href="#bgCustomImage"
+                                               class="{{($event->bg_type == 'custom_image') ? '' : 'collapsed'}}">
+                                                <span class="arrow mr5"></span> @lang("Design.use_a_custom_imge_for_the_background")
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="bgCustomImage"
+                                         class="panel-collapse {{($event->bg_type == 'custom_image') ? 'in' : 'collapse'}}">
+                                        <div class="panel-body">
+                                            {!! Form::styledFile('bg_image_path', ($event->bg_type == 'custom_image') ? $event->bg_image_path : '') !!}
+                                        </div>
                                     </div>
                                 </div>
 

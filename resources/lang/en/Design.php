@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/19 17:21:50 
+ Generated via "php artisan localization:missing" at 2018/04/19 17:21:50
 *************************************************************************/
 
 return array (
@@ -11,4 +11,5 @@ return array (
   'images_provided_by_pixabay' => 'Images Provided By <b>PixaBay.com</b>',
   'select_from_available_images' => 'Select From Available Images',
   'use_a_colour_for_the_background' => 'Use a colour for the background',
+  'use_a_custom_imge_for_the_background' => 'Upload Image'
 );

@@ -272,11 +272,8 @@ class EventCustomizeController extends MyBaseController
             $event->bg_type = 'color';
         }
 
-        /*
-         * Not in use for now.
-         */
         if ($request->hasFile('bg_image_path') && $request->get('bg_type') == 'custom_image') {
-            $path = public_path() . '/' . config('attendize.event_images_path');
+            $path = public_path() . '/' . config('attendize.event_custom_bg_images');
             $filename = 'event_bg-' . md5($event->id) . '.' . strtolower($request->file('bg_image_path')->getClientOriginalExtension());
 
             $file_full_path = $path . '/' . $filename;
@@ -292,10 +289,10 @@ class EventCustomizeController extends MyBaseController
 
             $img->save($file_full_path, 75);
 
-            $event->bg_image_path = config('attendize.event_images_path') . '/' . $filename;
+            $event->bg_image_path = config('attendize.event_custom_bg_images') . '/' . $filename;
             $event->bg_type = 'custom_image';
 
-            \Storage::put(config('attendize.event_images_path') . '/' . $filename, file_get_contents($file_full_path));
+            \Storage::put(config('attendize.event_custom_bg_images') . '/' . $filename, file_get_contents($file_full_path));
         }
 
         $event->save();
