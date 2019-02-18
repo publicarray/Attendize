@@ -279,6 +279,24 @@ class EventController extends MyBaseController
             }
         }
 
+        if ($request->hasFile('seating_plan_image') && $request->file('seating_plan_image')->isValid()) {
+            $image = $request->file('seating_plan_image');
+            $resize = $resize = Image::make($image)->fit(900);
+            $hash = md5($resize->__toString());
+            $path = public_path() . '/' . config('attendize.event_images_path');
+            $filename = "seating_plan_image-{$hash}." . strtolower($image->getClientOriginalExtension());
+            $path = "${path}/${filename}";
+
+            $resize->save($path);
+            \Storage::put(config('attendize.event_images_path') . '/' . $filename, file_get_contents($path));
+
+            $event->seating_plan = config('attendize.event_images_path') . '/' . $filename;;
+        }
+
+        if ($request->get('remove_current_seating_plan') == '1') {
+            $event->seating_plan = null;
+        }
+
         $event->save();
 
         if ($request->get('remove_current_image') == '1') {

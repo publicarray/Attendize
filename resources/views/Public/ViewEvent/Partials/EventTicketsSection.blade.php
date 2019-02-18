@@ -12,11 +12,13 @@
     @else
 
         @if($tickets->count() > 0)
-
             {!! Form::open(['url' => route('postValidateTickets', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
             <div class="row">
                 <div class="col-md-12">
                     <div class="content">
+                        @if($event->seating_plan)
+                            <img src="{{asset($event->seating_plan)}}" class="responsive-image">
+                        @endif
                         <div class="tickets_table_wrap">
                             <table class="table">
                                 <?php

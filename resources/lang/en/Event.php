@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/26 10:54:45 
+ Generated via "php artisan localization:missing" at 2018/04/26 10:54:45
 *************************************************************************/
 
 return array (
@@ -13,6 +13,7 @@ return array (
   'city_placeholder' => 'E.g: Dublin',
   'create_event' => 'Create Event',
   'current_event_flyer' => 'Current Event Flyer',
+  'current_seating_plan' => 'Current Seating Plan',
   'customize_event' => 'Customize Event',
   'delete?' => 'Delete?',
   'enter_existing' => 'Select From Existing Venues',
@@ -22,6 +23,7 @@ return array (
   'event_flyer' => 'Event Flyer',
   'event_image' => 'Event Image (Flyer or Graphic etc.)',
   'event_orders' => 'Event Orders',
+  'event_seating_plan' => 'Seating Plan',
   'event_start_date' => 'Event Start Date',
   'event_title' => 'Event Title',
   'event_title_placeholder' => 'E.g: :name\'s Interational Conference',

@@ -170,6 +170,30 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('event_image', trans("Event.event_seating_plan"), array('class'=>'control-label ')) !!}
+                    {!! Form::styledFile('seating_plan_image', 1) !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="float-l">
+                    @if($event->seating_plan)
+                    {!! Form::label('', trans("Event.current_seating_plan"), array('class'=>'control-label ')) !!}
+                    <div class="form-group">
+                        <div class="well well-sm well-small">
+                           {!! Form::label('remove_current_seating_plan', trans("Event.delete?"), array('class'=>'control-label ')) !!}
+                           {!! Form::checkbox('remove_current_seating_plan') !!}
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                       {!!HTML::image('/'.$event->seating_plan)!!}
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col-md-12">
