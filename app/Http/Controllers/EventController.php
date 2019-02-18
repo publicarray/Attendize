@@ -153,6 +153,22 @@ class EventController extends MyBaseController
             $event->ticket_sub_text_color = $defaults->ticket_sub_text_color;
         }
 
+        if ($request->hasFile('seating_plan') && $request->file('seating_plan')->isValid()) {
+            $image = $request->file('seating_plan');
+            $resize = Image::make($image)->resize(900, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $hash = md5($resize);
+            $path = public_path() . '/' . config('attendize.event_images_path');
+            $filename = "seating_plan-{$hash}." . strtolower($image->getClientOriginalExtension());
+            $path = "${path}/${filename}";
+
+            $resize->save($path);
+            \Storage::put(config('attendize.event_images_path') . '/' . $filename, file_get_contents($path));
+
+            $event->seating_plan = config('attendize.event_images_path') . '/' . $filename;;
+        }
+
         if (config('google-calendar.calendar_id')) {
             $GCEvent = new GCEvent;
             $GCEvent->name = $event->title;
@@ -279,12 +295,15 @@ class EventController extends MyBaseController
             }
         }
 
-        if ($request->hasFile('seating_plan_image') && $request->file('seating_plan_image')->isValid()) {
-            $image = $request->file('seating_plan_image');
-            $resize = $resize = Image::make($image)->fit(900);
-            $hash = md5($resize->__toString());
+        if ($request->hasFile('seating_plan') && $request->file('seating_plan')->isValid()) {
+            $image = $request->file('seating_plan');
+            $resize= Image::make($image)->resize(900, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $hash = md5($resize);
             $path = public_path() . '/' . config('attendize.event_images_path');
-            $filename = "seating_plan_image-{$hash}." . strtolower($image->getClientOriginalExtension());
+            $filename = "seating_plan-{$hash}." . strtolower($image->getClientOriginalExtension());
             $path = "${path}/${filename}";
 
             $resize->save($path);

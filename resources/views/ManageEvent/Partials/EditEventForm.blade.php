@@ -173,8 +173,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::label('event_image', trans("Event.event_seating_plan"), array('class'=>'control-label ')) !!}
-                    {!! Form::styledFile('seating_plan_image', 1) !!}
+                    {!! Form::label('seating_plan', trans("Event.event_seating_plan"), array('class'=>'control-label ')) !!}
+                    {!! Form::styledFile('seating_plan', 1) !!}
                 </div>
             </div>
             <div class="col-md-6">

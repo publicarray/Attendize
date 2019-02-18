@@ -64,7 +64,10 @@
                         <div class="form-group">
                             {!! Form::label('event_image', trans("Event.event_image"), array('class'=>'control-label ')) !!}
                             {!! Form::styledFile('event_image') !!}
-
+                        </div>
+                         <div class="form-group">
+                            {!! Form::label('seating_plan', trans("Event.event_seating_plan"), array('class'=>'control-label ')) !!}
+                            {!! Form::styledFile('seating_plan') !!}
                         </div>
                         <div class="form-group address-automatic">
                             {!! Form::label('name', trans("Event.venue_name"), array('class'=>'control-label required ')) !!}
