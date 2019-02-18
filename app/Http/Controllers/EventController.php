@@ -293,7 +293,7 @@ class EventController extends MyBaseController
             $GCEvent->name = $event->title;
             $GCEvent->startDate = $event->start_date;
             $GCEvent->endDate = $event->end_date;
-            $GCEvent->location = $event->$event->location_address;
+            $GCEvent->location = $event->location_address;
             // $GCEvent->description = $event->
            $GCEvent->save();
         }
