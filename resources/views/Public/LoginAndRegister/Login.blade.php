@@ -30,7 +30,7 @@
                     </div>
                     @if(env('GOOGLE_RECAPTCHA_SITE_KEY'))
                         <input id="captcha" type="hidden" name="grecaptcha">
-                        <script src="https://www.google.com/recaptcha/api.js?render={{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></script>
+                        <script src="https://www.recaptcha.net/recaptcha/api.js?render={{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></script>
                         <script>
                         grecaptcha.ready(function() {
                             grecaptcha.execute('{{env('GOOGLE_RECAPTCHA_SITE_KEY')}}', {action: 'login'}).then(function(token) {

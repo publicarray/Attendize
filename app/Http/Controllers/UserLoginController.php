@@ -61,7 +61,7 @@ class UserLoginController extends Controller
 
         if (env('GOOGLE_RECAPTCHA_SECRET_KEY')) {
             $client = new \GuzzleHttp\Client();
-            $res = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
+            $res = $client->request('POST', 'https://www.recaptcha.net/recaptcha/api/siteverify', [
                 'form_params' => [
                     'secret' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
                     'response' => $captcha,
@@ -82,6 +82,7 @@ class UserLoginController extends Controller
             }
             \Log::info($data->score);
         }
+
         if ($this->auth->attempt(['email' => $email, 'password' => $password], true) === false) {
             return Redirect::back()
                 ->with(['message' => trans("Controllers.login_password_incorrect"), 'failed' => true])

@@ -65,6 +65,7 @@ return array (
   'fill_email_and_password' => 'Please fill in your email and password',
   'image_upload_error' => 'There was a problem uploading your image.',
   'invalid_ticket_error' => '"Invalid Ticket! Please try again."',
+  'incorrect_captcha' => 'Captcha failed! Are you a human? see https://support.google.com/recaptcha/?hl=en',
   'login_password_incorrect' => 'Your username/password combination was incorrect',
   'maximum_refund_amount' => 'The maximum amount you can refund is :money',
   'message_successfully_sent' => 'Message Successfully Sent!',
