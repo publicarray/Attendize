@@ -28,6 +28,17 @@
                         (<a class="forgotPassword" href="{{route('forgotPassword')}}" tabindex="-1">@lang("User.forgot_password?")</a>)
                         {!! Form::password('password',  ['class' => 'form-control']) !!}
                     </div>
+                    @if(env('GOOGLE_RECAPTCHA_SITE_KEY'))
+                        <input id="captcha" type="hidden" name="grecaptcha">
+                        <script src="https://www.google.com/recaptcha/api.js?render={{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></script>
+                        <script>
+                        grecaptcha.ready(function() {
+                            grecaptcha.execute('{{env('GOOGLE_RECAPTCHA_SITE_KEY')}}', {action: 'login'}).then(function(token) {
+                                document.getElementById('captcha').value = token
+                            });
+                        });
+                        </script>
+                    @endif
                     <div class="form-group">
                         <button type="submit" class="btn btn-block btn-success">@lang("User.login")</button>
                     </div>
