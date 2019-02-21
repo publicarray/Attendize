@@ -45,9 +45,11 @@ class UserSignupController extends Controller
             'password'     => 'required|min:8|confirmed',
             'first_name'   => 'required',
             'terms_agreed' => $is_attendize ? 'required' : '',
+            'grecaptcha'   => 'required',
         ]);
 
         if (env('GOOGLE_RECAPTCHA_SECRET_KEY')) {
+            $captcha = $request->get('grecaptcha');
             $client = new \GuzzleHttp\Client();
             $res = $client->request('POST', 'https://www.recaptcha.net/recaptcha/api/siteverify', [
                 'form_params' => [
