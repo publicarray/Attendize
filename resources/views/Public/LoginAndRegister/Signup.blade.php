@@ -74,7 +74,17 @@
                     </div>
                 </div>
                 @endif
-
+                @if(env('GOOGLE_RECAPTCHA_SITE_KEY'))
+                    <input id="captcha" type="hidden" name="grecaptcha">
+                    <script src="https://www.recaptcha.net/recaptcha/api.js?render={{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></script>
+                    <script>
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute('{{env('GOOGLE_RECAPTCHA_SITE_KEY')}}', {action: 'login'}).then(function(token) {
+                            document.getElementById('captcha').value = token
+                        });
+                    });
+                    </script>
+                @endif
                 <div class="form-group ">
                    {!! Form::submit(trans("User.sign_up"), array('class'=>"btn btn-block btn-success")) !!}
                 </div>

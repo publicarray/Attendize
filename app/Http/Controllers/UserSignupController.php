@@ -47,6 +47,30 @@ class UserSignupController extends Controller
             'terms_agreed' => $is_attendize ? 'required' : '',
         ]);
 
+        if (env('GOOGLE_RECAPTCHA_SECRET_KEY')) {
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('POST', 'https://www.recaptcha.net/recaptcha/api/siteverify', [
+                'form_params' => [
+                    'secret' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
+                    'response' => $captcha,
+                    // 'remoteip' => ''
+                ]
+            ]);
+            if (!$res->getStatusCode() == 200) {
+                return Redirect::back()
+                    ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
+                    ->withInput();
+            }
+            $data = json_decode($res->getBody());
+            if (!$data->success || !$data->action == 'login' || $data->score <= 0.6) {
+                \Log::info($data->score);
+                return Redirect::back()
+                    ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
+                    ->withInput();
+            }
+            \Log::info($data->score);
+        }
+
         $account_data = $request->only(['email', 'first_name', 'last_name']);
         $account_data['currency_id'] = config('attendize.default_currency');
         $account_data['timezone_id'] = config('attendize.default_timezone');
