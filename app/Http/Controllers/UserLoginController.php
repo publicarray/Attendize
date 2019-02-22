@@ -75,7 +75,9 @@ class UserLoginController extends Controller
             }
             $data = json_decode($res->getBody());
             if (!$data->success || !$data->action == 'login' || $data->score <= 0.6) {
-                \Log::info($data->score);
+                if (isset($data->score)) {
+                    \Log::info($data->score);
+                }
                 return Redirect::back()
                     ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
                     ->withInput();
