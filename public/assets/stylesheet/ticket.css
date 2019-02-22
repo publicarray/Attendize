@@ -7,7 +7,7 @@
     margin-top: 20px;
     background: #000;
     position: relative;
-    height: 330px;
+    min-height: 330px;
     font-size: 12px;
     color: #999;
     border-left-width: 3px;
@@ -35,7 +35,7 @@
     height: 150px;
     position: absolute;
     left: 0px;
-    bottom: 85px;
+    top: 30%;
     overflow: hidden;
     padding: 10px;
     border: 1px solid #000;
@@ -43,7 +43,7 @@
     background-color: #fdfdfd;
 }
 
-.ticket   .barcode_vertical {
+.ticket .barcode_vertical {
     display: block;
     -moz-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
@@ -70,25 +70,14 @@
 }
 
 .ticket .layout_even {
-    position:absolute;
-    top:50%;
-    height:300px;
-    left: 175px;
+    margin: 0 150px;
     width: 400px;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
 }
 
 .ticket .event_details, .ticket .attendee_details {
-    position: absolute;
-    -webkit-transform: translateX(0px);
-    -moz-transform: translateX(0px);
-    -ms-transform: translateX(0px);
-    -o-transform: translateX(0px);
-    transform: translateX(0px);
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 15px;
 }
 
 .ticket .event_details {
