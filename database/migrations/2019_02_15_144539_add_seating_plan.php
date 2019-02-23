@@ -13,7 +13,7 @@ class AddSeatingPlan extends Migration
      */
     public function up()
     {
-        Schema::table('event', function (Blueprint $table) {
+        Schema::table('events', function (Blueprint $table) {
             $table->string('seating_plan', 255)->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddSeatingPlan extends Migration
      */
     public function down()
     {
-        Schema::table('event', function (Blueprint $table) {
+        Schema::table('events', function (Blueprint $table) {
             $table->dropColumn('seating_plan');
         });
     }
