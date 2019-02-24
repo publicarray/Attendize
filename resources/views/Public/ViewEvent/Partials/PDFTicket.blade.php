@@ -88,12 +88,14 @@
                             {{$order->order_reference}}
                                 <h4>@lang("Ticket.attendee_ref")</h4>
                             {{$attendee->reference}}
+                            @if($attendee->ticket->questions->count() > 0)
                                 <h4>@lang("Ticket.questions")</h4>
                                 @foreach($attendee->ticket->questions as $q)
                                     @foreach($q->showOptionNameWithPrice($event->currency) as $item)
                                         {{$item}}<br>
                                     @endforeach
                                 @endforeach
+                            @endif
                                 <h4>@lang("Ticket.price")</h4>
                                 @php
                                     // Calculating grand total including tax
