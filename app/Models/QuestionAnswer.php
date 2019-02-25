@@ -32,6 +32,14 @@ class QuestionAnswer extends MyBaseModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function options()
+    {
+        return $this->belongsToMany(\App\Models\Options::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function attendee()
