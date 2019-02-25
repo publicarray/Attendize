@@ -30,6 +30,14 @@ class QuestionOption extends MyBaseModel
         return $this->belongsTo(\App\Models\Question::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function anwsers()
+    {
+        return $this->belongsToMany(\App\Models\Anwsers::class);
+    }
+
     public function showWithNameAndPrice($currency)
     {
         if ($this->price > 0) {
