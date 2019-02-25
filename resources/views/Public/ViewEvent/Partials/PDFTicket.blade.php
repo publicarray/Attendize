@@ -72,7 +72,7 @@
                                 <h4>@lang("Ticket.organiser")</h4>
                             {{$event->organiser->name}}
                                 <h4>@lang("Ticket.venue")</h4>
-                            {{$event->venue_name}}
+                            {{$event->location_address}}
                                 <h4>@lang("Ticket.start_date_time")</h4>
                                 {{$event->startDateFormatted()}}
                                 <h4>@lang("Ticket.end_date_time")</h4>
@@ -103,8 +103,8 @@
                                     $tax_amt = ($grand_total * $event->organiser->tax_value) / 100;
                                     $grand_total = $tax_amt + $grand_total;
                                 @endphp
-                                {{money($grand_total, $order->event->currency)}} @if ($attendee->ticket->total_booking_fee) (inc. {{money($attendee->ticket->total_booking_fee, $order->event->currency)}} @lang("Public_ViewEvent.inc_fees")) @endif @if ($event->organiser->tax_name) (inc. {{money($tax_amt, $order->event->currency)}} {{$event->organiser->tax_name}})
-                                <br><br>{{$event->organiser->tax_name}} ID: {{ $event->organiser->tax_id }}
+                                {{money($grand_total, $order->event->currency)}} @if ($attendee->ticket->total_booking_fee)<br> (inc. {{money($attendee->ticket->total_booking_fee, $order->event->currency)}} @lang("Public_ViewEvent.inc_fees")) @endif @if ($event->organiser->tax_name)<br> (inc. {{money($tax_amt, $order->event->currency)}} {{$event->organiser->tax_name}})
+                                {{-- <br><br>{{$event->organiser->tax_name}} ID: {{ $event->organiser->tax_id }} --}}
                                 @endif
                             </div>
                         </div>

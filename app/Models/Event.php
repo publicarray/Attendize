@@ -344,6 +344,28 @@ class Event extends MyBaseModel
         return urlencode($string);
     }
 
+    public function getLocationAddressAttribute()
+    {
+        $string = '';
+        if (strlen($this->location_street_number) > 0) {
+            $string .= $this->location_street_number . ' ';
+        }
+        if (strlen($this->location_address_line_1) > 0) {
+            $string .= $this->location_address_line_1 . ', ';
+        }
+        if (strlen($this->location_address_line_2) > 0) {
+            $string .= $this->location_address_line_2 . ' ';
+        }
+        if (strlen($this->location_state) > 0) {
+            $string .= $this->location_state . ' ';
+        }
+        if (strlen($this->location_post_code) > 0) {
+            $string .= $this->location_post_code . ' ';
+        }
+
+        return $string;
+    }
+
     /**
      * Get the big image url.
      *
