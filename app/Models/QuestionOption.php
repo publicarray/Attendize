@@ -41,7 +41,7 @@ class QuestionOption extends MyBaseModel
     public function showWithNameAndPrice($currency)
     {
         if ($this->price > 0) {
-            return $this->name.' ('.money($this->price, $currency).')';
+            return $this->name.' - '.money($this->price, $currency);
         } else {
             return $this->name;
         }
