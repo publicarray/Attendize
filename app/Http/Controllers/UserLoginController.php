@@ -74,7 +74,7 @@ class UserLoginController extends Controller
                     ->withInput();
             }
             $data = json_decode($res->getBody());
-            if (!$data->success || !$data->action == 'login' || $data->score <= 0.6) {
+            if (!$data->success || $data->action != 'login' || $data->score <= 0.6) {
                 if (isset($data->score)) {
                     \Log::info($data->score);
                 }
