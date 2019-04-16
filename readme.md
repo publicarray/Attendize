@@ -57,22 +57,16 @@ To do a manual installation use the [Manual Installation Steps](http://www.atten
 
 ### Quick Start
 
-Development environment
+Setup development environment
 
 ```sh
 brew install php composer mariadb valet
 brew services start mariadb
 valet install
-
-# https://getcomposer.org/download/
-# php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-# php composer.phar install
 ```
 
-Development & Production
-
 ```sh
-git clone git@bitbucket.org:redcommunity/attendize.git
+git clone git@bitbucket.org:redcommunity/attendize.git && cd attendize
 cp .env.example .env
 nano .env
 composer install --no-dev
