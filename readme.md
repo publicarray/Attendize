@@ -65,6 +65,7 @@ brew services start mariadb
 valet install
 ```
 
+Installation
 ```sh
 git clone git@bitbucket.org:redcommunity/attendize.git && cd attendize
 cp .env.example .env
@@ -80,7 +81,7 @@ Open http://attendize.localhost/install in your web browser
 ---
 If you are having problems please read the [troubleshooting guide](http://www.attendize.com/troubleshooting.html) 
 
-Reset the database
+Reset the database:
 ```sh
 php artisan migrate:refresh --seed
 ```
