@@ -159,6 +159,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
 
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -172,6 +174,7 @@ return [
         /*
          * Third Party Service Providers...
          */
+
         Milon\Barcode\BarcodeServiceProvider::class,
         Nitmedia\Wkhtml2pdf\L5Wkhtml2pdfServiceProvider::class,
         MaxHoffmann\Parsedown\ParsedownServiceProvider::class,
