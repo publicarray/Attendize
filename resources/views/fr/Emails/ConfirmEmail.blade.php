@@ -4,7 +4,7 @@
 
 <p>Bonjour {{$first_name}}</p>
 <p>
-    Merci de vous être enregistré à {{ config('attendize.app_name') }}. Nous sommes ravis de vous compter parmi nous.
+    Merci de vous être enregistré à {{ config('app.name') }}. Nous sommes ravis de vous compter parmi nous.
 </p>
 
 <p>

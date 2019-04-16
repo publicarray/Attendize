@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>
-            @lang("basic.whoops")
+            {{ config('app.name') }} - @lang("basic.whoops")
         </title>
         <style>
             body {

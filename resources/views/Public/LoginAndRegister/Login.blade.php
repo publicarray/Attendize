@@ -1,6 +1,8 @@
 @extends('Shared.Layouts.MasterWithoutMenus')
 
-@section('title', trans("User.login"))
+@section('title')
+{{ config('app.name') }} - @lang("User.login")
+@stop
 
 @section('content')
     {!! Form::open(array('url' => route("login"))) !!}

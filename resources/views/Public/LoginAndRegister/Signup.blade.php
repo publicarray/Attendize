@@ -1,7 +1,7 @@
 @extends('Shared.Layouts.MasterWithoutMenus')
 
 @section('title')
-    @lang("User.sign_up")
+{{ config('app.name') }} - @lang("User.sign_up")
 @stop
 
 @section('content')

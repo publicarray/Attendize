@@ -266,8 +266,8 @@ class EventSurveyController extends MyBaseController
             $excel->setTitle(trans("Controllers.survey_answers"));
 
             // Chain the setters
-            $excel->setCreator(config('attendize.app_name'))
-                ->setCompany(config('attendize.app_name'));
+            $excel->setCreator(config('app.name'))
+                ->setCompany(config('app.name'));
 
             $excel->sheet('survey_answers_sheet_', function ($sheet) use ($event_id) {
 

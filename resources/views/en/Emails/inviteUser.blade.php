@@ -4,12 +4,12 @@
 
 <p>Hello</p>
 <p>
-    You have been added to an {{ config('attendize.app_name') }} account by {{$inviter->first_name.' '.$inviter->last_name}}.
+    You have been added to an {{ config('app.name') }} account by {{$inviter->first_name.' '.$inviter->last_name}}.
 </p>
 
 <p>
     You can log in using the following details.<br><br>
-    
+
     Username: <b>{{$user->email}}</b> <br>
     Password: <b>{{$temp_password}}</b>
 </p>

@@ -1,7 +1,7 @@
 @extends('Shared.Layouts.MasterWithoutMenus')
 
 @section('title')
-@lang("User.forgot_password")
+{{ config('app.name') }} - @lang("User.forgot_password")
 @stop
 
 @section('content')

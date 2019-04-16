@@ -10,7 +10,7 @@
          /_/    \_\__|\__\___|_| |_|\__,_|_/___\___(_)___\___/|_| |_| |_|
 
         -->
-        <title>{{{$organiser->name}}} - Attendize.com</title>
+        <title>{{$organiser->name}}</title>
 
 
         <meta charset="utf-8" />

@@ -4,7 +4,7 @@
 
     <p>Hola</p>
     <p>
-        Ha sido agregado a una cuenta {{ config('attendize.app_name') }}
+        Ha sido agregado a una cuenta {{ config('app.name') }}
         por {{$inviter->first_name.' '.$inviter->last_name}}.
     </p>
 

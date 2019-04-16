@@ -200,7 +200,7 @@ class ManageAccountController extends MyBaseController
 
         Mail::send('Emails.inviteUser', $data, function ($message) use ($data) {
             $message->to($data['user']->email)
-                ->subject(trans("Email.invite_user", ["name"=>$data['inviter']->first_name . ' ' . $data['inviter']->last_name, "app"=>config('attendize.app_name')]));
+                ->subject(trans("Email.invite_user", ["name"=>$data['inviter']->first_name . ' ' . $data['inviter']->last_name, "app"=>config('app.name')]));
         });
 
         return response()->json([

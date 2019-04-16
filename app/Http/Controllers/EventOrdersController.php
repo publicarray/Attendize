@@ -345,8 +345,8 @@ class EventOrdersController extends MyBaseController
             $excel->setTitle('Orders For Event: ' . $event->title);
 
             // Chain the setters
-            $excel->setCreator(config('attendize.app_name'))
-                ->setCompany(config('attendize.app_name'));
+            $excel->setCreator(config('app.name'))
+                ->setCompany(config('app.name'));
 
             $excel->sheet('orders_sheet_1', function ($sheet) use ($event) {
 

@@ -12,7 +12,7 @@
                     @if(!Auth::user()->first_name)
                         <div class="alert alert-info">
                             <b>
-                                @lang("User.welcome_to_app", ["app"=>config('attendize.app_name')])
+                                @lang("User.welcome_to_app", ["app"=>config('app.name')])
                             </b><br>
                             @lang("User.after_welcome")
                         </div>

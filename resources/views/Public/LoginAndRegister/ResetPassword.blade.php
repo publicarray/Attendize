@@ -1,7 +1,7 @@
 @extends('Shared.Layouts.MasterWithoutMenus')
 
 @section('title')
-Reset Password
+{{ config('app.name') }} - Reset Password
 @stop
 
 @section('content')

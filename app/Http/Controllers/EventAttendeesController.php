@@ -575,8 +575,8 @@ class EventAttendeesController extends MyBaseController
             $excel->setTitle('Attendees List');
 
             // Chain the setters
-            $excel->setCreator(config('attendize.app_name'))
-                ->setCompany(config('attendize.app_name'));
+            $excel->setCreator(config('app.name'))
+                ->setCompany(config('app.name'));
 
             $excel->sheet('attendees_sheet_1', function ($sheet) use ($event_id) {
                 DB::connection();

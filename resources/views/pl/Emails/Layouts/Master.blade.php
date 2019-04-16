@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>
         @section('subject')
-            {{ config('attendize.app_name') }} Email
+            {{ config('app.name') }} Email
         @show
     </title>
 </head>
