@@ -81,19 +81,21 @@ Route::group(
         /*
          * Registration / Account creation
          */
-        Route::get('/signup', [
-            'uses' => 'UserSignupController@showSignup',
-            'as'   => 'showSignup',
-        ]);
-        Route::post('/signup', 'UserSignupController@postSignup');
+        if (!(config('attendize.single_organiser_mode') && DB::table('accounts')->count() > 0)) {
+            Route::get('/signup', [
+                'uses' => 'UserSignupController@showSignup',
+                'as'   => 'showSignup',
+            ]);
+            Route::post('/signup', 'UserSignupController@postSignup');
 
-        /*
-         * Confirm Email
-         */
-        Route::get('signup/confirm_email/{confirmation_code}', [
-            'as'   => 'confirmEmail',
-            'uses' => 'UserSignupController@confirmEmail',
-        ]);
+            /*
+             * Confirm Email
+             */
+            Route::get('signup/confirm_email/{confirmation_code}', [
+                'as'   => 'confirmEmail',
+                'uses' => 'UserSignupController@confirmEmail',
+            ]);
+        }
     });
 
     /*
@@ -266,7 +268,7 @@ Route::group(
 
             // block the creation of additional organisers when
             // in single organiser mode
-            if (!config('attendize.single_organiser_mode') && file_exists(base_path('installed'))) {
+            if (!(config('attendize.single_organiser_mode') && DB::table('organisers')->count() > 0)) {
                 Route::get('create', [
                     'as'   => 'showCreateOrganiser',
                     'uses' => 'OrganiserController@showCreateOrganiser',
