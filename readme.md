@@ -55,9 +55,41 @@ Feel free to fork and contribute. If you are unsure about adding a feature creat
 To get developing straight away use the [Pre-configured Docker Environment](http://www.attendize.com/getting_started.html#running-attendize-in-docker-for-development)<br />
 To do a manual installation use the [Manual Installation Steps](http://www.attendize.com/getting_started.html#manual-installation)
 
+### Quick Start
+
+Development environment
+
+```sh
+brew install php composer mariadb valet
+brew services start mariadb
+valet install
+
+# https://getcomposer.org/download/
+# php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+# php composer.phar install
+```
+
+Development & Production
+
+```sh
+git clone git@bitbucket.org:redcommunity/attendize.git
+cp .env.example .env
+nano .env
+composer install --no-dev
+php artisan key:generate
+```
+
+Open http://attendize.localhost/install in your web browser
+
+
 ### Troubleshooting
 ---
 If you are having problems please read the [troubleshooting guide](http://www.attendize.com/troubleshooting.html) 
+
+Reset the database
+```sh
+php artisan migrate:refresh --seed
+```
 
 License
 ---
