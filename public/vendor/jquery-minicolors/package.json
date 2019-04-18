@@ -1,6 +1,6 @@
 {
-  "name": "jquery-minicolors",
-  "version": "2.2.3",
+  "name": "@claviska/jquery-minicolors",
+  "version": "2.3.4",
   "homepage": "https://github.com/claviska/jquery-minicolors",
   "author": "Cory LaViska",
   "description": "jQuery MiniColors Plugin",
@@ -10,8 +10,15 @@
     "colorpicker"
   ],
   "license": "MIT",
-  "dependencies": {
-    "jquery" : ">= 1.7.x"
+  "peerDependencies": {
+    "jquery": ">= 1.7.x"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-help": "^1.6.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^1.5.3"
   },
   "repository": {
     "type": "git",
@@ -20,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/claviska/jquery-minicolors/issues"
   },
-  "scripts": {}
+  "scripts": {
+    "build": "gulp",
+    "watch": "gulp watch"
+  }
 }

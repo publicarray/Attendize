@@ -1,4 +1,4 @@
-var Vue = require('vue');
+import Vue from 'vue';
 
 describe('Vue.url', function () {
 
@@ -13,6 +13,13 @@ describe('Vue.url', function () {
 
         expect(Vue.url('data{/id}')).toBe('data');
         expect(Vue.url('data{/id}', {id: 1})).toBe('data/1');
+
+    });
+
+    it('data{/array}', function () {
+
+        expect(Vue.url('data{?array}')).toBe('data');
+        expect(Vue.url('data{?array}', {array: [1,2,3]})).toBe('data?array=1,2,3');
 
     });
 

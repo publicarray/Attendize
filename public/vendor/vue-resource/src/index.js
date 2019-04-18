@@ -2,52 +2,56 @@
  * Install plugin.
  */
 
-function install(Vue) {
+import Url from './url/index';
+import Http from './http/index';
+import Promise from './promise';
+import Resource from './resource';
+import Util, { options } from './util';
 
-    var _ = require('./util');
+function plugin(Vue) {
 
-    _.config = Vue.config;
-    _.warning = Vue.util.warn;
-    _.nextTick = Vue.util.nextTick;
+    if (plugin.installed) {
+        return;
+    }
 
-    Vue.url = require('./url');
-    Vue.http = require('./http');
-    Vue.resource = require('./resource');
-    Vue.Promise = require('./promise');
+    Util(Vue);
+
+    Vue.url = Url;
+    Vue.http = Http;
+    Vue.resource = Resource;
+    Vue.Promise = Promise;
 
     Object.defineProperties(Vue.prototype, {
 
         $url: {
-            get: function () {
-                return _.options(Vue.url, this, this.$options.url);
+            get() {
+                return options(Vue.url, this, this.$options.url);
             }
         },
 
         $http: {
-            get: function () {
-                return _.options(Vue.http, this, this.$options.http);
+            get() {
+                return options(Vue.http, this, this.$options.http);
             }
         },
 
         $resource: {
-            get: function () {
+            get() {
                 return Vue.resource.bind(this);
             }
         },
 
         $promise: {
-            get: function () {
-                return function (executor) {
-                    return new Vue.Promise(executor, this);
-                }.bind(this);
+            get() {
+                return (executor) => new Vue.Promise(executor, this);
             }
         }
 
     });
 }
 
-if (window.Vue) {
-    Vue.use(install);
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(plugin);
 }
 
-module.exports = install;
+export default plugin;

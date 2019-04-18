@@ -22,7 +22,7 @@
     "modernizr": "~2.8.3",
     "jquery-form": "malsup/form#~3.46.0",
     "RRSSB": "~1.10.0",
-    "jquery-backstretch": "~2.0.4",
+    "jquery-backstretch": "~2.1.17",
     "fontawesome": "~4.2.0",
     "simplemde": "~1.8.1",
     "bootstrap-touchspin": "~3.0.1",
