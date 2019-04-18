@@ -19,6 +19,10 @@ return [
         'secret' => env('MAILGUN_SECRET'),
     ],
 
+    'sendgrid' => [
+        'api_key' => env('SENDGRID_API_KEY')
+    ],
+
     'mandrill' => [
         'secret' => '',
     ],

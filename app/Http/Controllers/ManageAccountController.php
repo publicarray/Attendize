@@ -200,6 +200,7 @@ class ManageAccountController extends MyBaseController
 
         Mail::send('Emails.inviteUser', $data, function ($message) use ($data) {
             $message->to($data['user']->email)
+                ->from(config('mail.from.address'), config('mail.from.name'))
                 ->subject(trans("Email.invite_user", ["name"=>$data['inviter']->first_name . ' ' . $data['inviter']->last_name, "app"=>config('app.name')]));
         });
 
