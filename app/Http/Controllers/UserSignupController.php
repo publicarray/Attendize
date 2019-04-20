@@ -45,7 +45,7 @@ class UserSignupController extends Controller
             'password'     => 'required|min:8|confirmed',
             'first_name'   => 'required',
             'terms_agreed' => $is_attendize ? 'required' : '',
-            'grecaptcha'   => 'required',
+            'grecaptcha'   => 'nullable',
         ]);
 
         if (env('GOOGLE_RECAPTCHA_SECRET_KEY')) {
