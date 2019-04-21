@@ -15,11 +15,11 @@ class AddAnswerOptions extends Migration
     {
         Schema::create('answer_options', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('answer_id')->index();
-            $table->unsignedInteger('options_id')->index();
-            $table->decimal('amount', 13, 2)->default(0.00);
-            $table->foreign('answer_id')->references('id')->on('question_answers');
-            $table->foreign('options_id')->references('id')->on('question_options');
+            $table->unsignedInteger('question_option_id')->index();
+            $table->unsignedInteger('option_id')->index();
+            $table->decimal('price', 13, 2)->default(0.00);
+            $table->foreign('question_answer_id')->references('id')->on('question_answers');
+            $table->foreign('question_option_id')->references('id')->on('question_options');
         });
     }
 

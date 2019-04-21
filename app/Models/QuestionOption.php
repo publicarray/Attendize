@@ -31,11 +31,11 @@ class QuestionOption extends MyBaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function anwsers()
     {
-        return $this->belongsToMany(\App\Models\Anwsers::class);
+        return $this->hasMany(\App\Models\AnwserOption::class);
     }
 
     public function showWithNameAndPrice($currency)
