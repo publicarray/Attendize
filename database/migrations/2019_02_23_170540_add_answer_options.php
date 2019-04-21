@@ -17,6 +17,7 @@ class AddAnswerOptions extends Migration
             $table->increments('id');
             $table->unsignedInteger('answer_id')->index();
             $table->unsignedInteger('options_id')->index();
+            $table->decimal('amount', 13, 2)->default(0.00);
             $table->foreign('answer_id')->references('id')->on('question_answers');
             $table->foreign('options_id')->references('id')->on('question_options');
         });

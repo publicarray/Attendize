@@ -8,9 +8,18 @@
             @elseif($question->question_type_id == config('attendize.question_textbox_multi'))
                 {!! Form::textarea("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]", null, ['rows'=>5, $question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}  form-control"]) !!}
             @elseif($question->question_type_id == config('attendize.question_dropdown_single'))
-                {!! Form::select("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]", array_merge(['' => '-- Please Select --'], $question->showOptionNameWithPrice($currency)->toArray()), null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}   form-control"]) !!}
+                <select @if($question->is_required) required @endif class="form-control" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}]">
+                    <option selected value="">-- Please Select --</option>
+                    @foreach($question->options as $option)
+                        <option value="{{$option->id}}">{{$option->name}} - {{money($option->price, $currency)}}</option>
+                    @endforeach
+                </select>
             @elseif($question->question_type_id == config('attendize.question_dropdown_multi'))
-                {!! Form::select("ticket_holder_questions[{$ticket->id}][{$i}][$question->id][]",$question->showOptionNameWithPrice($currency), null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}   form-control"]) !!}
+                <select @if($question->is_required) required @endif multiple="multiple" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}]" class="form-control">
+                    @foreach($question->options as $option)
+                        <option value="{{$option->id}}">{{$option->name}} - {{money($option->price, $currency)}}</option>
+                    @endforeach
+                </select>
             @elseif($question->question_type_id == config('attendize.question_checkbox_multi'))
                 <br>
                 @foreach($question->options as $option)
@@ -18,7 +27,7 @@
                         $checkbox_id = md5($ticket->id.$i.$question->id.$option->name);
                     ?>
                     <div class="custom-checkbox">
-                        {!! Form::checkbox("ticket_holder_questions[{$ticket->id}][{$i}][$question->id][]",$option->name, false,['class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}  ", 'id' => $checkbox_id]) !!}
+                        <input @if($question->is_required) required @endif id="{{$checkbox_id}}" type="checkbox" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}][]" value="{{$option->id}}">
                         <label for="{{ $checkbox_id }}">{{$option->showWithNameAndPrice($currency)}} </label>
                     </div>
                 @endforeach
@@ -29,7 +38,7 @@
                     $radio_id = md5($ticket->id.$i.$question->id.$option->name);
                     ?>
                 <div class="custom-radio">
-                    {!! Form::radio("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]",$option->name, false, ['id' => $radio_id, 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}  "]) !!}
+                    <input @if($question->is_required) required @endif id="{{$radio_id}}" type="radio" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}][]" value="{{$option->id}}">
                     <label for="{{ $radio_id }}">{{$option->showWithNameAndPrice($currency)}}</label>
                 </div>
                 @endforeach
