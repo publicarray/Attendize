@@ -15,13 +15,13 @@ if (!function_exists('money')) {
     }
 
     /**
-     * Get extras price (questions)
+     * Get extras price from questions
      * @param  object $ticket_order the ordered tickets
-     * @return int               total extras price
+     * @return float               total extras price
      */
     function getExtrasPrice($ticket_order, $ticket_questions)
     {
-        $extras_price = 0;
+        $extras_price = 0.0;
         foreach ($ticket_order['tickets'] as $attendee_details) {
             for ($i = 0; $i < $attendee_details['qty']; $i++) {
                 foreach ($attendee_details['ticket']->questions as $question) {
@@ -32,21 +32,20 @@ if (!function_exists('money')) {
 
                     switch ($question->question_type_id) {
                     case 3: // Dropdown (single selection)
-                        $extras_price += $question->options->slice($ticket_answer, 1)->first()->price;
+                        $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
                         break;
                     case 4: // Dropdown (multiple selection)
                         foreach ($ticket_answer as $answer) {
-                            // todo, don't rely on array index ($answer) and slice
-                            $extras_price += $question->options->slice($answer, 1)->first()->price;
+                            $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
                         }
                         break;
                     case 5: // Checkbox
                         foreach ($ticket_answer as $answer) {
-                            $extras_price += $question->options->where('name', $answer)->first()->price;
+                            $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
                         }
                         break;
                     case 6: // Radio input
-                        $extras_price += $question->options->where('name', $ticket_answer)->first()->price;
+                        $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
                         break;
                     default:
                         break;

@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentGateway;
 use App\Models\QuestionAnswer;
+use App\Models\QuestionOption;
 use App\Models\ReservedTickets;
 use App\Models\Ticket;
 use App\Services\Order as OrderService;
@@ -346,7 +347,7 @@ class EventCheckoutController extends Controller
             }
 
             $extras_price = getExtrasPrice($ticket_order, $ticket_questions);
-            Log::debug(['extras_price:', $extras_price]);
+            Log::debug('extras_price:', [$extras_price]);
 
             $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event, $extras_price);
             $orderService->calculateFinalCosts();
@@ -638,11 +639,11 @@ class EventCheckoutController extends Controller
 
                         // convert drop-down indexes to answer text
                         if ($question->question_type_id == 3) { // Dropdown (single selection)
-                            $ticket_answer = $question->options->slice($ticket_answer, 1)->first()->name;
+                            $ticket_answer = $question->options->firstWhere('id', $ticket_answer)->name;
                         } else if ($question->question_type_id == 4) { // Dropdown (multiple selection)
                             $tmp_ticket_answer = [];
                             foreach ($ticket_answer as $answer) {
-                                array_push($tmp_ticket_answer, $question->options->slice($answer, 1)->first()->name);
+                                array_push($tmp_ticket_answer, $question->options->firstWhere('id', $ticket_answer)->name);
                             }
                             $ticket_answer = $tmp_ticket_answer;
                         }
