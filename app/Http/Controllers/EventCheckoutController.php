@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OrderCompletedEvent;
-use App\Models\Account;
-use App\Models\AccountPaymentGateway;
-use App\Models\Affiliate;
-use App\Models\Attendee;
+use DB;
+use Log;
+use PDF;
+use Cookie;
+use Omnipay;
+use Validator;
+use Carbon\Carbon;
 use App\Models\Event;
-use App\Models\EventStats;
 use App\Models\Order;
+use App\Models\Ticket;
+use App\Models\Account;
+use App\Models\Attendee;
+use App\Models\Affiliate;
 use App\Models\OrderItem;
+use App\Models\EventStats;
+use App\Models\AnswerOption;
+use Illuminate\Http\Request;
 use App\Models\PaymentGateway;
 use App\Models\QuestionAnswer;
 use App\Models\QuestionOption;
 use App\Models\ReservedTickets;
-use App\Models\Ticket;
-use App\Services\Order as OrderService;
-use Carbon\Carbon;
-use Cookie;
-use DB;
-use Illuminate\Http\Request;
-use Log;
-use Omnipay;
-use PDF;
 use PhpSpec\Exception\Exception;
-use Validator;
+use App\Events\OrderCompletedEvent;
+use App\Models\AccountPaymentGateway;
+use App\Services\Order as OrderService;
 
 class EventCheckoutController extends Controller
 {
@@ -636,16 +637,23 @@ class EventCheckoutController extends Controller
                         if (is_null($ticket_answer)) {
                             continue;
                         }
-
+                        $optionIds = [];
+                        $optionPrices = [];
                         // convert drop-down indexes to answer text
                         if ($question->question_type_id == 3) { // Dropdown (single selection)
-                            $ticket_answer = $question->options->firstWhere('id', $ticket_answer)->name;
+                            $option = $question->options->firstWhere('id', $ticket_answer);
+                            array_push($optionIds, $option->id);
+                            array_push($optionPrices, $option->price);
+                            $ticket_answer = $option->name;
                         } else if ($question->question_type_id == 4) { // Dropdown (multiple selection)
-                            $tmp_ticket_answer = [];
+                            $tmp_ticket_answers = [];
                             foreach ($ticket_answer as $answer) {
-                                array_push($tmp_ticket_answer, $question->options->firstWhere('id', $ticket_answer)->name);
+                                $option = $question->options->firstWhere('id', $ticket_answer);
+                                array_push($optionIds, $option->id);
+                                array_push($optionPrices, $option->price);
+                                array_push($tmp_ticket_answers, $option->name);
                             }
-                            $ticket_answer = $tmp_ticket_answer;
+                            $ticket_answer = $tmp_ticket_answers;
                         }
 
                         /*
@@ -654,14 +662,25 @@ class EventCheckoutController extends Controller
                          */
                         $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
                         if (!empty($ticket_answer)) {
-                            QuestionAnswer::create([
+                            DB::beginTransaction();
+                            $questionAnswer = new QuestionAnswer([
                                 'answer_text' => $ticket_answer,
                                 'attendee_id' => $attendee->id,
                                 'event_id'    => $event->id,
                                 'account_id'  => $event->account->id,
                                 'question_id' => $question->id
                             ]);
+                            $questionAnswer->save();
 
+                            foreach ($optionIds as $i => $optionId) {
+                                $option = new AnswerOption([
+                                    'question_answer_id' => $questionAnswer->id,
+                                    'question_option_id' => $optionId,
+                                    'price' => $optionPrices[$i],
+                                ]);
+                                $questionAnswer->answeredOptions()->save($option);
+                            }
+                            DB::commit();
                         }
                     }
 
