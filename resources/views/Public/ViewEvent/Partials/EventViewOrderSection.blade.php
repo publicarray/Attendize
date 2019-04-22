@@ -178,22 +178,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            @if($orderService->extrasAmount > 0)
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                    @lang("Public_ViewEvent.extras")
-                                </td>
-                                <td colspan="2">
-                                    {{ $orderService->getExtrasAmount(true) }}
-                                </td>
-                            </tr>
-                            @endif
                             <tr>
                                 <td>
                                 </td>
