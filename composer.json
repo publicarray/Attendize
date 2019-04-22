@@ -11,6 +11,7 @@
     "type": "project",
     "homepage": "https://www.attendize.com",
     "require": {
+        "barryvdh/laravel-dompdf": "^0.8.4",
         "barryvdh/laravel-ide-helper": "~2.4",
         "bugsnag/bugsnag-laravel": "^2.0",
         "doctrine/dbal": "~2.8",
@@ -31,7 +32,6 @@
         "mcamara/laravel-localization": "~1.2",
         "mews/purifier": "~2.0",
         "milon/barcode": "~5.3",
-        "nitmedia/wkhtml2pdf": "dev-master",
         "omnipay/common": "~3",
         "omnipay/dummy": "~3",
         "omnipay/paypal": "~3",
@@ -46,7 +46,6 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
         "fzaninotto/faker": "1.8.*",
-        "phpspec/phpspec": "5.0.*",
         "phpunit/phpunit": "7.3.*",
         "symfony/css-selector": "~3.0",
         "symfony/dom-crawler": "~3.0"

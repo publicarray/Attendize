@@ -880,7 +880,7 @@ class EventAttendeesController extends MyBaseController
         ];
 
         if ($request->get('download') == '1') {
-            return PDF::html('Public.ViewEvent.Partials.PDFTicket', $data, 'Tickets');
+            return PDF::loadView('Public.ViewEvent.Partials.PDFTicket', $data)->download('Tickets.pdf');
         }
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
     }

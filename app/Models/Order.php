@@ -158,8 +158,7 @@ class Order extends MyBaseModel
             File::makeDirectory(dirname($pdf_file_path), 0777, true, true);
         }
 
-        PDF::setOutputMode('F'); // force to file
-        PDF::html('Public.ViewEvent.Partials.PDFTicket', $data, $pdf_file_path);
+        PDF::viewView('Public.ViewEvent.Partials.PDFTicket', $data)->save($pdf_file_path);
 
         $this->ticket_pdf_path = config('attendize.event_pdf_tickets_path') . '/' . $this->order_reference . '.pdf';
         $this->save();
