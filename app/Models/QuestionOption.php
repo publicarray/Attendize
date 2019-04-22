@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
+// use Illuminate\Database\Eloquent\SoftDeletes;
+
 class QuestionOption extends MyBaseModel
 {
+    // use SoftDeletes;
+
     /**
      * Indicates if the model should be timestamped.
      *

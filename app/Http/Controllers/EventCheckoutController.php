@@ -640,12 +640,12 @@ class EventCheckoutController extends Controller
                         $optionIds = [];
                         $optionPrices = [];
                         // convert drop-down indexes to answer text
-                        if ($question->question_type_id == 3) { // Dropdown (single selection)
+                        if ($question->question_type_id == 3) { // Dropdown (single selection)  -----todo: and radio buttons
                             $option = $question->options->firstWhere('id', $ticket_answer);
                             array_push($optionIds, $option->id);
                             array_push($optionPrices, $option->price);
                             $ticket_answer = $option->name;
-                        } else if ($question->question_type_id == 4) { // Dropdown (multiple selection)
+                        } else if ($question->question_type_id == 4) { // Dropdown (multiple selection) -----todo: and checkbox
                             $tmp_ticket_answers = [];
                             foreach ($ticket_answer as $answer) {
                                 $option = $question->options->firstWhere('id', $ticket_answer);
@@ -662,7 +662,6 @@ class EventCheckoutController extends Controller
                          */
                         $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
                         if (!empty($ticket_answer)) {
-                            DB::beginTransaction();
                             $questionAnswer = new QuestionAnswer([
                                 'answer_text' => $ticket_answer,
                                 'attendee_id' => $attendee->id,
@@ -673,14 +672,27 @@ class EventCheckoutController extends Controller
                             $questionAnswer->save();
 
                             foreach ($optionIds as $i => $optionId) {
-                                $option = new AnswerOption([
-                                    'question_answer_id' => $questionAnswer->id,
+                                $answerOption = new AnswerOption([
+                                    'question_answer_id' => $question->id,
                                     'question_option_id' => $optionId,
                                     'price' => $optionPrices[$i],
                                 ]);
-                                $questionAnswer->answeredOptions()->save($option);
+                                $questionAnswer->answeredOptions()->save($answerOption);
+
+                                // add items with a price to order
+                                $option = QuestionOption::find($answerOption->question_option_id);
+                                array_push($awnser_qty, $option);
+                                if ($option->price > 0) {
+                                    $orderItem = new OrderItem();
+                                    $orderItem->title = $option->name;
+                                    $orderItem->quantity = 1; // todo
+                                    $orderItem->order_id = $order->id;
+                                    $orderItem->unit_price = $answerOption->price;
+                                    $orderItem->unit_booking_fee = 0.00;
+                                    $orderItem->save();
+                                }
+
                             }
-                            DB::commit();
                         }
                     }
 

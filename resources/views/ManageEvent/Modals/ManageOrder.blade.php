@@ -137,20 +137,6 @@
                                     <td>
                                     </td>
                                     <td>
-                                        @lang("Order.extras")
-                                    </td>
-                                    <td colspan="2">
-                                        {{money($order->extras, $order->event->currency)}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
                                         <b>@lang("Order.sub_total")</b>
                                     </td>
                                     <td colspan="2">
