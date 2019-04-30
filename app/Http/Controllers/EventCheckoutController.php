@@ -634,26 +634,35 @@ class EventCheckoutController extends Controller
 
                         $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
 
-                        if (is_null($ticket_answer)) {
+                        if (is_null($ticket_answer) || $ticket_answer == "") {
                             continue;
                         }
                         $optionIds = [];
                         $optionPrices = [];
                         // convert drop-down indexes to answer text
-                        if ($question->question_type_id == 3) { // Dropdown (single selection)  -----todo: and radio buttons
-                            $option = $question->options->firstWhere('id', $ticket_answer);
-                            array_push($optionIds, $option->id);
-                            array_push($optionPrices, $option->price);
-                            $ticket_answer = $option->name;
-                        } else if ($question->question_type_id == 4) { // Dropdown (multiple selection) -----todo: and checkbox
-                            $tmp_ticket_answers = [];
-                            foreach ($ticket_answer as $answer) {
+                        switch ($question->question_type_id) {
+                            case 3: // Dropdown (single selection)
+                            case 6: // Radio input
+                                // \Log::info("*******3/6->", [$question, $ticket_answer]);
                                 $option = $question->options->firstWhere('id', $ticket_answer);
                                 array_push($optionIds, $option->id);
                                 array_push($optionPrices, $option->price);
-                                array_push($tmp_ticket_answers, $option->name);
-                            }
-                            $ticket_answer = $tmp_ticket_answers;
+                                $ticket_answer = $option->name;
+                                break;
+                            case 4: // Dropdown (multiple selection)
+                            case 5: // Checkbox
+                                $tmp_ticket_answers = [];
+                                // \Log::info("*******4/5->", [$question, $ticket_answer]);
+                                foreach ($ticket_answer as $answer) {
+                                    $option = $question->options->firstWhere('id', $ticket_answer);
+                                    array_push($optionIds, $option->id);
+                                    array_push($optionPrices, $option->price);
+                                    array_push($tmp_ticket_answers, $option->name);
+                                }
+                                $ticket_answer = $tmp_ticket_answers;
+                                break;
+                            default:
+                                break;
                         }
 
                         /*
