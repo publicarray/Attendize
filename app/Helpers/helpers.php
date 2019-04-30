@@ -26,26 +26,20 @@ if (!function_exists('money')) {
             for ($i = 0; $i < $attendee_details['qty']; $i++) {
                 foreach ($attendee_details['ticket']->questions as $question) {
                     $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
-                    if (is_null($ticket_answer)) {
+                    if (is_null($ticket_answer) || $ticket_answer == "") {
                         continue;
                     }
 
                     switch ($question->question_type_id) {
                     case 3: // Dropdown (single selection)
+                    case 6: // Radio input
                         $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
                         break;
                     case 4: // Dropdown (multiple selection)
-                        foreach ($ticket_answer as $answer) {
-                            $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
-                        }
-                        break;
                     case 5: // Checkbox
                         foreach ($ticket_answer as $answer) {
                             $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
                         }
-                        break;
-                    case 6: // Radio input
-                        $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
                         break;
                     default:
                         break;
