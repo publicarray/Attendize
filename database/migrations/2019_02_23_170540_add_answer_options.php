@@ -15,6 +15,7 @@ class AddAnswerOptions extends Migration
     {
         Schema::create('answer_options', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('question_answer_id')->index();
             $table->unsignedInteger('question_option_id')->index();
             $table->unsignedInteger('option_id')->index();
             $table->decimal('price', 13, 2)->default(0.00);
