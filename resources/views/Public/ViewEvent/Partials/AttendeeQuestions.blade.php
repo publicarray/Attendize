@@ -15,7 +15,7 @@
                     @endforeach
                 </select>
             @elseif($question->question_type_id == config('attendize.question_dropdown_multi'))
-                <select @if($question->is_required) required @endif multiple="multiple" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}]" class="form-control">
+                <select @if($question->is_required) required @endif multiple="multiple" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}][]" class="form-control">
                     @foreach($question->options as $option)
                         <option value="{{$option->id}}">{{$option->name}} - {{money($option->price, $currency)}}</option>
                     @endforeach
@@ -38,7 +38,7 @@
                     $radio_id = md5($ticket->id.$i.$question->id.$option->name);
                     ?>
                 <div class="custom-radio">
-                    <input @if($question->is_required) required @endif id="{{$radio_id}}" type="radio" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}][]" value="{{$option->id}}">
+                    <input @if($question->is_required) required @endif id="{{$radio_id}}" type="radio" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}]" value="{{$option->id}}">
                     <label for="{{ $radio_id }}">{{$option->showWithNameAndPrice($currency)}}</label>
                 </div>
                 @endforeach
