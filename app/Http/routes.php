@@ -90,7 +90,7 @@ Route::group(
         /*
          * Registration / Account creation
          */
-        if (!(config('attendize.single_organiser_mode') && DB::table('accounts')->count() > 0)) {
+        if (!config('attendize.single_organiser_mode') && Schema::hasTable('accounts') && DB::table('accounts')->count() == 0) {
             Route::get('/signup', [
                 'uses' => 'UserSignupController@showSignup',
                 'as'   => 'showSignup',
@@ -272,7 +272,7 @@ Route::group(
 
             // block the creation of additional organisers when
             // in single organiser mode
-            if (!(config('attendize.single_organiser_mode') && DB::table('organisers')->count() > 0)) {
+            if (!config('attendize.single_organiser_mode') && Schema::hasTable('organisers') && DB::table('organisers')->count() == 0) {
                 Route::get('create', [
                     'as'   => 'showCreateOrganiser',
                     'uses' => 'OrganiserController@showCreateOrganiser',
