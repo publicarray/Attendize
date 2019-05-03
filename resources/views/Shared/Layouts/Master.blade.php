@@ -12,7 +12,7 @@
     -->
     <title>
         @section('title')
-            Attendize -
+            {{ config('attendize.app_name') }} -
         @show
     </title>
 
@@ -38,7 +38,7 @@
 
     <div class="navbar-header">
         <a class="navbar-brand" href="javascript:void(0);">
-            <img style="width: 150px;" class="logo" alt="Attendize" src="{{asset('assets/images/logo-light.png')}}"/>
+            <img style="width: 150px;" class="logo" alt="{{ config('attendize.app_name') }}" src="{{asset('assets/images/logo-light.png')}}"/>
         </a>
     </div>
 

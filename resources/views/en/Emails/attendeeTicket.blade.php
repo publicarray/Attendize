@@ -1,4 +1,4 @@
-Hi {{{$attendee->first_name}}},<br><br>
+Hi {{$attendee->first_name}},<br><br>
 
 We've attached your tickets to this email.<br><br>
 
