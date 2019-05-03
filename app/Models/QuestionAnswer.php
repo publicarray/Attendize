@@ -32,6 +32,18 @@ class QuestionAnswer extends MyBaseModel
     }
 
     /**
+     * @return float
+     */
+    public function getPriceAttribute()
+    {
+        $price = 0;
+        foreach ($this->answeredOptions as $option) {
+            $price += $option->price;
+        }
+        return $price;
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function answeredOptions()
