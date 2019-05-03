@@ -9,7 +9,7 @@
                 </a>
             </li>
         </ul>
-        <h5 class="heading">Event Menu</h5>
+        <h5 class="heading">@lang('basic.event_menu')</h5>
         <ul id="nav_event" class="topmenu">
             <li class="{{ Request::is('*dashboard*') ? 'active' : '' }}">
                 <a href="{{route('showEventDashboard', array('event_id' => $event->id))}}">
@@ -68,5 +68,12 @@
                     <span class="text">@lang("ManageEvent.widgets")</span>
                 </a>
             </li>
+            <li class="{{ Request::is('*access_codes*') ? 'active' : '' }}">
+                <a href="{{ route('showEventAccessCodes', [ 'event_id' => $event->id ]) }}">
+                    <span class="figure"><i class="ico-money"></i></span>
+                    <span class="text">@lang("AccessCodes.title")</span>
+                </a>
+            </li>
+        </ul>
     </section>
 </aside>

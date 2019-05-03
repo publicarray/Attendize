@@ -84,9 +84,8 @@
                     <li><a data-href="{{route('showEditAccount')}}" data-modal-id="EditAccount" class="loadModal"
                            href="javascript:void(0);"><span class="icon ico-cog"></span>@lang("Top.account_settings")</a></li>
 
-
                     <li class="divider"></li>
-                    <li><a target="_blank" href="https://www.attendize.com/feedback.php?v={{ config('attendize.version') }}"><span class="icon ico-megaphone"></span>@lang("Top.feedback_bug_report")</a></li>
+                    <li><a target="_blank" href="https://github.com/Attendize/Attendize/issues/new?body=Version%20{{ config('attendize.version') }}"><span class="icon ico-megaphone"></span>@lang("Top.feedback_bug_report")</a></li>
                     <li class="divider"></li>
                     <li><a href="{{route('logout')}}"><span class="icon ico-exit"></span>@lang("Top.sign_out")</a></li>
                 </ul>

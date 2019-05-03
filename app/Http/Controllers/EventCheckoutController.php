@@ -186,14 +186,14 @@ class EventCheckoutController extends Controller
             $paymentGateway = $activeAccountPaymentGateway;
         } else {
             $activeAccountPaymentGateway = $event->account->getGateway($event->account->payment_gateway_id);
-            //if no payment gateway configured don't go to the next step and show user error
-            if (empty($activeAccountPaymentGateway)) {
+            //if no payment gateway configured and no offline pay, don't go to the next step and show user error
+            if (empty($activeAccountPaymentGateway) && !$event->enable_offline_payments) {
                 return response()->json([
                     'status'  => 'error',
                     'message' => 'No payment gateway configured',
                 ]);
             }
-            $paymentGateway = $activeAccountPaymentGateway->payment_gateway;
+            $paymentGateway = $activeAccountPaymentGateway ? $activeAccountPaymentGateway->payment_gateway : false;
         }
 
         /*
@@ -392,7 +392,7 @@ class EventCheckoutController extends Controller
                     break;
                 default:
                     Log::error('No payment gateway configured.');
-                    return repsonse()->json([
+                    return response()->json([
                         'status'  => 'error',
                         'message' => 'No payment gateway configured.'
                     ]);
@@ -467,7 +467,7 @@ class EventCheckoutController extends Controller
     {
 
         if ($request->get('is_payment_cancelled') == '1') {
-            session()->flash('message', 'You cancelled your payment. You may try again.');
+            session()->flash('message', trans('Event.payment_cancelled'));
             return response()->redirectToRoute('showEventCheckout', [
                 'event_id'             => $event_id,
                 'is_payment_cancelled' => 1,

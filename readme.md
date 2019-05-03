@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="https://www.attendize.com/img/logo-dark.png" alt="Attendize"/>
-  <img style='border: 1px solid #444;' src="https://attendize.com/img/screenshots/screen1.PNG" alt="Attendize"/>
+  <img src="http://attendize.website/assets/images/logo-dark.png" alt="Attendize"/>
+  <img style='border: 1px solid #444;' src="https://www.attendize.com/images/screenshots/screen1.PNG" alt="Attendize"/>
 </p>
 
 <h1>Attendize</h1>
@@ -93,12 +93,12 @@ Attendize is open-sourced software licensed under the Attribution Assurance Lice
 
 Contributors 
 ---
-
+* Jeremy Quinton ([Github](https://github.com/jeremyquinton))
+* Sam Bell ([Github](https://github.com/samdb))
+* Sebastian Schmidt ([Github](https://github.com/publicarray))
 * Brett B ([Github](https://github.com/bretto36))
 * G0dLik3 ([Github](https://github.com/G0dLik3))
-* Honoré Hounwanou ([Github](http://github.com/mercuryseries)) <mercuryseries@gmail.com>
+* Honoré Hounwanou ([Github](http://github.com/mercuryseries))
 * James Campbell ([Github](https://github.com/jncampbell))
 * JapSeyz ([Github](https://github.com/JapSeyz))
 * Mark Walet ([Github](https://github.com/markwalet))
-* Jeremy Quinton ([Github](https://github.com/jeremyquinton))
-* Sebastian Schmidt ([Github](https://github.com/publicarray))

@@ -44,7 +44,7 @@
                         <span style="float: right;"><b>{{ $orderService->getTaxAmount(true) }}</b></span>
                     </h5>
                     <h5>
-                        <strong>Grand Total:</strong>
+                        <strong>@lang("Public_ViewEvent.grand_total")</strong>
                         <span style="float: right;"><b>{{  $orderService->getGrandTotal(true) }}</b></span>
                     </h5>
                     @endif
@@ -159,7 +159,13 @@
                 @if($event->enable_offline_payments)
                     <div class="offline_payment_toggle">
                         <div class="custom-checkbox">
-                            <input data-toggle="toggle" id="pay_offline" name="pay_offline" type="checkbox" value="1">
+                            @if($payment_gateway === false)
+                                {{--  Force offline payment if no gateway  --}}
+                                <input type="hidden" name="pay_offline" value="1">
+                                <input id="pay_offline" type="checkbox" value="1" checked disabled>
+                            @else
+                                <input data-toggle="toggle" id="pay_offline" name="pay_offline" type="checkbox" value="1">
+                            @endif
                             <label for="pay_offline">@lang("Public_ViewEvent.pay_using_offline_methods")</label>
                         </div>
                     </div>
