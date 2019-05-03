@@ -759,7 +759,11 @@ class EventAttendeesController extends MyBaseController
             try {
                 // This does not account for an increased/decreased ticket price
                 // after the original purchase.
-                $refund_amount = $attendee->ticket->price; //ToDo
+                $extraPrice = 0;
+                foreach ($attendee->answers as $answer) {
+                    $extraPrice += $answer->price;
+                }
+                $refund_amount = $attendee->ticket->price + $extraPrice;
                 $data['refund_amount'] = $refund_amount;
 
                 $gateway = Omnipay::create($attendee->order->payment_gateway->name);
