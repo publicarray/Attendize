@@ -38,7 +38,7 @@ if (!function_exists('money')) {
                     case 4: // Dropdown (multiple selection)
                     case 5: // Checkbox
                         foreach ($ticket_answer as $answer) {
-                            $extras_price += $question->options->firstWhere('id', $ticket_answer)->price;
+                            $extras_price += $question->options->firstWhere('id', $answer)->price;
                         }
                         break;
                     default:

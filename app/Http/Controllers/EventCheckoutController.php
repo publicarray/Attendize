@@ -643,7 +643,6 @@ class EventCheckoutController extends Controller
                         switch ($question->question_type_id) {
                             case 3: // Dropdown (single selection)
                             case 6: // Radio input
-                                // \Log::info("*******3/6->", [$question, $ticket_answer]);
                                 $option = $question->options->firstWhere('id', $ticket_answer);
                                 array_push($optionIds, $option->id);
                                 array_push($optionPrices, $option->price);
@@ -652,9 +651,8 @@ class EventCheckoutController extends Controller
                             case 4: // Dropdown (multiple selection)
                             case 5: // Checkbox
                                 $tmp_ticket_answers = [];
-                                // \Log::info("*******4/5->", [$question, $ticket_answer]);
                                 foreach ($ticket_answer as $answer) {
-                                    $option = $question->options->firstWhere('id', $ticket_answer);
+                                    $option = $question->options->firstWhere('id', $answer);
                                     array_push($optionIds, $option->id);
                                     array_push($optionPrices, $option->price);
                                     array_push($tmp_ticket_answers, $option->name);
@@ -689,8 +687,8 @@ class EventCheckoutController extends Controller
                                 $questionAnswer->answeredOptions()->save($answerOption);
 
                                 // add items with a price to order
-                                $option = QuestionOption::find($answerOption->question_option_id);
-                                array_push($awnser_qty, $option);
+                                $option = QuestionOption::findOrFail($answerOption->question_option_id);
+                                // array_push($awnser_qty, $option); // todo
                                 if ($option->price > 0) {
                                     $orderItem = new OrderItem();
                                     $orderItem->title = $option->name;

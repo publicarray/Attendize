@@ -106,7 +106,7 @@ class Order extends MyBaseModel
      */
     public function getOrganiserAmountAttribute()
     {
-        return $this->amount + $this->organiser_booking_fee + $this->taxamt;
+        return $this->amount + $this->extras + $this->organiser_booking_fee + $this->taxamt;
     }
 
     /**
