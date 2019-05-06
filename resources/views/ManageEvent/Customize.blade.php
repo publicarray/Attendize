@@ -116,22 +116,15 @@
                 var subTextColor = $('input[name="ticket_sub_text_color"]').val();
 
                 $('.ticket').css({
-                    'border': '1px solid ' + borderColor,
+                    'border-color': borderColor,
                     'background-color': bgColor,
-                    'color': subTextColor,
-                    'border-left-color': borderColor
+                    'color': subTextColor
                 });
-                $('.ticket h4').css({
+                $('.ticket strong, h1, h2').css({
                     'color': textColor
                 });
-                $('.ticket .logo').css({
-                    'border-left': '1px solid ' + borderColor,
-                    'border-bottom': '1px solid ' + borderColor
-                });
-                $('.ticket .barcode').css({
-                    'border-right': '1px solid ' + borderColor,
-                    'border-bottom': '1px solid ' + borderColor,
-                    'border-top': '1px solid ' + borderColor
+                $('.ticket-checkin').css({
+                    'border-color': borderColor
                 });
 
             });
