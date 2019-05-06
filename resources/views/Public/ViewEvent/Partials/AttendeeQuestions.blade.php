@@ -11,13 +11,13 @@
                 <select @if($question->is_required) required @endif class="form-control" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}]">
                     <option selected value="">-- Please Select --</option>
                     @foreach($question->options as $option)
-                        <option value="{{$option->id}}">{{$option->name}} - {{money($option->price, $currency)}}</option>
+                        <option value="{{$option->id}}">{{$option->showWithNameAndPrice($currency)}}</option>
                     @endforeach
                 </select>
             @elseif($question->question_type_id == config('attendize.question_dropdown_multi'))
                 <select @if($question->is_required) required @endif multiple="multiple" name="ticket_holder_questions[{{$ticket->id}}][{{$i}}][{{$question->id}}][]" class="form-control">
                     @foreach($question->options as $option)
-                        <option value="{{$option->id}}">{{$option->name}} - {{money($option->price, $currency)}}</option>
+                        <option value="{{$option->id}}">{{$option->showWithNameAndPrice($currency)}}</option>
                     @endforeach
                 </select>
             @elseif($question->question_type_id == config('attendize.question_checkbox_multi'))
