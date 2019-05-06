@@ -69,5 +69,8 @@ return [
     'default_payment_gateway'    => 1, #Stripe=1 Paypal=2 BitPay=3 MIGS=4
 
     'cdn_url_user_assets'   => '',
-    'cdn_url_static_assets' => ''
+    'cdn_url_static_assets' => '',
+
+    'recaptcha_site' => env('GOOGLE_RECAPTCHA_SITE_KEY'),
+    'recaptcha_secret' => env('GOOGLE_RECAPTCHA_SECRET_KEY')
 ];

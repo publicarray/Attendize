@@ -28,12 +28,12 @@
                         (<a class="forgotPassword" href="{{route('forgotPassword')}}" tabindex="-1">@lang("User.forgot_password?")</a>)
                         {!! Form::password('password',  ['class' => 'form-control']) !!}
                     </div>
-                    @if(env('GOOGLE_RECAPTCHA_SITE_KEY'))
+                    @if(config('attendize.recaptcha_site'))
                         <input id="captcha" type="hidden" name="grecaptcha">
-                        <script src="https://www.recaptcha.net/recaptcha/api.js?render={{env('GOOGLE_RECAPTCHA_SITE_KEY')}}"></script>
+                        <script src="https://www.recaptcha.net/recaptcha/api.js?render={{config('attendize.recaptcha_site')}}"></script>
                         <script>
                         grecaptcha.ready(function() {
-                            grecaptcha.execute('{{env('GOOGLE_RECAPTCHA_SITE_KEY')}}', {action: 'login'}).then(function(token) {
+                            grecaptcha.execute('{{config('attendize.recaptcha_site')}}', {action: 'login'}).then(function(token) {
                                 document.getElementById('captcha').value = token
                             });
                         });

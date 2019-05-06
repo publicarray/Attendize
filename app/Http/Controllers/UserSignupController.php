@@ -48,12 +48,12 @@ class UserSignupController extends Controller
             'grecaptcha'   => 'nullable',
         ]);
 
-        if (env('GOOGLE_RECAPTCHA_SECRET_KEY')) {
+        if (config('attendize.recaptcha_secret')) {
             $captcha = $request->get('grecaptcha');
             $client = new \GuzzleHttp\Client();
             $res = $client->request('POST', 'https://www.recaptcha.net/recaptcha/api/siteverify', [
                 'form_params' => [
-                    'secret' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
+                    'secret' => config('attendize.recaptcha_secret'),
                     'response' => $captcha,
                     // 'remoteip' => ''
                 ]
