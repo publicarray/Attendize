@@ -249,7 +249,6 @@
                 'price': ticketsEl[i].children[1].innerText,
                 'qty': parseInt(ticketsEl[i].children[0].children[0].innerText)
             }
-            console.log('', ticketsEl[i].children[0])
             originalOrder.push(ticket)
         }
     }
@@ -312,7 +311,6 @@
                 'qty': 1
             }
             store.push(newItem)
-            console.log("newItem", newItem)
         }
     }
 
