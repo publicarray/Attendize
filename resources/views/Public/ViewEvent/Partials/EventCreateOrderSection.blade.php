@@ -296,7 +296,7 @@
     }
 
     function addNewItem(store, item, price) {
-        if (price) {
+        if (price && price > 0) {
             // store the quantity
             for (let i = 0; i < store.length; i++) {
                 if (store[i].item == item) {
