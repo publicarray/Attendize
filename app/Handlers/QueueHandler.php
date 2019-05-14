@@ -40,7 +40,7 @@ class QueueHandler
         $pdf_file = storage_path() . '/' . $order->order_reference;
         exit($pdf_file);
 
-        PDF::loadView('Public.ViewEvent.Partials.PDFTicket', $data)->save($pdf_file);
+        PDF::html('Public.ViewEvent.Partials.PDFTicket', $data)->save($pdf_file.'.pdf');
 
         //1
         $this->orderMailer->sendOrderNotification($order);

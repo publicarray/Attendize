@@ -74,7 +74,7 @@ class GenerateTicket extends Job implements ShouldQueue
             'images'    => $images,
         ];
         try {
-            PDF::loadView('Public.ViewEvent.Partials.PDFTicket', $data)->save($file_path);
+            PDF::html('Public.ViewEvent.Partials.PDFTicket', $data)->save($file_with_ext);
 
             Log::info("Ticket generated!");
         } catch(\Exception $e) {

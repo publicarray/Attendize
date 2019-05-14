@@ -816,9 +816,9 @@ class EventCheckoutController extends Controller
         ];
 
         if ($request->get('download') == '1') {
-            return PDF::loadView('Public.ViewEvent.Partials.PDFTicket', $data)->download('Tickets.pdf');
+            return PDF::html('Public.ViewEvent.Partials.PDFTicket', $data)->download('Tickets.pdf');
         } else if ($request->get('view') == '1') {
-            return PDF::loadView('Public.ViewEvent.Partials.PDFTicket', $data)->stream('Tickets.pdf');
+            return PDF::html('Public.ViewEvent.Partials.PDFTicket', $data)->stream('Tickets.pdf');
         }
         return view('Public.ViewEvent.Partials.PDFTicket', $data);
     }

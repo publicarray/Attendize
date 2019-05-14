@@ -55,7 +55,7 @@
             display: inline-block;
             width: 48%;
             vertical-align: top;
-            padding: 0 5px;
+            padding: 0 0.4%;
         }
 
         img {
@@ -72,6 +72,9 @@
             text-transform: uppercase;
             padding: 0 0 20px;
             margin: 0;
+            /*text-overflow: ellipsis;*/
+            /*white-space: nowrap;*/
+            /*overflow: hidden;*/
         }
 
         h3 {
@@ -200,11 +203,6 @@
     @endif
 @endforeach
 
-<div class="bottom_info">
-    {{--Attendize is provided free of charge on the condition the below hyperlink is left in place.--}}
-    {{--See https://www.attendize.com/license.html for more information.--}}
-    @include('Shared.Partials.PoweredBy')
-</div>
 </body>
 </html>
 
