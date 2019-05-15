@@ -254,7 +254,7 @@ class Event extends MyBaseModel
     public function endTimeFormatted()
     {
         $format = config('attendize.default_datetime_format');
-        if ((strpos($format, "h") || strpos($format, "g")) && strpos($format, "a")) { // 12 h time
+        if ((strpos($format, "h") || strpos($format, "g")) && (strpos($format, "a") || strpos($format, "A")) ) { // 12 h time
             return $this->end_date->format("g:i a");
         } else { // 24 hour time
             return $this->end_date->format("H:i");
