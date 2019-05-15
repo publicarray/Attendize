@@ -33,7 +33,7 @@
                 -
                 <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
                      @if($event->start_date->diffInDays($event->end_date) == 0)
-                        {{ $event->end_date->format('H:i') }}
+                        {{ $event->endTimeFormatted() }}
                      @else
                         {{ $event->endDateFormatted() }}
                      @endif
