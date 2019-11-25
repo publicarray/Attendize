@@ -381,19 +381,19 @@ Route::group(
                 [EventAttendeesController::class, 'postMessageAttendees']
             )->name('postMessageAttendees');
 
-            Route::get('{event_id}/attendees/single_message',
+            Route::get('{attendee_id}/attendees/single_message',
                 [EventAttendeesController::class, 'showMessageAttendee']
             )->name('showMessageAttendee');
 
-            Route::post('{event_id}/attendees/single_message',
+            Route::post('{attendee_id}/attendees/single_message',
                 [EventAttendeesController::class, 'postMessageAttendee']
             )->name('postMessageAttendee');
 
-            Route::get('{event_id}/attendees/resend_ticket',
+            Route::get('{attendee_id}/attendees/resend_ticket',
                 [EventAttendeesController::class, 'showResendTicketToAttendee']
             )->name('showResendTicketToAttendee');
 
-            Route::post('{event_id}/attendees/resend_ticket',
+            Route::post('{attendee_id}/attendees/resend_ticket',
                 [EventAttendeesController::class, 'postResendTicketToAttendee']
             )->name('postResendTicketToAttendee');
 
@@ -486,7 +486,7 @@ Route::group(
                 [EventOrdersController::class, 'showExportOrders']
             )->name('showExportOrders');
 
-            Route::get('{event_id}/orders/message',
+            Route::get('{order_id}/orders/message',
                 [EventOrdersController::class, 'showMessageOrder']
             )->name('showMessageOrder');
 

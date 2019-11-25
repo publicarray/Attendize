@@ -36,12 +36,24 @@ return [
 
     'checkout_timeout_after' => env('CHECKOUT_TIMEOUT_AFTER', 30), #minutes
 
-    'ticket_status_before_sale_date' => 3,
-    'ticket_status_on_sale'          => 4,
-    'ticket_status_off_sale'         => 5,
+    'ticket' => [
+        'image'   => [
+            // Default image for Ticket Generator
+            'default' => 'assets/images/attendize-ticket-default.jpg',
 
-    'ticket_booking_fee_fixed'      => 0,
-    'ticket_booking_fee_percentage' => 0,
+            // JPG Quality for Ticket Generator
+            'quality' => 80
+        ],
+        'booking' => [
+            'fee_fixed'      => 0,
+            'fee_percentage' => 0,
+        ],
+        'status'  => [
+            'before_sale_date' => 3,
+            'on_sale'          => 4,
+            'off_sale'         => 5,
+        ],
+    ],
 
     /* Order statuses */
     'order'                         => [

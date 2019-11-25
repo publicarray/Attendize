@@ -43,7 +43,7 @@ $is_free_event = true;
                           content="http://schema.org/SoldOut">
                                     @lang("Public_ViewEvent.sold_out")
                                 </span>
-                @elseif($ticket->sale_status === config('attendize.ticket_status_before_sale_date'))
+                @elseif($ticket->sale_status === config('attendize.ticket.status.before_sale_date'))
                     <span class="text-danger">
                                     @lang("Public_ViewEvent.sales_have_not_started")
                                 </span>

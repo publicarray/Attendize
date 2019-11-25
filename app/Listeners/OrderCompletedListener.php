@@ -40,7 +40,7 @@ class OrderCompletedListener implements ShouldQueue
          */
         Log::info('Begin Processing Order: ' . $event->order->order_reference);
         ProcessGenerateAndSendTickets::withChain([
-            new GenerateTicket($event->order->order_reference),
+            new GenerateTicket($event->order),
             new SendOrderTickets($event->order)
         ])->dispatch();
 

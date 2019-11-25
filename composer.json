@@ -13,13 +13,15 @@
     "homepage": "https://www.attendize.com",
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
+        "barryvdh/laravel-dompdf": "^0.8.5",
         "doctrine/dbal": "^2.9",
         "dompdf/dompdf": "^0.8",
-        "ext-json": "*",
         "fideloper/proxy": "^4.2",
         "guzzlehttp/guzzle": "^6.4",
         "guzzlehttp/psr7": "^1.6",
         "intervention/image": "^2.5",
+        "intervention/imagecache": "dev-master",
         "laracasts/utilities": "^3.0",
         "laravel/framework": "^6.5",
         "laravel/socialite": "^4.3",
@@ -32,7 +34,6 @@
         "mcamara/laravel-localization": "^1.4",
         "mews/purifier": "^3.1",
         "milon/barcode": "^6.0",
-        "nitmedia/wkhtml2pdf": "dev-master",
         "omnipay/common": "^3.0",
         "omnipay/dummy": "^3.0",
         "omnipay/paypal": "^3.0",
@@ -53,7 +54,8 @@
         "phpspec/phpspec": "^6.0",
         "phpunit/phpunit": "^8.0",
         "symfony/css-selector": "~3.0",
-        "symfony/dom-crawler": "~3.0"
+        "symfony/dom-crawler": "~3.0",
+        "ext-fileinfo": "*"
     },
     "autoload": {
         "classmap": [

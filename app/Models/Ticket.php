@@ -199,7 +199,7 @@ class Ticket extends MyBaseModel
     public function getBookingFeeAttribute()
     {
         return (int)ceil($this->price) === 0 ? 0 : round(
-            ($this->price * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
+            ($this->price * (config('attendize.ticket.booking.fee_percentage') / 100)) + (config('attendize.ticket.booking.fee_fixed')),
             2
         );
     }
@@ -251,7 +251,7 @@ class Ticket extends MyBaseModel
     public function getSaleStatusAttribute()
     {
         if ($this->start_sale_date !== null && $this->start_sale_date->isFuture()) {
-            return config('attendize.ticket_status_before_sale_date');
+            return config('attendize.ticket.status.before_sale_date');
         }
 
         if ($this->end_sale_date !== null && $this->end_sale_date->isPast()) {
@@ -263,10 +263,10 @@ class Ticket extends MyBaseModel
         }
 
         if ($this->event->start_date->lte(Carbon::now())) {
-            return config('attendize.ticket_status_off_sale');
+            return config('attendize.ticket.status.off_sale');
         }
 
-        return config('attendize.ticket_status_on_sale');
+        return config('attendize.ticket.status.on_sale');
     }
 
     /**
