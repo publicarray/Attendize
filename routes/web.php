@@ -103,19 +103,25 @@ Route::group(
         /*
          * Registration / Account creation
          */
-        Route::get('/signup',
-            [UserSignupController::class, 'showSignup']
-        )->name('showSignup');
+        // true if not in single_organiser_mode or there is no accounts table or if there no accounts
+        if (!config('attendize.single_organiser_mode')
+            || !Schema::hasTable('accounts') ||
+            (Schema::hasTable('accounts') && DB::table('accounts')->count() == 0)) {
 
-        Route::post('/signup',
-            [UserSignupController::class, 'postSignup']);
+            Route::get('/signup',
+                [UserSignupController::class, 'showSignup']
+            )->name('showSignup');
 
-        /*
-         * Confirm Email
-         */
-        Route::get('signup/confirm_email/{confirmation_code}',
-            [UserSignupController::class, 'confirmEmail']
-        )->name('confirmEmail');
+            Route::post('/signup',
+                [UserSignupController::class, 'postSignup']);
+
+            /*
+             * Confirm Email
+             */
+            Route::get('signup/confirm_email/{confirmation_code}',
+                [UserSignupController::class, 'confirmEmail']
+            )->name('confirmEmail');
+        }
     });
 
     /*
@@ -268,13 +274,19 @@ Route::group(
                 [OrganiserCustomizeController::class, 'postEditOrganiser']
             )->name('postEditOrganiser');
 
-            Route::get('create',
-                [OrganiserController::class, 'showCreateOrganiser']
-            )->name('showCreateOrganiser');
+            // block the creation of additional organisers when in single organiser mode
+            if (!config('attendize.single_organiser_mode') ||
+                !Schema::hasTable('accounts') ||
+                (Schema::hasTable('accounts') && DB::table('accounts')->count() == 0)) {
 
-            Route::post('create',
-                [OrganiserController::class, 'postCreateOrganiser']
-            )->name('postCreateOrganiser');
+                Route::get('create',
+                    [OrganiserController::class, 'showCreateOrganiser']
+                )->name('showCreateOrganiser');
+
+                Route::post('create',
+                    [OrganiserController::class, 'postCreateOrganiser']
+                )->name('postCreateOrganiser');
+            }
 
             Route::post('{organiser_id}/page_design',
                 [OrganiserCustomizeController::class, 'postEditOrganiserPageDesign']
