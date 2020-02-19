@@ -34,6 +34,7 @@ return [
     'fallback_organiser_logo_url' => '/assets/images/logo-dark.png',
     'cdn_url'                     => '',
 
+    'single_organiser_mode' => env('SINGLE_ORGANISER_MODE', false),
     'checkout_timeout_after' => env('CHECKOUT_TIMEOUT_AFTER', 30), #minutes
 
     'ticket_status_before_sale_date' => 3,
