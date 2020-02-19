@@ -155,4 +155,13 @@ class Utils
     {
         return file_exists(base_path('installed'));
     }
+
+    public static function parse_version($string)
+    {
+        $matches = '';
+        if (preg_match('/^(\d+\.)?(\d+\.)?(\d+)$/', $string, $matches)) {
+            return $matches[0];
+        }
+        return $matches;
+    }
 }
