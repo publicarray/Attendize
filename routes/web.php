@@ -276,8 +276,8 @@ Route::group(
 
             // block the creation of additional organisers when in single organiser mode
             if (!config('attendize.single_organiser_mode') ||
-                !Schema::hasTable('accounts') ||
-                (Schema::hasTable('accounts') && DB::table('accounts')->count() == 0)) {
+                !Schema::hasTable('organisers') ||
+                (Schema::hasTable('organisers') && DB::table('organisers')->count() == 0)) {
 
                 Route::get('create',
                     [OrganiserController::class, 'showCreateOrganiser']
