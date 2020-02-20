@@ -16,7 +16,7 @@
         "ext-json": "*",
         "barryvdh/laravel-dompdf": "^0.8.5",
         "doctrine/dbal": "^2.9",
-        "dompdf/dompdf": "^0.8",
+        "dompdf/dompdf": "^0.8.4",
         "fideloper/proxy": "^4.2",
         "guzzlehttp/guzzle": "^6.4",
         "guzzlehttp/psr7": "^1.6",
