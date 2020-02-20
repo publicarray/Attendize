@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group {{ ($errors->has('last_name')) ? 'has-error' : '' }}">
-                            {!! Form::label('last_name', trans("User.last_name"), ['class' => 'control-label']) !!}
+                            {!! Form::label('last_name', trans("User.last_name"), ['class' => 'control-label required']) !!}
                             {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
                             @if($errors->has('last_name'))
                                 <p class="help-block">{{ $errors->first('last_name') }}</p>
