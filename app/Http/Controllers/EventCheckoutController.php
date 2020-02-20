@@ -4,28 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Attendize\PaymentUtils;
 use App\Events\OrderCompletedEvent;
-use App\Models\Account;
-use App\Models\AccountPaymentGateway;
+use App\Generators\TicketGenerator;
+use App\Generators\TicketImageGenerator;
 use App\Models\Affiliate;
 use App\Models\Attendee;
 use App\Models\Event;
 use App\Models\EventStats;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\PaymentGateway;
 use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
 use App\Models\Ticket;
 use App\Services\Order as OrderService;
-use Services\PaymentGateway\Factory as PaymentGatewayFactory;
 use Carbon\Carbon;
 use Cookie;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\View\View;
 use Log;
-use Omnipay;
-use PDF;
 use PhpSpec\Exception\Exception;
+use Services\PaymentGateway\Factory as PaymentGatewayFactory;
 use Validator;
 
 class EventCheckoutController extends Controller
@@ -241,7 +240,7 @@ class EventCheckoutController extends Controller
      *
      * @param Request $request
      * @param $event_id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|View
      */
     public function showEventCheckout(Request $request, $event_id)
     {
@@ -743,7 +742,7 @@ class EventCheckoutController extends Controller
      *
      * @param Request $request
      * @param $order_reference
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showOrderDetails(Request $request, $order_reference)
     {
@@ -772,39 +771,36 @@ class EventCheckoutController extends Controller
     }
 
     /**
-     * Shows the tickets for an order - either HTML or PDF
+     * Shows the tickets for an order - either Image or PDF
      *
      * @param Request $request
      * @param $order_reference
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function showOrderTickets(Request $request, $order_reference)
     {
-        $order = Order::where('order_reference', '=', $order_reference)->first();
+        // Is a demo ticket?
+        if ($order_reference === 'example' && $request->get('event')) {
+            // Generate demo data
+            $order = TicketGenerator::demoData($request->get('event'));
 
-        if (!$order) {
-            abort(404);
-        }
-        $images = [];
-        $imgs = $order->event->images;
-        foreach ($imgs as $img) {
-            $images[] = base64_encode(file_get_contents(public_path($img->image_path)));
+            // Return Image ticket
+            return (new TicketImageGenerator($order))
+                ->createImageTicket(Arr::first($order->attendees))
+                ->response('jpg', config('attendize.ticket.image.quality'));
         }
 
-        $data = [
-            'order'     => $order,
-            'event'     => $order->event,
-            'tickets'   => $order->event->tickets,
-            'attendees' => $order->attendees,
-            'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
-            'image'     => base64_encode(file_get_contents(public_path($order->event->organiser->full_logo_path))),
-            'images'    => $images,
-        ];
+        // It's a real ticket, try to find the order in database
+        $order = Order::where('order_reference', '=', $order_reference)->firstOrFail();
 
-        if ($request->get('download') == '1') {
-            return PDF::html('Public.ViewEvent.Partials.PDFTicket', $data, 'Tickets');
+        // Generate PDF
+        $pdf_file = TicketGenerator::createPDFTicket($order);
+
+        if ($request->get('download') === '1') { // Force download PDF
+            return response()->download($pdf_file->path);
         }
-        return view('Public.ViewEvent.Partials.PDFTicket', $data);
+
+        return response()->file($pdf_file->path, ['Content-Type' => 'application/pdf']);
     }
 
 }
