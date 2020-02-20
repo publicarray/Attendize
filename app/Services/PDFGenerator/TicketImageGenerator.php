@@ -124,8 +124,6 @@ class TicketImageGenerator
         // If no flyer use default flyer
         if ($flyer === null || !file_exists(public_path($flyer))) {
             $flyer = config('attendize.ticket.image.default');
-        } else {
-            $flyer = public_path($flyer);
         }
 
         // Create banner Image (Recommended Size 1360x635) and store it in the cache
