@@ -195,6 +195,9 @@ class InstallerController extends Controller
             $set = false;
             foreach($config_temp as $rownum=>$row) {
                 if($row[0]==$key) {
+                    if ($key=='MAIL_FROM_NAME') {
+                        $val = '"'.$val.'"';
+                    }
                     $config_temp[$rownum][1] = $val;
                     $set = true;
                 }
