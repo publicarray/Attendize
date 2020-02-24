@@ -67,6 +67,15 @@ If you are creating an issue/bug report for Attendize please let us know the fol
 To get developing straight away use the [Pre-configured Docker Environment](http://www.attendize.com/getting_started.html#running-attendize-in-docker-for-development)<br />
 To do a manual installation use the [Manual Installation Steps](http://www.attendize.com/getting_started.html#manual-installation)
 
+```bash
+composer install --no-dev
+yarn
+yarn grunt deploy
+php artisan serve # or with valet `valet open`
+# start your db: `brew services start mariadb`
+# open http://127.0.0.1:8000 in your browser
+```
+
 ### Testing
 
 To run the application tests, you can run the following from your project root:

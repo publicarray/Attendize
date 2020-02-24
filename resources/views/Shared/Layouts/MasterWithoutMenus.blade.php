@@ -8,7 +8,7 @@
         @include('Shared.Partials.GlobalMeta')
 
         <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/application.css')}}">
-        <script src="{{cdn('vendor/jquery/dist/jquery.min.js')}}"></script>
+        <script src="{{cdn('assets/javascript/jquery.min.js')}}"></script>
 
         @yield('head')
 

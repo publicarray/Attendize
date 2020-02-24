@@ -5,12 +5,14 @@
         @lang("Attendee.check_in", ["event"=>$event->title])
     </title>
 
-    <script src="{{cdn('vendor/vue/dist/vue.min.js')}}"></script>
-    <script src="{{cdn('vendor/vue-resource/dist/vue-resource.min.js')}}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> --}}
+    <script src="{{cdn('assets/javascript/vue.min.js')}}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/vue-resource"></script> --}}
+    <script src="{{cdn('assets/javascript/vue-resource.min.js')}}"></script>
 
     <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/application.css')}}">
     <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/check_in.css')}}">
-    <script src="{{cdn('vendor/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{cdn('assets/javascript/jquery.min.js')}}"></script>
 
     @include('Shared/Layouts/ViewJavascript')
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
@@ -30,7 +32,8 @@
         }
     </style>
 </head>
-<body id="app">
+<body>
+<div id="app">
 <header>
     <div class="menuToggle hide">
         <i class="ico-menu"></i>
@@ -48,7 +51,7 @@
                     'class' => 'form-control attendee_search',
                             'id' => 'search',
                             'v-model' => 'searchTerm',
-                            '@keyup' => 'fetchAttendees | debounce 500',
+                            '@keyup' => 'fetchAttendees',
                             '@keyup.esc' => 'clearSearch',
                             'placeholder' => trans("ManageEvent.checkin_search_placeholder")
                 ])  !!}
@@ -133,7 +136,7 @@
         <div v-if="isScanning" class="scannerAimer">
         </div>
 
-        <div v-if="scanResult" class="scannerResult @{{ scanResultObject.status }}">
+        <div class="scannerResult" v-if="scanResult" :class="scanResultObject.status">
             <i v-if="scanResultObject.status == 'success'" class="ico-checkmark"></i>
             <i v-if="scanResultObject.status == 'error'" class="ico-close"></i>
         </div>
@@ -155,6 +158,7 @@
     </div>
 </div>
 {{-- /END QR Modal--}}
+</div>
 
 <script>
 Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
@@ -162,7 +166,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
 
 @include("Shared.Partials.LangScript")
 
-<script src="{{cdn('vendor/qrcode-scan/llqrcode.js')}}"></script>
+<script src="{{cdn('assets/javascript/qrcode-scan/llqrcode.js')}}"></script>
 <script src="{{cdn('assets/javascript/check_in.js')}}"></script>
 </body>
 </html>

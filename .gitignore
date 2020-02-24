@@ -27,3 +27,17 @@ yarn-error.log
 
 # Do not include backup lang files
 resources/lang/*/[a-zA-Z]*20[0-9][0-9][0-1][0-9][0-3][0-9]_[0-2][0-9][0-5][0-9][0-5][0-9].php
+
+public/assets/javascript/backend.js
+public/assets/javascript/frontend.js
+public/assets/stylesheet/application.css
+
+public/assets/javascript/fullcalendar.min.js
+public/assets/javascript/fullcalendar/*
+public/assets/javascript/jquery.geocomplete.min.js
+public/assets/javascript/moment.min.js
+public/assets/javascript/simplemde.min.js
+public/assets/stylesheet/simplemde.min.css
+public/assets/javascript/vue.min.js
+public/assets/javascript/vue-resource.min.js
+public/assets/javascript/jquery.min.js

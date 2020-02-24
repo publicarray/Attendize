@@ -39,7 +39,7 @@
 
 @section('head')
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{config("attendize.google_maps_geocoding_key")}}"></script>
-    <script src="{{cdn('vendor/geocomplete/jquery.geocomplete.min.js')}}"></script>
+    <script src="{{cdn('assets/javascript/jquery.geocomplete.min.js')}}"></script>
 
     <script>
         $(function () {

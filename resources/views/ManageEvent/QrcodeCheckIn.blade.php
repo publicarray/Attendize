@@ -6,10 +6,10 @@
   </title>
 
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-    
+
     <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/application.css')}}">
     <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/qrcode-check-in.css')}}">
-    <script src="{{cdn('vendor/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{cdn('assets/javascript/jquery.min.js')}}"></script>
 
   @include('Shared/Layouts/ViewJavascript')
 
@@ -29,8 +29,8 @@
           });
       });
   </script>
-    <script src="{{cdn('vendor/qrcode-scan/llqrcode.js')}}"></script>
-    <script src="{{cdn('vendor/qrcode-scan/webqr.js')}}"></script>
+    <script src="{{cdn('assets/javascript/qrcode-scan/llqrcode.js')}}"></script>
+    <script src="{{cdn('assets/javascript/qrcode-scan/webqr.js')}}"></script>
 </head>
 <body>
   <div id="main">

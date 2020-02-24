@@ -14,7 +14,64 @@ module.exports = function (grunt) {
                     "./public/assets/stylesheet/frontend.css": "./public/assets/stylesheet/frontend.less",
                 }
             },
-
+        },
+        copy: {
+            jquery_js: {
+                files: [{
+                    src: './node_modules/@bower_components/jquery/jquery.min.js',
+                    dest: './public/assets/javascript/jquery.min.js',
+                }],
+            },
+            moment: {
+                files: [{
+                    src: './node_modules/@bower_components/moment/min/moment-with-locales.min.js',
+                    dest: './public/assets/javascript/moment.min.js',
+                }],
+            },
+            vue: {
+                files: [{
+                    src: './node_modules/@bower_components/vue/vue.min.js',
+                    dest: './public/assets/javascript/vue.min.js',
+                }],
+            },
+            vue_resource: {
+                files: [{
+                    src: './node_modules/@bower_components/vue-resource/dist/vue-resource.min.js',
+                    dest: './public/assets/javascript/vue-resource.min.js',
+                }],
+            },
+            geocomplete: {
+                files: [{
+                    src: './node_modules/@bower_components/geocomplete/jquery.geocomplete.min.js',
+                    dest: './public/assets/javascript/jquery.geocomplete.min.js',
+                }],
+            },
+            simplemde_js: {
+                files: [{
+                    src: './node_modules/@bower_components/simplemde/dist/simplemde.min.js',
+                    dest: './public/assets/javascript/simplemde.min.js',
+                }],
+            },
+            simplemde_css: {
+                files: [{
+                    src: './node_modules/@bower_components/simplemde/dist/simplemde.min.css',
+                    dest: './public/assets/stylesheet/simplemde.min.css',
+                }],
+            },
+            fullcalendar: {
+                files: [{
+                    src: './node_modules/@bower_components/fullcalendar/dist/fullcalendar.min.js',
+                    dest: './public/assets/javascript/fullcalendar.min.js',
+                }],
+            },
+            fullcalendar_lang: {
+                files: [{
+                    expand: true,
+                    cwd: './node_modules/@bower_components/fullcalendar/dist/lang/',
+                    src: '*.js',
+                    dest: './public/assets/javascript/fullcalendar/',
+                }],
+            },
         },
         concat: {
             options: {
@@ -26,27 +83,27 @@ module.exports = function (grunt) {
             },
             js_frontend: {
                 src: [
-                    './public/vendor/jquery/dist/jquery.min.js',
-                    './public/vendor/bootstrap/dist/js/bootstrap.js',
-                    './public/vendor/jquery-form/jquery.form.js',
-                    './public/vendor/RRSSB/js/rrssb.js',
-                    './public/vendor/humane-js/humane.js',
-                    './public/vendor/jquery.payment/lib/jquery.payment.js',
+                    './node_modules/@bower_components/jquery/jquery.min.js',
+                    './node_modules/@bower_components/bootstrap/dist/js/bootstrap.js',
+                    './node_modules/@bower_components/jquery-form/jquery.form.js',
+                    './node_modules/@bower_components/RRSSB/js/rrssb.js',
+                    './node_modules/@bower_components/humane-js/humane.js',
+                    './node_modules/@bower_components/jquery.payment/lib/jquery.payment.js',
                     './public/assets/javascript/app-public.js'
                 ],
                 dest: './public/assets/javascript/frontend.js',
             },
             js_backend: {
                 src: [
-                    './public/vendor/modernizr/modernizr.js',
-                    './public/vendor/html.sortable/dist/html.sortable.js',
-                    './public/vendor/bootstrap/dist/js/bootstrap.js',
-                    './public/vendor/jquery-form/jquery.form.js',
-                    './public/vendor/humane-js/humane.js',
-                    './public/vendor/RRSSB/js/rrssb.js',
-                    './public/vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js',
-                    './public/vendor/datetimepicker/dist/DateTimePicker.js',
-                    './public/vendor/jquery-minicolors/jquery.minicolors.min.js',
+                    './node_modules/@bower_components/modernizr/modernizr.js',
+                    './node_modules/@bower_components/html.sortable/dist/html.sortable.js',
+                    './node_modules/@bower_components/bootstrap/dist/js/bootstrap.js',
+                    './node_modules/@bower_components/jquery-form/jquery.form.js',
+                    './node_modules/@bower_components/humane-js/humane.js',
+                    './node_modules/@bower_components/RRSSB/js/rrssb.js',
+                    './node_modules/@bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js',
+                    './node_modules/@bower_components/datetimepicker/dist/DateTimePicker.js',
+                    './node_modules/@bower_components/jquery-minicolors/jquery.minicolors.min.js',
                     './public/assets/javascript/app.js'
                 ],
                 dest: './public/assets/javascript/backend.js',
@@ -84,13 +141,14 @@ module.exports = function (grunt) {
 
     // Plugin loading
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     // Task definition
-    grunt.registerTask('default', ['less', 'concat']);
-    grunt.registerTask('deploy', ['less', 'concat', 'uglify']);
-    grunt.registerTask('js', ['concat']);
-    grunt.registerTask('styles', ['concat']);
+    grunt.registerTask('default', ['less', 'concat', 'copy']);
+    grunt.registerTask('deploy', ['less', 'concat', 'uglify', 'copy']);
+    grunt.registerTask('js', ['concat', 'copy']);
+    grunt.registerTask('styles', ['concat', 'copy']);
     grunt.registerTask('minify', ['uglify']);
 };
