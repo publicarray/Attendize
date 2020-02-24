@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="http://attendize.website/assets/images/logo-dark.png" alt="Attendize"/>
-  <img style='border: 1px solid #444;' src="https://www.attendize.com/images/screenshots/screen1.PNG" alt="Attendize"/>
+  ![Attendize](public/assets/images/logo-dark.png)
+  <img style='border: 1px solid #444;' src="https://www.attendize.com/images/screenshots/screen1.PNG"/>
 </p>
 
 <h1>Attendize</h1>
@@ -8,6 +8,8 @@
 Open-source ticket selling and event management platform
 </p>
 
+![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=publicarray/Attendize)
+[![phpunit](https://github.com/publicarray/Attendize/workflows/Attendize/badge.svg)](https://github.com/publicarray/Attendize/actions)
 
 > Please report bugs here: https://github.com/Attendize/Attendize/issues. Detailed bug reports are more likely to be looked at. Simple creating an issue and saying "it doesn't work" is not useful. Providing some steps to reproduce your problem as well as details about your operating system, PHP version etc can help. <br />
 
