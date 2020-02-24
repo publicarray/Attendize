@@ -1,5 +1,5 @@
 <p align="center">
-  ![Attendize](public/assets/images/logo-dark.png)
+  ![Attendize](https://raw.githubusercontent.com/publicarray/Attendize/new_master/public/assets/images/logo-dark.png)
   <img style='border: 1px solid #444;' src="https://www.attendize.com/images/screenshots/screen1.PNG"/>
 </p>
 
