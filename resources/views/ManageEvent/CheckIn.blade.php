@@ -9,7 +9,7 @@
     <script src="{{cdn('vendor/vue-resource/dist/vue-resource.min.js')}}"></script>
 
     <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/application.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/qrcode-check-in.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/check_in.css')}}">
     <script src="{{cdn('vendor/jquery/dist/jquery.min.js')}}"></script>
 
     @include('Shared/Layouts/ViewJavascript')
