@@ -345,6 +345,10 @@ class EventCheckoutController extends Controller
     public function showEventPayment(Request $request, $event_id)
     {
         $order_session = session()->get('ticket_order_' . $event_id);
+        if (!$order_session) {
+            $route_name = $this->is_embedded ? 'showEmbeddedEventPage' : 'showEventPage';
+            return redirect()->route($route_name, ['event_id' => $event_id]);
+        }
         $event = Event::findOrFail($event_id);
 
         $payment_gateway = $order_session['payment_gateway'];
