@@ -55,7 +55,7 @@
         "phpspec/phpspec": "^6.0",
         "phpunit/phpunit": "^8.0",
         "symfony/css-selector": "~3.0",
-        "symfony/dom-crawler": "~3.0",
+        "symfony/dom-crawler": "~5.0",
         "ext-fileinfo": "*"
     },
     "autoload": {
