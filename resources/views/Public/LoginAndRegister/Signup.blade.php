@@ -10,7 +10,7 @@
             {!! Form::open(array('url' => route("showSignup"), 'class' => 'panel')) !!}
             <div class="panel-body">
                 <div class="logo">
-                   {!! Html::image('assets/images/logo-dark.png') !!}
+                   <img src="{{cdn('/assets/images/logo-dark.png')}}" alt="">
                 </div>
                 <h2>@lang("User.sign_up")</h2>
 

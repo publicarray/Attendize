@@ -121,7 +121,7 @@
                                         @if(!$is_free_event)
                                             <div class="hidden-xs pull-left">
                                                 <img class=""
-                                                     src="{{asset('assets/images/public/EventPage/credit-card-logos.png')}}"/>
+                                                     src="{{cdn('assets/images/public/EventPage/credit-card-logos.png')}}"/>
                                                 @if($event->enable_offline_payments)
 
                                                     <div class="help-block" style="font-size: 11px;">

@@ -24,7 +24,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="logo">
-                        {!!Html::image('assets/images/logo-dark.png')!!}
+                        <img src="{{cdn('/assets/images/logo-dark.png')}}" alt="">
                     </div>
                     <h2>@lang("Organiser.create_organiser")</h2>
 

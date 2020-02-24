@@ -38,8 +38,9 @@
 @stop
 
 @section('head')
-    {!! Html::script('https://maps.googleapis.com/maps/api/js?libraries=places&key='.config('attendize.google_maps_geocoding_key')) !!}
-    {!! Html::script('vendor/geocomplete/jquery.geocomplete.min.js') !!}
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{config("attendize.google_maps_geocoding_key")}}"></script>
+    <script src="{{cdn('vendor/geocomplete/jquery.geocomplete.min.js')}}"></script>
+
     <script>
         $(function () {
 
@@ -381,7 +382,7 @@
 
                                                 <img data-3="{{str_replace('/thumbs', '', $event->bg_image_path)}}"
                                                      class="img-thumbnail ma5 bgImage {{ ($bg_image === str_replace('/thumbs', '', $event->bg_image_path) ? 'selected' : '') }}"
-                                                     style="width: 120px;" src="{{asset($bg_image)}}"
+                                                     style="width: 120px;" src="{{cdn($bg_image)}}"
                                                      data-src="{{str_replace('/thumbs', '', substr($bg_image,1))}}"/>
 
                                             @endforeach

@@ -5,12 +5,12 @@
         @lang("Attendee.check_in", ["event"=>$event->title])
     </title>
 
-    {!! Html::script('vendor/vue/dist/vue.min.js') !!}
-    {!! Html::script('vendor/vue-resource/dist/vue-resource.min.js') !!}
+    <script src="{{cdn('vendor/vue/dist/vue.min.js')}}"></script>
+    <script src="{{cdn('vendor/vue-resource/dist/vue-resource.min.js')}}"></script>
 
-    {!! Html::style('assets/stylesheet/application.css') !!}
-    {!! Html::style('assets/stylesheet/check_in.css') !!}
-    {!! Html::script('vendor/jquery/dist/jquery.min.js') !!}
+    <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/application.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/qrcode-check-in.css')}}">
+    <script src="{{cdn('vendor/jquery/dist/jquery.min.js')}}"></script>
 
     @include('Shared/Layouts/ViewJavascript')
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
@@ -24,7 +24,7 @@
     <![endif]-->
     <style>
         body {
-            background: url({{asset('assets/images/background.png')}}) repeat;
+            background: url({{cdn('assets/images/background.png')}}) repeat;
             background-color: #2E3254;
             background-attachment: fixed;
         }
@@ -161,7 +161,8 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
 </script>
 
 @include("Shared.Partials.LangScript")
-{!! Html::script('vendor/qrcode-scan/llqrcode.js') !!}
-{!! Html::script('assets/javascript/check_in.js') !!}
+
+<script src="{{cdn('vendor/qrcode-scan/llqrcode.js')}}"></script>
+<script src="{{cdn('assets/javascript/check_in.js')}}"></script>
 </body>
 </html>

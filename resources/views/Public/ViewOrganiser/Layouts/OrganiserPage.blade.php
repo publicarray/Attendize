@@ -22,7 +22,7 @@
         <meta property="og:title" content="{{{$organiser->name}}}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{URL::to('')}}" />
-        <meta property="og:image" content="{{URL::to($organiser->full_logo_path)}}" />
+        <meta property="og:image" content="{{cdn($organiser->full_logo_path)}}" />
         <meta property="og:description" content="{{{Str::words(strip_tags($organiser->description)), 20}}}" />
         <meta property="og:site_name" content="Attendize.com" />
         <!--[if lt IE 9]>
@@ -30,7 +30,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-       {!!Html::style('assets/stylesheet/frontend.css')!!}
+        <link rel="stylesheet" type="text/css" href="{{cdn('/assets/stylesheet/frontend.css')}}">
         @yield('head')
     </head>
     <body class="attendize">
@@ -43,8 +43,7 @@
             <span style="font-size:11px;">@lang("basic.TOP")</span></a>
 
         @include("Shared.Partials.LangScript")
-        {!!Html::script('assets/javascript/frontend.js')!!}
-
+        <script src="{{cdn('assets/javascript/frontend.js')}}"></script>
         @include('Shared.Partials.GlobalFooterJS')
         @yield('foot')
 </body>

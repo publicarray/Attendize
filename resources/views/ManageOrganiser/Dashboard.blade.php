@@ -22,15 +22,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js" integrity="sha256-Gk+dzc4kV2rqAZMkyy3gcfW6Xd66BhGYjVWa/FjPu+s=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js" integrity="sha256-0rg2VtfJo3VUij/UY9X0HJP7NET6tgAY98aMOfwP0P8=" crossorigin="anonymous"></script>
 
-    {!! Html::script('https://maps.googleapis.com/maps/api/js?libraries=places&key='.config("attendize.google_maps_geocoding_key")) !!}
-    {!! Html::script('vendor/geocomplete/jquery.geocomplete.min.js')!!}
-    {!! Html::script('vendor/moment/moment.js')!!}
-    {!! Html::script('vendor/fullcalendar/dist/fullcalendar.min.js')!!}
-    <?php
-    if(Lang::locale()!="en")
-        echo Html::script('vendor/fullcalendar/dist/lang/'.Lang::locale().'.js');
-    ?>
-    {!! Html::style('vendor/fullcalendar/dist/fullcalendar.css')!!}
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{config('attendize.google_maps_geocoding_key')}}"></script>
+    <script src="{{cdn('vendor/geocomplete/jquery.geocomplete.min.js')}}"></script>
+    <script src="{{cdn('vendor/moment/moment.js')}}"></script>
+    <script src="{{cdn('vendor/fullcalendar/dist/fullcalendar.min.js')}}"></script>
+    @if (Lang::locale()!="en") <script src="{{cdn('vendor/fullcalendar/dist/lang/'.Lang::locale().'.js')}}"></script> @endif
+    <link rel="stylesheet" href="{{ cdn('vendor/fullcalendar/dist/fullcalendar.css') }}" />
 
     <script>
         $(function() {

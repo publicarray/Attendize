@@ -22,13 +22,8 @@
     @include('Shared.Partials.GlobalMeta')
    <!--/Meta-->
 
-    <!--JS-->
-    {!! Html::script(config('attendize.cdn_url_static_assets').'/vendor/jquery/dist/jquery.min.js') !!}
-    <!--/JS-->
-
-    <!--Style-->
-    {!! Html::style(config('attendize.cdn_url_static_assets').'/assets/stylesheet/application.css') !!}
-    <!--/Style-->
+    <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/application.css')}}">
+    <script src="{{cdn('vendor/jquery/dist/jquery.min.js')}}"></script>
 
     @yield('head')
 </head>
@@ -38,7 +33,7 @@
 
     <div class="navbar-header">
         <a class="navbar-brand" href="javascript:void(0);">
-            <img style="width: 150px;" class="logo" alt="Attendize" src="{{asset('assets/images/logo-light.png')}}"/>
+            <img style="width: 150px;" class="logo" alt="Attendize" src="{{cdn('assets/images/logo-light.png')}}"/>
         </a>
     </div>
 
@@ -127,7 +122,7 @@
 
 <!--JS-->
 @include("Shared.Partials.LangScript")
-{!! Html::script('assets/javascript/backend.js') !!}
+<script src="{{cdn('assets/javascript/backend.js')}}"></script>
 <script>
     $(function () {
         $.ajaxSetup({

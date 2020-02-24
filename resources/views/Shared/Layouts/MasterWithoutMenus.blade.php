@@ -7,20 +7,15 @@
 
         @include('Shared.Partials.GlobalMeta')
 
-        <!--JS-->
-       {!! Html::script('vendor/jquery/dist/jquery.min.js') !!}
-        <!--/JS-->
-
-        <!--Style-->
-       {!!Html::style('assets/stylesheet/application.css')!!}
-        <!--/Style-->
+        <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/application.css')}}">
+        <script src="{{cdn('vendor/jquery/dist/jquery.min.js')}}"></script>
 
         @yield('head')
 
         <style>
 
             body {
-                background: url({{asset('assets/images/background.png')}}) repeat;
+                background: url({{cdn('assets/images/background.png')}}) repeat;
                 background-color: #2E3254;
             }
 
@@ -76,7 +71,7 @@
         </div>
 
         @include("Shared.Partials.LangScript")
-        {!!Html::script('assets/javascript/backend.js')!!}
+        <script src="{{cdn('assets/javascript/backend.js')}}"></script>
     </body>
     @include('Shared.Partials.GlobalFooterJS')
 </html>

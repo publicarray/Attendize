@@ -5,11 +5,11 @@
       @lang("ManageEvent.attendize_qrcode_check_in"): {{ $event->title }}
   </title>
 
-    {!! Html::style('assets/stylesheet/application.css') !!}
-    {!! Html::style('assets/stylesheet/qrcode-check-in.css') !!}
-  {!! Html::script('vendor/jquery/jquery.js') !!}
-
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/application.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{cdn('assets/stylesheet/qrcode-check-in.css')}}">
+    <script src="{{cdn('vendor/jquery/dist/jquery.min.js')}}"></script>
 
   @include('Shared/Layouts/ViewJavascript')
 
@@ -29,13 +29,13 @@
           });
       });
   </script>
-  {!! Html::script('vendor/qrcode-scan/llqrcode.js') !!}
-  {!! Html::script('vendor/qrcode-scan/webqr.js') !!}
+    <script src="{{cdn('vendor/qrcode-scan/llqrcode.js')}}"></script>
+    <script src="{{cdn('vendor/qrcode-scan/webqr.js')}}"></script>
 </head>
 <body>
   <div id="main">
     <header id="header">
-      <h2 class="text-center"><img style="width: 40px;" class="logo" alt="Attendize" src="{{ asset('/assets/images/logo-dark.png') }}"/><br><span style="font-size: 0.7em;">@lang("ManageEvent.check-in"): <strong>{{ $event->title }}</strong></span></h2>
+      <h2 class="text-center"><img style="width: 40px;" class="logo" alt="Attendize" src="{{ cdn('/assets/images/logo-dark.png') }}"/><br><span style="font-size: 0.7em;">@lang("ManageEvent.check-in"): <strong>{{ $event->title }}</strong></span></h2>
     </header>
 
     <hr>

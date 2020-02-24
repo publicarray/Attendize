@@ -24,7 +24,7 @@
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{$event->event_url}}?utm_source=fb" />
         @if($event->images->count())
-        <meta property="og:image" content="{{config('attendize.cdn_url_user_assets').'/'.$event->images->first()['image_path']}}" />
+        <meta property="og:image" content="{{cdn('/'.$event->images->first()['image_path'])}}" />
         @endif
         <meta property="og:description" content="{{Str::words(strip_tags(Markdown::parse($event->description))), 20}}" />
         <meta property="og:site_name" content="Attendize.com" />
@@ -33,8 +33,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         @yield('head')
-
-       {!!Html::style(config('attendize.cdn_url_static_assets').'/assets/stylesheet/frontend.css')!!}
+        <link rel="stylesheet" type="text/css" href="{{cdn('/assets/stylesheet/frontend.css')}}">
 
         <!--Bootstrap placeholder fix-->
         <style>
@@ -69,7 +68,7 @@
         @if (($event->bg_type == 'image' || $event->bg_type == 'custom_image' || Request::input('bg_img_preview')) && !Request::input('bg_color_preview'))
             <style>
                 body {
-                    background: url({{(Request::input('bg_img_preview') ? URL::to(Request::input('bg_img_preview')) :  asset(config('attendize.cdn_url_static_assets').'/'.$event->bg_image_path))}}) no-repeat center center fixed;
+                    background: url({{(Request::input('bg_img_preview') ? URL::to(Request::input('bg_img_preview')) : cdn($event->bg_image_path))}}) no-repeat center center fixed;
                     background-size: cover;
                 }
             </style>
@@ -91,7 +90,7 @@
             <span style="font-size:11px;">@lang("basic.TOP")</span></a>
 
         @include("Shared.Partials.LangScript")
-        {!!Html::script(config('attendize.cdn_url_static_assets').'/assets/javascript/frontend.js')!!}
+        <script src="{{cdn('/assets/javascript/frontend.js')}}"></script>
 
 
         @if(isset($secondsToExpire))
