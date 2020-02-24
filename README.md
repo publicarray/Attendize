@@ -3,10 +3,11 @@
   <img style='border: 1px solid #444;' src="https://camo.githubusercontent.com/f971154821cf19038707fef3c548a91c21d5ac4f/68747470733a2f2f7777772e617474656e64697a652e636f6d2f696d616765732f73637265656e73686f74732f73637265656e312e504e47"/>
 </p>
 
-<h1>Attendize</h1>
-<p>
+## This branch **will** get force pushes and rebases, until I use it production!
+
+# Attendize 
+
 Open-source ticket selling and event management platform
-</p>
 
 ![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=publicarray/Attendize)
 [![phpunit](https://github.com/publicarray/Attendize/workflows/Attendize/badge.svg)](https://github.com/publicarray/Attendize/actions)
