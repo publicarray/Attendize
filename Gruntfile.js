@@ -58,10 +58,16 @@ module.exports = function (grunt) {
                     dest: './public/assets/stylesheet/simplemde.min.css',
                 }],
             },
-            fullcalendar: {
+            fullcalendar_js: {
                 files: [{
                     src: './node_modules/@bower_components/fullcalendar/dist/fullcalendar.min.js',
                     dest: './public/assets/javascript/fullcalendar.min.js',
+                }],
+            },
+            fullcalendar_css: {
+                files: [{
+                    src: './node_modules/@bower_components/fullcalendar/dist/fullcalendar.min.css',
+                    dest: './public/assets/stylesheet/fullcalendar.min.css',
                 }],
             },
             fullcalendar_lang: {

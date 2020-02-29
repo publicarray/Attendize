@@ -27,7 +27,7 @@
     <script src="{{cdn('assets/javascript/moment.min.js')}}"></script>
     <script src="{{cdn('assets/javascript/fullcalendar.min.js')}}"></script>
     @if (Lang::locale()!="en") <script src="{{cdn('assets/javascript/fullcalendar/'.Lang::locale().'.js')}}"></script> @endif
-    <link rel="stylesheet" href="{{ cdn('assets/stylesheet/fullcalendar.css') }}" />
+    <link rel="stylesheet" href="{{ cdn('assets/stylesheet/fullcalendar.min.css') }}" />
 
     <script>
         $(function() {
