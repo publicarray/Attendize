@@ -17,16 +17,19 @@
             font-family: sans-serif;
             margin: 2px 0;
             color: {{$order->event->ticket_text_color}};
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .small {
             font-size: 10px;
         }
         .ticket {
             width: 95%;
-            border: 2px dashed #{{$order->event->ticket_border_color}};
-            padding: 10px;
+            border: 2px dashed {{$order->event->ticket_border_color}};
+            padding: 10px 10px 10px 0px;
             margin: 40px 0;
-            background: #{{$order->event->ticket_bg_color}};
+            background: {{$order->event->ticket_bg_color}};
         }
         .ticket:after {
             clear: both;
@@ -35,12 +38,15 @@
             width: 120px;
             float: left;
         }
+        .left-col p {
+            line-height: 1.6
+        }
         .right-col {
             width: 540px;
             float: left;
         }
         .price-container, .event-container {
-            background: rgba(255,255,255,0.8);
+            background: {{$order->event->ticket_bg_color}}cc;
         }
         .price-container{
             float: right;
@@ -48,10 +54,10 @@
             margin: 5px;
         }
         .event-container {
-            background: rgba(255,255,255,0.8);
+            background: {{$order->event->ticket_bg_color}}cc;
             float: left;
             width: 100%;
-            margin: 215px 7px 5px 7px;
+            margin: 217px 7px 5px 7px;
             text-align: left;
             padding: 0 10px;
         }
@@ -61,16 +67,19 @@
         }
         .organiser {
             max-width: 120px;
-            max-height: 61px;
-            padding: 3px;
-            margin: 5px 0;
+            max-height: 50px;
+            margin-top: 3px;
+        }
+        .orgname {
+            margin-top: 10px;
         }
         .barcode {
-            margin: 15px 0;
+            margin: 3px 0;
         }
-        .barcode .c39 {
+        .c39 {
             width: 100px;
             height: auto;
+            margin-top: 15px;
         }
         .ticket-sub-text {
             color: {{$order->event->ticket_sub_text_color}};
@@ -102,19 +111,13 @@
         <img class="organiser" src="{{public_path($order->event->organiser->full_logo_path)}}" alt="">
         <div class="barcode">
             <img src="data:image/svg+xml;base64,{{base64_encode(DNS2D::getBarcodeSVG($attendee->private_reference_number, "QRCODE", 4, 4))}}"/>
-            {{-- {!! DNS2D::getBarcodeHTML($attendee->private_reference_number, "QRCODE", 4, 4) !!} --}}
-            {{-- <img src="data:image/png;base64,'{{ DNS2D::getBarcodePNG($attendee->private_reference_number, "QRCODE", 4, 4) }}"/> --}}
-            @if ($order->event->is_1d_barcode_enabled) {
-                {{-- {!! DNS1D::getBarcodeHTML($attendee->private_reference_number, "C39+", 1, 40) !!} --}}
-                <img class="c39" src="data:image/svg+xml;base64,{{base64_encode(DNS1D::getBarcodeSVG($attendee->private_reference_number, "C39+", 1, 40, 'black', false))}}"/>
-                {{-- <img src="data:image/png;base64,'{{ DNS1D::getBarcodePNG($attendee->private_reference_number, "C39+", 1, 40) }}"/> --}}
-            @endif
         </div>
         <p><strong>{{$attendee->reference}}</strong></p>
-        <p class="small">{{$order->event->organiser->name}}</p>
+        <p class="small orgname">{{$order->event->organiser->name}}</p>
         <p class="small">{{$order->event->title}}</p>
-        {{-- <p class="small">{{$attendee->private_reference_number}}</p> --}}
-
+        @if ($order->event->is_1d_barcode_enabled)
+            <img class="c39" src="data:image/svg+xml;base64,{{base64_encode(DNS1D::getBarcodeSVG($attendee->private_reference_number, "C39+", 1, 60, 'black', false))}}"/>
+        @endif
     </div>
     <div class="right-col">
         <div class="price-container">
@@ -127,12 +130,13 @@
         </div>
         <div class="event-container">
             <p class="small">
-                <span>{{$attendee->first_name}} {{$attendee->last_name}} &middot;</span>
-                <span>{{$attendee->ticket->title}}</span>
+                {{$attendee->first_name}} {{$attendee->last_name}} &middot;
+                {{$attendee->ticket->title}}
             </p>
             <p class="ticket-sub-text small">
-                <span>{{$order->event->venue_name}} &middot;</span>
-                <span>{{$order->event->startDateFormatted()}} &middot; {{$order->event->endDateFormatted()}}</span>
+                {{$order->event->venue_name}} &middot;
+                {{$order->event->startDateFormatted()}} &middot;
+                {{$order->event->endDateFormatted()}}
             </p>
 
         </div>

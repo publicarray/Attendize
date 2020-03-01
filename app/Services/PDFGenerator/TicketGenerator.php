@@ -72,7 +72,7 @@ class TicketGenerator
         // Generate file name
         $pdf_file = self::generateFileName($order, $attendee);
 
-        // // Check if file exist before create it again
+        // Check if file exist before create it again
         if (file_exists($pdf_file->path)) {
             Log::debug('Use ticket from cache: ' . $pdf_file->path);
 
@@ -143,9 +143,9 @@ class TicketGenerator
             $flyer = config('attendize.ticket.image.default');
         }
 
-        $image_path = public_path($flyer.'-642.jpg');
+        $image_path = public_path($flyer.'-1360.jpg');
         if (!file_exists($image_path)) {
-            Image::make(public_path($flyer))->fit(642, 300)->save($image_path, 96);// 2.1417322835
+            Image::make(public_path($flyer))->fit(1360, 635)->save($image_path);
         }
         return $image_path;
     }
