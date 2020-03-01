@@ -12,6 +12,7 @@ use App\Services\PDFGenerator\PDFFile;
 use Barryvdh\DomPDF\Facade as PDF;
 use Dompdf\Exception;
 use Illuminate\Support\Facades\Log;
+use Intervention\Image\Facades\Image;
 
 /**
  * Create a ticket using Intervention Image
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Log;
  */
 class TicketGenerator
 {
+
     /**
      * Generate a fake ticket data for demo purposes
      *
@@ -70,7 +72,7 @@ class TicketGenerator
         // Generate file name
         $pdf_file = self::generateFileName($order, $attendee);
 
-        // Check if file exist before create it again
+        // // Check if file exist before create it again
         if (file_exists($pdf_file->path)) {
             Log::debug('Use ticket from cache: ' . $pdf_file->path);
 
@@ -78,14 +80,10 @@ class TicketGenerator
             return $pdf_file;
         }
 
-        // Generate the tickets
-        $ticket_image_generator = new TicketImageGenerator($order);
-        $tickets = $ticket_image_generator->createImageTickets($attendee);
-
         // Data for view
         $data = [
-            'tickets' => $tickets,
-            'event'   => $order->event,
+            'banner' => self::createBanner($order),
+            'order' => $order,
         ];
 
         try {
@@ -128,5 +126,27 @@ class TicketGenerator
     public static function isAttendeeTicket($attendee): bool
     {
         return ($attendee !== null && $attendee instanceof Attendee);
+    }
+
+    /**
+     * Create the banner/flyer image for the ticket if it hasn't already been created.
+     *
+     * @return \Intervention\Image\Image
+     */
+    private static function createBanner($order)
+    {
+        // Get the event flyer
+        $flyer = optional($order->event->images->first())->image_path;
+
+        // If no flyer use default flyer
+        if ($flyer === null || !file_exists(public_path($flyer))) {
+            $flyer = config('attendize.ticket.image.default');
+        }
+
+        $image_path = public_path($flyer.'-642.jpg');
+        if (!file_exists($image_path)) {
+            Image::make(public_path($flyer))->fit(642, 300)->save($image_path, 96);// 2.1417322835
+        }
+        return $image_path;
     }
 }
