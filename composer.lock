@@ -4422,16 +4422,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.27.0",
+            "version": "v7.27.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "a49e144ab6ddaaaca68a2f7521c8caf7001324d9"
+                "reference": "6e973221ac6f7a94be31c48390c1e750dba7e9ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/a49e144ab6ddaaaca68a2f7521c8caf7001324d9",
-                "reference": "a49e144ab6ddaaaca68a2f7521c8caf7001324d9",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/6e973221ac6f7a94be31c48390c1e750dba7e9ba",
+                "reference": "6e973221ac6f7a94be31c48390c1e750dba7e9ba",
                 "shasum": ""
             },
             "require": {
@@ -4475,7 +4475,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2020-02-28T17:06:16+00:00"
+            "time": "2020-03-04T03:43:39+00:00"
         },
         {
             "name": "superbalist/php-money",
