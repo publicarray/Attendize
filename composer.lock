@@ -1288,6 +1288,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -1334,6 +1335,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -1392,6 +1394,7 @@
                 "serialize",
                 "tokenizer"
             ],
+            "abandoned": "opis/closure",
             "time": "2018-03-21T22:21:57+00:00"
         },
         {
@@ -2453,16 +2456,16 @@
         },
         {
             "name": "mews/purifier",
-            "version": "3.2.0",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mewebstudio/Purifier.git",
-                "reference": "261ac8abb0298e853af22ca4ef57bc2a5a723d22"
+                "reference": "75e4d9a0553b31c1fd31aef65f9561c30dbe5e5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/261ac8abb0298e853af22ca4ef57bc2a5a723d22",
-                "reference": "261ac8abb0298e853af22ca4ef57bc2a5a723d22",
+                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/75e4d9a0553b31c1fd31aef65f9561c30dbe5e5e",
+                "reference": "75e4d9a0553b31c1fd31aef65f9561c30dbe5e5e",
                 "shasum": ""
             },
             "require": {
@@ -2527,7 +2530,7 @@
                 "security",
                 "xss"
             ],
-            "time": "2020-03-06T00:05:13+00:00"
+            "time": "2020-04-10T19:42:16+00:00"
         },
         {
             "name": "milon/barcode",
