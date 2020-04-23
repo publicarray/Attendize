@@ -1288,6 +1288,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -1334,6 +1335,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -1392,6 +1394,7 @@
                 "serialize",
                 "tokenizer"
             ],
+            "abandoned": "opis/closure",
             "time": "2018-03-21T22:21:57+00:00"
         },
         {
@@ -4421,16 +4424,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.27.3",
+            "version": "v7.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "a6bbc392248f892123aed515b18a6360447cd658"
+                "reference": "657c8ec888d8bcb58dd8f4fa227809108b406a44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/a6bbc392248f892123aed515b18a6360447cd658",
-                "reference": "a6bbc392248f892123aed515b18a6360447cd658",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/657c8ec888d8bcb58dd8f4fa227809108b406a44",
+                "reference": "657c8ec888d8bcb58dd8f4fa227809108b406a44",
                 "shasum": ""
             },
             "require": {
@@ -4440,7 +4443,7 @@
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.15",
+                "friendsofphp/php-cs-fixer": "2.16.1",
                 "php-coveralls/php-coveralls": "^2.1",
                 "phpunit/phpunit": "^5.7",
                 "squizlabs/php_codesniffer": "^3.3",
@@ -4474,7 +4477,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2020-03-18T20:32:13+00:00"
+            "time": "2020-04-22T19:35:10+00:00"
         },
         {
             "name": "superbalist/php-money",
