@@ -2456,16 +2456,16 @@
         },
         {
             "name": "mews/purifier",
-            "version": "3.2.0",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mewebstudio/Purifier.git",
-                "reference": "261ac8abb0298e853af22ca4ef57bc2a5a723d22"
+                "reference": "75e4d9a0553b31c1fd31aef65f9561c30dbe5e5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/261ac8abb0298e853af22ca4ef57bc2a5a723d22",
-                "reference": "261ac8abb0298e853af22ca4ef57bc2a5a723d22",
+                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/75e4d9a0553b31c1fd31aef65f9561c30dbe5e5e",
+                "reference": "75e4d9a0553b31c1fd31aef65f9561c30dbe5e5e",
                 "shasum": ""
             },
             "require": {
@@ -2530,7 +2530,7 @@
                 "security",
                 "xss"
             ],
-            "time": "2020-03-06T00:05:13+00:00"
+            "time": "2020-04-10T19:42:16+00:00"
         },
         {
             "name": "milon/barcode",
