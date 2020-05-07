@@ -48,7 +48,8 @@ class UserSignupController extends Controller
             'h-captcha-response' => 'nullable',
         ]);
 
-       if (config('attendize.hcaptcha_secret_key')) {
+        if (config('attendize.hcaptcha_secret_key')) {
+            $captcha = $request->get('h-captcha-response');
             $client = new \GuzzleHttp\Client();
             $response = $client->request('POST', 'https://hcaptcha.com/siteverify', [
                 'form_params' => [

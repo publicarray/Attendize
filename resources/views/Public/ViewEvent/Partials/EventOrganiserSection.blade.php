@@ -33,7 +33,7 @@
                     </button>
                 </p>
                 <div class="contact_form well well-sm">
-                    {!! Form::open(array('url' => route('postContactOrganiser', array('event_id' => $event->id)), 'class' => 'reset ajax')) !!}
+                    {!! Form::open(['url' => route('postContactOrganiser', ['event_id' => $event->id]), 'class' => 'reset ajax', 'id' => 'contact-form']) !!}
                     <h3>@lang("Public_ViewEvent.Contact") <i>{{$event->organiser->name}}</i></h3>
                     <div class="form-group">
                         {!! Form::label(trans("Public_ViewEvent.your_name")) !!}
@@ -60,8 +60,19 @@
                     </div>
 
                     <div class="form-group">
-                        {!! Form::submit(trans("Public_ViewEvent.send_message_submit"),
-                          array('class'=>'btn btn-primary')) !!}
+                        @if(config('attendize.hcaptcha_site_key'))
+                            <script src="https://hcaptcha.com/1/api.js" async defer></script>
+                            <input class="btn btn-primary  h-captcha" type="submit" value="@lang("Public_ViewEvent.send_message_submit")"data-sitekey="{{config('attendize.hcaptcha_site_key')}}" data-callback="onSubmit">
+                            <script type="text/javascript">
+                               function onSubmit(token) {
+                                  document.getElementById("contact-form").submit();
+                               };
+                            </script>
+                            <br><br>
+                            This site is protected by hCaptcha and its <a href="https://hcaptcha.com/privacy">Privacy Policy</a> and <a href="https://hcaptcha.com/terms">Terms of Service</a> apply.
+                        @else
+                            <input class="btn btn-primary" type="submit" value="@lang("Public_ViewEvent.send_message_submit")">
+                        @endif
                     </div>
                 </div>
                 {!! Form::close() !!}
