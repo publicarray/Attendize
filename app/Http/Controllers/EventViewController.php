@@ -12,7 +12,8 @@ use Cookie;
 use Illuminate\Http\Request;
 use Mail;
 use Validator;
-use App\Service\HCaptureService;
+use App\Services\HCaptureService;
+
 class EventViewController extends Controller
 {
     /**

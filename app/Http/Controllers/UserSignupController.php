@@ -9,6 +9,7 @@ use Hash;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Mail;
+use App\Services\HCaptureService;
 
 class UserSignupController extends Controller
 {
