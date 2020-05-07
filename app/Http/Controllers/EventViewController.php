@@ -12,7 +12,7 @@ use Cookie;
 use Illuminate\Http\Request;
 use Mail;
 use Validator;
-
+use App\Service\HCaptureService;
 class EventViewController extends Controller
 {
     /**
@@ -104,29 +104,11 @@ class EventViewController extends Controller
                 'messages' => $validator->messages()->toArray(),
             ]);
         }
-
-        if (config('attendize.hcaptcha_secret_key')) {
-            $captcha = $request->get('h-captcha-response');
-            $client = new \GuzzleHttp\Client();
-            $response = $client->request('POST', 'https://hcaptcha.com/siteverify', [
-                'form_params' => [
-                    'secret' => config('attendize.hcaptcha_secret_key'),
-                    'response' => $captcha,
-                    // 'remoteip' => $request->ip()
-                ]
-            ]);
-            if (!$response->getStatusCode() == 200) {
-                return Redirect::back()
-                    ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
-                    ->withInput();
-            }
-            $responseData = json_decode($response->getBody());
-            \Log::debug([$request->ip(), $response->getBody()]);
-            if(!$responseData->success) {
-                return Redirect::back()
-                    ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
-                    ->withInput();
-            }
+        $hcapture = new HCaptureService($request);
+        if (!$hcapture->isHuman()) {
+            return Redirect::back()
+                ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
+                ->withInput();
         }
 
         $event = Event::findOrFail($event_id);

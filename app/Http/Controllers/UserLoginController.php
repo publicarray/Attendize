@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Redirect;
 use View;
+use App\Services\HCaptureService;
 
 class UserLoginController extends Controller
 {
@@ -49,7 +50,6 @@ class UserLoginController extends Controller
     {
         $email = $request->get('email');
         $password = $request->get('password');
-        $captcha = $request->get('h-captcha-response');
 
         if (empty($email) || empty($password)) {
             return Redirect::back()
@@ -57,27 +57,11 @@ class UserLoginController extends Controller
                 ->withInput();
         }
 
-        if (config('attendize.hcaptcha_secret_key')) {
-            $client = new \GuzzleHttp\Client();
-            $response = $client->request('POST', 'https://hcaptcha.com/siteverify', [
-                'form_params' => [
-                    'secret' => config('attendize.hcaptcha_secret_key'),
-                    'response' => $captcha,
-                    // 'remoteip' => $request->ip()
-                ]
-            ]);
-            if (!$response->getStatusCode() == 200) {
-                return Redirect::back()
-                    ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
-                    ->withInput();
-            }
-            $responseData = json_decode($response->getBody());
-            \Log::debug([$request->ip(), $response->getBody()]);
-            if(!$responseData->success) {
-                return Redirect::back()
-                    ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
-                    ->withInput();
-            }
+        $hcapture = new HCaptureService($request);
+        if (!$hcapture->isHuman()) {
+            return Redirect::back()
+                ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
+                ->withInput();
         }
 
         if (Auth::attempt(['email' => $email, 'password' => $password], true) === false) {

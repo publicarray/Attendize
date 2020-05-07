@@ -48,28 +48,11 @@ class UserSignupController extends Controller
             'h-captcha-response' => 'nullable',
         ]);
 
-        if (config('attendize.hcaptcha_secret_key')) {
-            $captcha = $request->get('h-captcha-response');
-            $client = new \GuzzleHttp\Client();
-            $response = $client->request('POST', 'https://hcaptcha.com/siteverify', [
-                'form_params' => [
-                    'secret' => config('attendize.hcaptcha_secret_key'),
-                    'response' => $captcha,
-                    // 'remoteip' => $request->ip()
-                ]
-            ]);
-            if (!$response->getStatusCode() == 200) {
-                return Redirect::back()
-                    ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
-                    ->withInput();
-            }
-            $responseData = json_decode($response->getBody());
-            \Log::debug([$request->ip(), $response->getBody()]);
-            if(!$responseData->success) {
-                return Redirect::back()
-                    ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
-                    ->withInput();
-            }
+        $hcapture = new HCaptureService($request);
+        if (!$hcapture->isHuman()) {
+            return Redirect::back()
+                ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
+                ->withInput();
         }
 
         $account_data = $request->only(['email', 'first_name', 'last_name']);
