@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-7 col-md-offset-2">
-            {!! Form::open(array('url' => route("showSignup"), 'class' => 'panel')) !!}
+            {!! Form::open(['url' => route("showSignup"), 'class' => 'panel', 'id' => 'signup-form']) !!}
             <div class="panel-body">
                 <div class="logo">
                    {!! Html::image('assets/images/logo-dark.png') !!}
@@ -76,7 +76,19 @@
                 @endif
 
                 <div class="form-group ">
-                   {!! Form::submit(trans("User.sign_up"), array('class'=>"btn btn-block btn-success")) !!}
+                @if(config('attendize.hcaptcha_site_key'))
+                    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+                    <input class="btn btn-block btn-success h-captcha" type="submit" value="{{trans('User.sign_up')}}" data-sitekey="{{config('attendize.hcaptcha_site_key')}}" data-callback="onSubmit">
+                    <script type="text/javascript">
+                       function onSubmit(token) {
+                          document.getElementById("signup-form").submit();
+                       };
+                    </script>
+                    <br>
+                    This site is protected by hCaptcha and its <a href="https://hcaptcha.com/privacy">Privacy Policy</a> and <a href="https://hcaptcha.com/terms">Terms of Service</a> apply.
+                @else
+                    <input class="btn btn-block btn-success" type="submit" value="@lang('User.sign_up')">
+                @endif
                 </div>
                     <div class="signup">
                         <span>{!! @trans("User.already_have_account", ["url"=>route("login")]) !!}</span>

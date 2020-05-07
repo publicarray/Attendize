@@ -3,7 +3,7 @@
 @section('title', trans("User.login"))
 
 @section('content')
-    {!! Form::open(array('url' => route("login"))) !!}
+    {!! Form::open(['url' => route("login"), 'id' => 'login-form']) !!}
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="panel">
@@ -29,7 +29,19 @@
                         {!! Form::password('password',  ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-block btn-success">@lang("User.login")</button>
+                        @if(config('attendize.hcaptcha_site_key'))
+                            <script src="https://hcaptcha.com/1/api.js" async defer></script>
+                            <button type="submit" class="btn btn-block btn-success h-captcha" data-sitekey="{{config('attendize.hcaptcha_site_key')}}" data-callback="onSubmit">@lang("User.login")</button>
+                            <script type="text/javascript">
+                               function onSubmit(token) {
+                                  document.getElementById("login-form").submit();
+                               };
+                            </script>
+                            <br>
+                            This site is protected by hCaptcha and its <a href="https://hcaptcha.com/privacy">Privacy Policy</a> and <a href="https://hcaptcha.com/terms">Terms of Service</a> apply.
+                        @else
+                            <button type="submit" class="btn btn-block btn-success">@lang("User.login")</button>
+                        @endif
                     </div>
 
                     @if(Utils::isAttendize())
