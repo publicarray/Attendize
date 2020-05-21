@@ -18,7 +18,7 @@ class SendAttendeeTicket extends Job implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param  Attendee  $attendee
      */
     public function __construct(Attendee $attendee)
     {
@@ -28,11 +28,13 @@ class SendAttendeeTicket extends Job implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @param  AttendeeMailer  $attendeeMailer
+     *
      * @return void
      */
     public function handle(AttendeeMailer $attendeeMailer)
     {
-        $this->dispatchNow(new GenerateTicket($this->attendee->reference));
+        $this->dispatchNow(new GenerateTicket($this->attendee->order, $this->attendee));
         $attendeeMailer->sendAttendeeTicket($this->attendee);
     }
 }

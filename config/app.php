@@ -182,7 +182,7 @@ return [
         App\Providers\BladeServiceProvider::class,
         App\Providers\HtmlMacroServiceProvider::class,
         App\Providers\HelpersServiceProvider::class,
-        Nitmedia\Wkhtml2pdf\L5Wkhtml2pdfServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 

@@ -63,9 +63,10 @@ class TicketGenerator
      *
      * @param  Order  $order
      * @param  Attendee|null  $attendee
+     * @param  Bool|false  $ignoreDiskCache
      * @return PDFFile
      */
-    public static function createPDFTicket(Order $order, Attendee $attendee = null)
+    public static function createPDFTicket(Order $order, Attendee $attendee = null, $ignoreDiskCache = false)
     {
         Log::info('Generating ticket for order: #' . $order->id . '. Reference ' . $order->order_reference);
 
@@ -73,7 +74,7 @@ class TicketGenerator
         $pdf_file = self::generateFileName($order, $attendee);
 
         // Check if file exist before create it again
-        if (file_exists($pdf_file->path)) {
+        if (file_exists($pdf_file->path) && $ignoreDiskCache == false) {
             Log::debug('Use ticket from cache: ' . $pdf_file->path);
 
             $pdf_file->cached = true;
