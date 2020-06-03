@@ -4,8 +4,7 @@
         border: none !important;
         font-size: 30px;
         text-align: center;
-        margin: 0;
-        margin-bottom: 30px;
+        margin: 0 0 30px;
         letter-spacing: .2em;
         font-weight: 200;
     }
@@ -69,7 +68,7 @@
 
                 @if($event->post_order_display_message)
                 <div class="alert alert-dismissable alert-info">
-                    {{ nl2br(e($event->post_order_display_message)) }}
+                    {{ nl2br($event->post_order_display_message) }}
                 </div>
                 @endif
 
@@ -101,6 +100,32 @@
                         <div class="col-sm-4 col-xs-6">
                             <b>@lang("Public_ViewEvent.email")</b><br> {{$order->email}}
                         </div>
+                        @if ($order->is_business)
+                        <div class="col-sm-4 col-xs-6">
+                            <b>@lang("Public_ViewEvent.business_name")</b><br> {{$order->business_name}}
+                        </div>
+                        <div class="col-sm-4 col-xs-6">
+                            <b>@lang("Public_ViewEvent.business_tax_number")</b><br> {{$order->business_tax_number}}
+                        </div>
+                        <div class="col-sm-4 col-xs-6">
+                            <b>@lang("Public_ViewEvent.business_address")</b><br />
+                            @if ($order->business_address_line_one)
+                            {{$order->business_address_line_one}},
+                            @endif
+                            @if ($order->business_address_line_two)
+                            {{$order->business_address_line_two}},
+                            @endif
+                            @if ($order->business_address_state_province)
+                            {{$order->business_address_state_province}},
+                            @endif
+                            @if ($order->business_address_city)
+                            {{$order->business_address_city}},
+                            @endif
+                            @if ($order->business_address_code)
+                            {{$order->business_address_code}}
+                            @endif
+                        </div>
+                        @endif
                     </div>
                 </div>
 
@@ -113,7 +138,7 @@
                         @lang("Public_ViewEvent.order_awaiting_payment")
                     </div>
                     <div class="offline_payment_instructions well">
-                        {!! Markdown::parse($event->offline_payment_instructions) !!}
+                        {!! Markdown::convertToHtml($event->offline_payment_instructions) !!}
                     </div>
 
                     @endif
@@ -153,26 +178,28 @@
                                         {{$order_item->quantity}}
                                     </td>
                                     <td>
-                                        @if((int)ceil($order_item->unit_price) == 0)
+                                        @isFree($order_item->unit_price)
                                             @lang("Public_ViewEvent.free")
                                         @else
-                                       {{money($order_item->unit_price, $order->event->currency)}}
+                                            {{money($order_item->unit_price, $order->event->currency)}}
                                         @endif
-
                                     </td>
                                     <td>
-                                        @if((int)ceil($order_item->unit_price) == 0)
-                                        -
+                                        @requiresPayment($order_item->unit_booking_fee)
+                                            @requiresPayment($order_item->unit_price)
+                                                {{money($order_item->unit_booking_fee, $order->event->currency)}}
+                                            @else
+                                                -
+                                            @endif
                                         @else
-                                        {{money($order_item->unit_booking_fee, $order->event->currency)}}
+                                            -
                                         @endif
-
                                     </td>
                                     <td>
-                                        @if((int)ceil($order_item->unit_price) == 0)
+                                        @isFree($order_item->unit_price)
                                             @lang("Public_ViewEvent.free")
                                         @else
-                                        {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
+                                            {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
                                         @endif
 
                                     </td>
@@ -201,7 +228,7 @@
                                 <td>
                                 </td>
                                 <td>
-                                    {{$event->organiser->tax_name}}
+                                    <strong>{{$event->organiser->tax_name}}</strong><em>({{$order->event->organiser->tax_value}}%)</em>
                                 </td>
                                 <td colspan="2">
                                     {{ $orderService->getTaxAmount(true) }}

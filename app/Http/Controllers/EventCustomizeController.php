@@ -5,11 +5,37 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use File;
 use Illuminate\Http\Request;
+use App\Models\Currency;
 use Image;
 use Validator;
 
 class EventCustomizeController extends MyBaseController
 {
+
+    /**
+     * Returns data which is required in each view, optionally combined with additional data.
+     *
+     * @param  int  $event_id
+     * @param  array  $additional_data
+     *
+     * @return array
+     */
+    public function getEventViewData($event_id, $additional_data = [])
+    {
+        $event = Event::scope()->findOrFail($event_id);
+
+        $image_path = $event->organiser->full_logo_path;
+        if ($event->images->first() != null) {
+            $image_path = $event->images()->first()->image_path;
+        }
+
+        return array_merge([
+            'event'      => $event,
+            'questions'  => $event->questions()->get(),
+            'image_path' => $image_path,
+        ], $additional_data);
+    }
+
     /**
      * Show the event customize page
      *
@@ -20,6 +46,7 @@ class EventCustomizeController extends MyBaseController
     public function showCustomize($event_id = '', $tab = '')
     {
         $data = $this->getEventViewData($event_id, [
+            'currencies'               	 => Currency::pluck('title', 'id'),
             'available_bg_images'        => $this->getAvailableBackgroundImages(),
             'available_bg_images_thumbs' => $this->getAvailableBackgroundImagesThumbs(),
             'tab'                        => $tab,

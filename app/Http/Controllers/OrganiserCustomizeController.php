@@ -48,18 +48,19 @@ class OrganiserCustomizeController extends MyBaseController
             ]);
         }
 
-        $organiser->name                  = $request->get('name');
-        $organiser->about                 = $request->get('about');
+        $organiser->name = $request->get('name');
+        $organiser->about = $request->get('about');
         $organiser->google_analytics_code = $request->get('google_analytics_code');
-        $organiser->email                 = $request->get('email');
+        $organiser->google_tag_manager_code = $request->get('google_tag_manager_code');
+        $organiser->email = $request->get('email');
         $organiser->enable_organiser_page = $request->get('enable_organiser_page');
-        $organiser->facebook              = $request->get('facebook');
-        $organiser->twitter               = $request->get('twitter');
+        $organiser->facebook = $request->get('facebook');
+        $organiser->twitter = $request->get('twitter');
 
-        $organiser->tax_name              = $request->get('tax_name');
-        $organiser->tax_value             = $request->get('tax_value');
-        $organiser->tax_id                = $request->get('tax_id');
-        $organiser->charge_tax            = ($request->get('charge_tax') == 1) ? 1 : 0;
+        $organiser->tax_name = $request->get('tax_name');
+        $organiser->tax_value = $request->get('tax_value');
+        $organiser->tax_id = $request->get('tax_id');
+        $organiser->charge_tax = ($request->get('charge_tax') == 1) ? 1 : 0;
 
         if ($request->get('remove_current_image') == '1') {
             $organiser->logo_path = '';
@@ -88,7 +89,7 @@ class OrganiserCustomizeController extends MyBaseController
      */
     public function postEditOrganiserPageDesign(Request $request, $organiser_id)
     {
-        $event = Organiser::scope()->findOrFail($organiser_id);
+        $organiser = Organiser::scope()->findOrFail($organiser_id);
 
         $rules = [
             'page_bg_color'        => ['required'],
@@ -109,11 +110,11 @@ class OrganiserCustomizeController extends MyBaseController
             ]);
         }
 
-        $event->page_bg_color        = $request->get('page_bg_color');
-        $event->page_header_bg_color = $request->get('page_header_bg_color');
-        $event->page_text_color      = $request->get('page_text_color');
+        $organiser->page_bg_color        = $request->get('page_bg_color');
+        $organiser->page_header_bg_color = $request->get('page_header_bg_color');
+        $organiser->page_text_color      = $request->get('page_text_color');
 
-        $event->save();
+        $organiser->save();
 
         return response()->json([
             'status'  => 'success',

@@ -9,6 +9,7 @@ use Hash;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Mail;
+use App\Services\HCaptureService;
 
 class UserSignupController extends Controller
 {
@@ -73,6 +74,12 @@ class UserSignupController extends Controller
                     ->withInput();
             }
             \Log::info($data->score);
+
+//         $hcapture = new HCaptureService($request);
+//         if (!$hcapture->isHuman()) {
+//             return Redirect::back()
+//                 ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
+//                 ->withInput();
         }
 
         $account_data = $request->only(['email', 'first_name', 'last_name']);

@@ -20,7 +20,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('subject',  trans("Message.subject"), array('class'=>'control-label required')) !!}
-                                    {!!  Form::text('subject', Input::old('subject'),
+                                    {!!  Form::text('subject', old('subject'),
                                         array(
                                         'class'=>'form-control'
                                         ))  !!}
@@ -28,7 +28,7 @@
 
                                 <div class="form-group">
                                     {!! Form::label('message', trans("Message.content"), array('class'=>'control-label required')) !!}
-                                    {!!  Form::textarea('message', Input::old('message'),
+                                    {!!  Form::textarea('message', old('message'),
                                         array(
                                         'class'=>'form-control',
                                         'rows' => '5'
@@ -46,7 +46,7 @@
 
                                 <div class="form-group hide">
                                     {!! Form::label('sent_time', trans("Message.schedule_send_time"), array('class'=>'control-label required')) !!}
-                                    {!!  Form::text('sent_time', Input::old('sent_time'),
+                                    {!!  Form::text('sent_time', old('sent_time'),
                                         array(
                                         'class'=>'form-control'
                                         ))  !!}
@@ -84,7 +84,7 @@
                                                 <tr>
                                                     <td class="meta">
                                                         @if($message->sent_at!=null) <?php /* Can occur when there was mailing error*/ ?>
-                                                            <p class="date">{{$message->sent_at->format(env("DEFAULT_DATETIME_FORMAT"))}}</p>
+                                                            <p class="date">{{$message->sent_at->format(config("attendize.default_datetime_format"))}}</p>
                                                         @else
                                                             <p class="date">@lang("Message.unsent")</p>
                                                         @endif

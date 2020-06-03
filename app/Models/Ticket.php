@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
+use App\Attendize\PaymentUtils;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Superbalist\Money\Money;
 
 class Ticket extends MyBaseModel
 {
     use SoftDeletes;
 
     protected $dates = ['start_sale_date', 'end_sale_date'];
+
+    protected $quantity_reserved_cache = null;
 
     /**
      * The rules to validate the model.
@@ -23,10 +28,10 @@ class Ticket extends MyBaseModel
         return [
             'title'              => 'required',
             'price'              => 'required|numeric|min:0',
-            'description'        => '',
-            'start_sale_date'    => 'date_format:"'.$format.'"',
-            'end_sale_date'      => 'date_format:"'.$format.'"|after:start_sale_date',
-            'quantity_available' => 'integer|min:'.($this->quantity_sold + $this->quantity_reserved)
+            'description'        => 'nullable',
+            'start_sale_date'    => 'nullable|date_format:"'.$format.'"',
+            'end_sale_date'      => 'nullable|date_format:"'.$format.'"|after:start_sale_date',
+            'quantity_available' => 'nullable|integer|min:'.($this->quantity_sold + $this->quantity_reserved)
         ];
     }
 
@@ -54,18 +59,22 @@ class Ticket extends MyBaseModel
 
     /**
      * The order associated with the ticket.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function order()
+    public function orders()
     {
-        return $this->belongsToMany(\App\Models\Order::class);
+        return $this->belongsToMany(
+            Order::class,
+            'ticket_order',
+            'ticket_id',
+            'order_id'
+        );
     }
 
     /**
      * The questions associated with the ticket.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function questions()
     {
@@ -73,7 +82,7 @@ class Ticket extends MyBaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     function event_access_codes()
     {
@@ -157,12 +166,17 @@ class Ticket extends MyBaseModel
      */
     public function getQuantityReservedAttribute()
     {
-        $reserved_total = DB::table('reserved_tickets')
-            ->where('ticket_id', $this->id)
-            ->where('expires', '>', Carbon::now())
-            ->sum('quantity_reserved');
+        if (is_null($this->quantity_reserved_cache)) {
+            $reserved_total = DB::table('reserved_tickets')
+                ->where('ticket_id', $this->id)
+                ->where('expires', '>', Carbon::now())
+                ->sum('quantity_reserved');
 
-        return $reserved_total;
+            $this->quantity_reserved_cache = $reserved_total;
+
+            return $reserved_total;
+        }
+        return $this->quantity_reserved_cache;
     }
 
     /**
@@ -192,7 +206,7 @@ class Ticket extends MyBaseModel
      */
     public function getBookingFeeAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(
+        return PaymentUtils::isFree($this->price) ? 0 : round(
             ($this->price * (config('attendize.ticket_booking_fee_percentage') / 100)) + (config('attendize.ticket_booking_fee_fixed')),
             2
         );
@@ -205,7 +219,7 @@ class Ticket extends MyBaseModel
      */
     public function getOrganiserBookingFeeAttribute()
     {
-        return (int)ceil($this->price) === 0 ? 0 : round(
+        return PaymentUtils::isFree($this->price) ? 0 : round(
             ($this->price * ($this->event->organiser_fee_percentage / 100)) + ($this->event->organiser_fee_fixed),
             2
         );
@@ -234,7 +248,7 @@ class Ticket extends MyBaseModel
      */
     public function getIsFreeAttribute()
     {
-        return ceil($this->price) == 0;
+        return PaymentUtils::isFree($this->price);
     }
 
     /**
@@ -261,5 +275,39 @@ class Ticket extends MyBaseModel
         }
 
         return config('attendize.ticket_status_on_sale');
+    }
+
+    /**
+     * Ticket revenue is calculated as:
+     *
+     * Sales Volume + Organiser Booking Fees - Partial Refunds
+     * @return Money
+     */
+    public function getTicketRevenueAmount()
+    {
+        $currency = $this->getEventCurrency();
+
+        $salesVolume = (new Money($this->sales_volume, $currency));
+        $organiserFeesVolume = (new Money($this->organiser_fees_volume, $currency));
+
+        return $salesVolume->add($organiserFeesVolume);
+    }
+
+    /**
+     * @return \Superbalist\Money\Currency
+     */
+    private function getEventCurrency()
+    {
+        // Get the event currency
+        $eventCurrency = $this->event()->first()->currency()->first();
+
+        // Setup the currency on the event for transformation
+        $currency = new \Superbalist\Money\Currency(
+            $eventCurrency->code,
+            empty($eventCurrency->symbol_left) ? $eventCurrency->symbol_right : $eventCurrency->symbol_left,
+            $eventCurrency->title,
+            !empty($eventCurrency->symbol_left)
+        );
+        return $currency;
     }
 }

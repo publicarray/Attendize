@@ -6694,6 +6694,7 @@ $.cf = {
 			oDTP._setTimeFormatArray(); // Set TimeFormatArray
 			oDTP._setDateTimeFormatArray(); // Set DateTimeFormatArray
 
+			console.log($(oDTP.element).data('parentelement') + " " + $(oDTP.element).attr('data-parentelement'));
 			if($(oDTP.element).data('parentelement') !== undefined)
 	        {
 	           	oDTP.settings.parentElement = $(oDTP.element).data('parentelement');
@@ -7911,7 +7912,8 @@ $.cf = {
 			{
 				$(document).on("click.DateTimePicker", function(e)
 				{
-					oDTP._hidePicker("");
+					if (oDTP.oData.bElemFocused)
+						oDTP._hidePicker("");
 				});
 			}
 		
@@ -9867,9 +9869,25 @@ function removeQuestionOption(removeBtn)
 
 function processFormErrors($form, errors)
 {
-    $.each(errors, function (index, error)
-    {
-        var $input = $(':input[name=' + index + ']', $form);
+    $.each(errors, function (index, error) {
+        var $input = $('input[name^="' + index + '"]', $form);
+
+        // Fix for description wysiwyg form elements
+        if (index === 'description') {
+            $input = $('.CodeMirror', $form)
+        }
+
+        // Try and render a better error message for checkboxes in a table
+        if (index.indexOf('[]') > -1) {
+            var $formCombinedErrors = $input.closest('form').find('.form-errors');
+            // $input.addClass('has-error');
+            if ($formCombinedErrors.is(':visible') === false) {
+                $formCombinedErrors.append('<div class="help-block error">' + error + '</div>')
+                    .removeClass('hidden')
+                    .addClass('has-error');
+            }
+            return false;
+        }
 
         if ($input.prop('type') === 'file') {
             $('#input-' + $input.prop('name')).append('<div class="help-block error">' + error + '</div>')
@@ -9880,7 +9898,6 @@ function processFormErrors($form, errors)
                 .parent()
                 .addClass('has-error');
         }
-
     });
 
     var $submitButton = $form.find('input[type=submit]');

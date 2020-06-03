@@ -65,6 +65,7 @@ class EventCheckInController extends MyBaseController
                     )
                     //->orWhere('attendees.email', 'like', $searchQuery . '%')
                     ->orWhere('orders.order_reference', 'like', $searchQuery . '%')
+                    ->orWhere('attendees.private_reference_number', 'like', $searchQuery . '%')
                     ->orWhere('attendees.last_name', 'like', $searchQuery . '%');
             })
             ->select([
@@ -168,7 +169,7 @@ class EventCheckInController extends MyBaseController
         if ($attendee->has_arrived) {
             return response()->json([
                 'status'  => 'error',
-                'message' => trans("Controllers.attendee_already_checked_in", ["time"=> $attendee->arrival_time->format(env("DEFAULT_DATETIME_FORMAT"))])
+                'message' => trans("Controllers.attendee_already_checked_in", ["time"=> $attendee->arrival_time->format(config("attendize.default_datetime_format"))])
             ]);
         }
 

@@ -12,6 +12,7 @@ use Cookie;
 use Illuminate\Http\Request;
 use Mail;
 use Validator;
+use App\Services\HCaptureService;
 
 class EventViewController extends Controller
 {
@@ -90,9 +91,10 @@ class EventViewController extends Controller
     public function postContactOrganiser(Request $request, $event_id)
     {
         $rules = [
-            'name'    => 'required',
-            'email'   => ['required', 'email'],
-            'message' => ['required'],
+            'name'                  => 'required',
+            'email'                 => 'required|email',
+            'message'               => 'required',
+            'h-captcha-response'    => 'nullable',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -102,6 +104,12 @@ class EventViewController extends Controller
                 'status'   => 'error',
                 'messages' => $validator->messages()->toArray(),
             ]);
+        }
+        $hcapture = new HCaptureService($request);
+        if (!$hcapture->isHuman()) {
+            return Redirect::back()
+                ->with(['message' => trans("Controllers.incorrect_captcha"), 'failed' => true])
+                ->withInput();
         }
 
         $event = Event::findOrFail($event_id);

@@ -20,6 +20,7 @@ return array (
   //==================================== Translations ====================================//
   'account_successfully_updated' => 'Account Successfully Updated',
   'addInviteError' => 'You need to create a ticket before you can invite an attendee.',
+  'attendees_required' => 'Please select at least one attendee',
   'attendee_already_cancelled' => 'Attendee Already Cancelled',
   'attendee_already_checked_in' => 'Attendee already checked in at :time ',
   'attendee_exception' => 'An error occurred while inviting this attendee. Please try again.',
@@ -67,6 +68,7 @@ return array (
   'invalid_ticket_error' => '"Invalid Ticket! Please try again."',
   'incorrect_captcha' => 'Captcha failed! Are you a human? see https://support.google.com/recaptcha/?hl=en',
   'login_password_incorrect' => 'Your username/password combination was incorrect',
+  'incorrect_captcha' => 'Robot verification failed, please try again.',
   'maximum_refund_amount' => 'The maximum amount you can refund is :money',
   'message_successfully_sent' => 'Message Successfully Sent!',
   'new_order_received' => 'New order received on the event :event [:order]',

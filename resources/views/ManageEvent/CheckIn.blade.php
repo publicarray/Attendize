@@ -5,15 +5,16 @@
         @lang("Attendee.check_in", ["event"=>$event->title])
     </title>
 
-    {!! HTML::script('vendor/vue/dist/vue.min.js') !!}
-    {!! HTML::script('vendor/vue-resource/dist/vue-resource.min.js') !!}
+    {!! Html::script('vendor/vue/dist/vue.min.js') !!}
+    {!! Html::script('vendor/vue-resource/dist/vue-resource.min.js') !!}
 
-    {!! HTML::style('assets/stylesheet/application.css') !!}
-    {!! HTML::style('assets/stylesheet/check_in.css') !!}
-    {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
+    {!! Html::style('assets/stylesheet/application.css') !!}
+    {!! Html::style('assets/stylesheet/check_in.css') !!}
+    {!! Html::script('vendor/jquery/dist/jquery.min.js') !!}
 
     @include('Shared/Layouts/ViewJavascript')
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -160,7 +161,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
 </script>
 
 @include("Shared.Partials.LangScript")
-{!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
-{!! HTML::script('assets/javascript/check_in.js') !!}
+{!! Html::script('vendor/qrcode-scan/llqrcode.js') !!}
+{!! Html::script('assets/javascript/check_in.js') !!}
 </body>
 </html>

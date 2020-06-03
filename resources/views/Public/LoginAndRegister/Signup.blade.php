@@ -7,14 +7,14 @@
 @section('content')
     <div class="row">
         <div class="col-md-7 col-md-offset-2">
-            {!! Form::open(array('url' => route("showSignup"), 'class' => 'panel')) !!}
+            {!! Form::open(['url' => route("showSignup"), 'class' => 'panel', 'id' => 'signup-form']) !!}
             <div class="panel-body">
                 <div class="logo">
-                   {!! HTML::image('assets/images/logo-dark.png') !!}
+                   {!! Html::image('assets/images/logo-dark.png') !!}
                 </div>
                 <h2>@lang("User.sign_up")</h2>
 
-                @if(Input::get('first_run'))
+                @if(Request::input('first_run'))
                     <div class="alert alert-info">
                         @lang("User.sign_up_first_run")
                     </div>
@@ -66,7 +66,7 @@
                 @if(Utils::isAttendize())
                 <div class="form-group {{ ($errors->has('terms_agreed')) ? 'has-error' : '' }}">
                     <div class="checkbox custom-checkbox">
-                        {!! Form::checkbox('terms_agreed', Input::old('terms_agreed'), false, ['id' => 'terms_agreed']) !!}
+                        {!! Form::checkbox('terms_agreed', old('terms_agreed'), false, ['id' => 'terms_agreed']) !!}
                         {!! Form::rawLabel('terms_agreed', trans("User.terms_and_conditions", ["url"=>route('termsAndConditions')])) !!}
                         @if ($errors->has('terms_agreed'))
                             <p class="help-block">{{ $errors->first('terms_agreed') }}</p>
@@ -86,7 +86,19 @@
                     </script>
                 @endif
                 <div class="form-group ">
-                   {!! Form::submit(trans("User.sign_up"), array('class'=>"btn btn-block btn-success")) !!}
+                @if(config('attendize.hcaptcha_site_key'))
+                    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+                    <input class="btn btn-block btn-success h-captcha" type="submit" value="{{trans('User.sign_up')}}" data-sitekey="{{config('attendize.hcaptcha_site_key')}}" data-callback="onSubmit">
+                    <script type="text/javascript">
+                       function onSubmit(token) {
+                          document.getElementById("signup-form").submit();
+                       };
+                    </script>
+                    <br>
+                    This site is protected by hCaptcha and its <a href="https://hcaptcha.com/privacy">Privacy Policy</a> and <a href="https://hcaptcha.com/terms">Terms of Service</a> apply.
+                @else
+                    <input class="btn btn-block btn-success" type="submit" value="@lang('User.sign_up')">
+                @endif
                 </div>
                     <div class="signup">
                         <span>{!! @trans("User.already_have_account", ["url"=>route("login")]) !!}</span>

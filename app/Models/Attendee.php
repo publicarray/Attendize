@@ -1,25 +1,22 @@
-<?php
+<?php namespace App\Models;
 
-namespace App\Models;
-
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-/*
-  Attendize.com   - Event Management & Ticketing
- */
+use Illuminate\Support\Str;
 
 /**
- * Description of Attendees.
- *
- * @author Dave
+ * @property bool is_cancelled
+ * @property Order order
+ * @property string first_name
+ * @property string last_name
  */
 class Attendee extends MyBaseModel
 {
     use SoftDeletes;
 
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array $fillable
      */
     protected $fillable = [
@@ -35,6 +32,11 @@ class Attendee extends MyBaseModel
         'arrival_time'
     ];
 
+    protected $casts = [
+        'is_refunded'  => 'boolean',
+        'is_cancelled' => 'boolean',
+    ];
+
     /**
      * Generate a private reference number for the attendee. Use for checking in the attendee.
      *
@@ -44,46 +46,63 @@ class Attendee extends MyBaseModel
         parent::boot();
 
         static::creating(function ($order) {
-            $order->private_reference_number = str_pad(random_int(0, pow(10, 9) - 1), 9, '0', STR_PAD_LEFT);
+
+            do {
+                //generate a random string using Laravel's Str::Random helper
+                $token = Str::Random(15);
+            } //check if the token already exists and if it does, try again
+
+            while (Attendee::where('private_reference_number', $token)->first());
+            $order->private_reference_number = $token;
         });
+
+    }
+
+    /**
+     * @param  array  $attendeeIds
+     * @return Collection
+     */
+    public static function findFromSelection(array $attendeeIds = [])
+    {
+        return (new static)->whereIn('id', $attendeeIds)->get();
     }
 
     /**
      * The order associated with the attendee.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function order()
     {
-        return $this->belongsTo(\App\Models\Order::class);
+        return $this->belongsTo(Order::class);
     }
 
     /**
      * The ticket associated with the attendee.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function ticket()
     {
-        return $this->belongsTo(\App\Models\Ticket::class);
+        return $this->belongsTo(Ticket::class);
     }
 
     /**
      * The event associated with the attendee.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function event()
     {
-        return $this->belongsTo(\App\Models\Event::class);
+        return $this->belongsTo(Event::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function answers()
     {
-        return $this->hasMany('App\Models\QuestionAnswer');
+        return $this->hasMany(QuestionAnswer::class);
     }
 
     /**
