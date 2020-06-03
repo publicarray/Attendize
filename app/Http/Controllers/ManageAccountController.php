@@ -22,7 +22,6 @@ use Illuminate\Support\Str;
 use Services\PaymentGateway\Dummy;
 use Services\PaymentGateway\Stripe;
 use Services\PaymentGateway\StripeSCA;
-use Validator;
 use Utils;
 
 class ManageAccountController extends MyBaseController
