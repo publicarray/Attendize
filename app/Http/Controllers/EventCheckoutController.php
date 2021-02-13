@@ -102,8 +102,7 @@ class EventCheckoutController extends Controller
 
             $total_ticket_quantity = $total_ticket_quantity + $current_ticket_quantity;
             $ticket = Ticket::find($ticket_id);
-            $ticket_quantity_remaining = $ticket->quantity_remaining;
-            $max_per_person = min($ticket_quantity_remaining, $ticket->max_per_person);
+            $max_per_person = min($ticket->quantity_remaining, $ticket->max_per_person);
 
             $quantity_available_validation_rules['ticket_' . $ticket_id] = [
                 'numeric',
@@ -112,7 +111,7 @@ class EventCheckoutController extends Controller
             ];
 
             $quantity_available_validation_messages = [
-                'ticket_' . $ticket_id . '.max' => 'The maximum number of tickets you can register is ' . $ticket_quantity_remaining,
+                'ticket_' . $ticket_id . '.max' => 'The maximum number of tickets you can register is ' . $max_per_person,
                 'ticket_' . $ticket_id . '.min' => 'You must select at least ' . $ticket->min_per_person . ' tickets.',
             ];
 
