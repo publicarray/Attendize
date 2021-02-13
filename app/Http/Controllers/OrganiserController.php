@@ -53,8 +53,8 @@ class OrganiserController extends MyBaseController
             ]);
         }
 
-        $organiser->name = $request->get('name');
-        $organiser->about = $request->get('about');
+        $organiser->name = strip_tags($request->get('name'));
+        $organiser->about = strip_tags($request->get('about'));
         $organiser->email = $request->get('email');
         $organiser->facebook = $request->get('facebook');
         $organiser->twitter = $request->get('twitter');

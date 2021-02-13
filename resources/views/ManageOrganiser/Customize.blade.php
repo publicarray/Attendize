@@ -32,8 +32,8 @@
 
         });
 
-        @include('ManageOrganiser.Partials.OrganiserCreateAndEditJS')
     </script>
+    @include('ManageOrganiser.Partials.OrganiserCreateAndEditJS')
 @stop
 
 @section('menu')
@@ -88,10 +88,10 @@
                                                 ))  !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('about', trans("Organiser.organiser_description"), array('class'=>'control-label ')) !!}
+                        {!! Form::label('about', trans("Organiser.organiser_description"), array('class'=>'control-label')) !!}
                         {!!  Form::textarea('about', old('about'),
                                                 array(
-                                                'class'=>'form-control ',
+                                                'class'=>'form-control editable',
                                                 'placeholder'=>trans("Organiser.organiser_description_placeholder"),
                                                 'rows' => 4
                                                 ))  !!}

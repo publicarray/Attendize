@@ -113,8 +113,8 @@ class EventController extends MyBaseController
                 ]);
             }
 
-            $organiser->name = $request->get('organiser_name');
-            $organiser->about = $request->get('organiser_about');
+            $organiser->name = strip_tags($request->get('organiser_name'));
+            $organiser->about = strip_tags($request->get('organiser_about'));
             $organiser->email = $request->get('organiser_email');
             $organiser->facebook = $request->get('organiser_facebook');
             $organiser->twitter = $request->get('organiser_twitter');
