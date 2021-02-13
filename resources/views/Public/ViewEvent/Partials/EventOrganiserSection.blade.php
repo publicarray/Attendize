@@ -15,7 +15,7 @@
                 </h3>
 
                 <div property="description">
-                    {!! Markdown::convertToHtml($event->organiser->about) !!}
+                    {!! md_to_html($event->organiser->about) !!}
                 </div>
 
                 <p>

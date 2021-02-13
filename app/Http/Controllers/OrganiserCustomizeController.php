@@ -48,8 +48,8 @@ class OrganiserCustomizeController extends MyBaseController
             ]);
         }
 
-        $organiser->name = strip_tags($request->get('name'));
-        $organiser->about = strip_tags($request->get('about'));
+        $organiser->name = $request->get('name');
+        $organiser->about = prepare_markdown($request->get('about'));
         $organiser->google_analytics_code = $request->get('google_analytics_code');
         $organiser->google_tag_manager_code = $request->get('google_tag_manager_code');
         $organiser->email = $request->get('email');

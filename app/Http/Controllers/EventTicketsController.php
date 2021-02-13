@@ -99,14 +99,14 @@ class EventTicketsController extends MyBaseController
         }
 
         $ticket->event_id = $event_id;
-        $ticket->title = strip_tags($request->get('title'));
+        $ticket->title = $request->get('title');
         $ticket->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
         $ticket->start_sale_date = $request->get('start_sale_date');
         $ticket->end_sale_date = $request->get('end_sale_date');
         $ticket->price = $request->get('price');
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
-        $ticket->description = strip_tags($request->get('description'));
+        $ticket->description = prepare_markdown($request->get('description'));
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
 
         $ticket->save();
@@ -235,12 +235,12 @@ class EventTicketsController extends MyBaseController
         // Check if the ticket visibility changed on update
         $ticketPreviouslyHidden = (bool)$ticket->is_hidden;
 
-        $ticket->title = strip_tags($request->get('title'));
+        $ticket->title = $request->get('title');
         $ticket->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
         $ticket->price = $request->get('price');
         $ticket->start_sale_date = $request->get('start_sale_date');
         $ticket->end_sale_date = $request->get('end_sale_date');
-        $ticket->description = strip_tags($request->get('description'));
+        $ticket->description = prepare_markdown($request->get('description'));
         $ticket->min_per_person = $request->get('min_per_person');
         $ticket->max_per_person = $request->get('max_per_person');
         $ticket->is_hidden = $request->get('is_hidden') ? 1 : 0;
